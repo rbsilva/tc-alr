@@ -1,0 +1,1 @@
+[User|+Name;+Password;+Permissions;|+Login();+Logout();+CRUD]<>1->*[Permission|+Id;+Description;-Path|+CRUD]
