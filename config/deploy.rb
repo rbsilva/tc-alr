@@ -1,7 +1,7 @@
 set :application, "tc"
 
 default_run_options[:pty] = true  # Must be set for the password prompt from git to work
-set :repository, "git@github.com:rbsilva/tc-alr.git"  # Your clone URL
+set :repository, "https://github.com/rbsilva/tc-alr.git"  # Your clone URL
 set :scm, "git"
 set :branch, "master"
 set :deploy_via, :remote_cache
