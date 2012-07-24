@@ -15,3 +15,6 @@
 /tmp
 /.settings
 /log
+
+# Ignore swp files from vim
+*.swp
