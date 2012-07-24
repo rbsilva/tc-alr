@@ -11,6 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20120724202026) do
+
+  create_table "raw_files", :force => true do |t|
+    t.string   "path"
+    t.string   "tags"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

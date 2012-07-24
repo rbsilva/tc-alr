@@ -1,0 +1,32 @@
+<%= form_for :file_upload, :url => url_for(:action => 'save'), :html => {:multipart => true} do |f| %>
+  <% if !@nil %>
+    <% if @raw_file.errors.any?%>
+      <div id="error_explanation">
+        <h2><%= pluralize(@raw_file.errors.count, "error") %> prohibited this file from being saved:</h2>
+  
+        <ul>
+        <% @raw_file.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% else %>
+    <div id="error_explanation">
+      <ul>
+         <li>File not given</li>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :file %>:<br/>
+    <%= f.file_field :raw_file %>
+  </div>
+  <div class="field">
+    <%= f.label :tags %>:<br/>
+    <%= f.text_field :tags %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Upload" %>
+  </div>
+<% end %>

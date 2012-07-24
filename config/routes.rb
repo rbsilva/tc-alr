@@ -1,4 +1,11 @@
 TC::Application.routes.draw do
+  
+  resources :raw_files
+
+  get "upload/index"
+  
+  post "upload/save"
+
   get "user/index"
 
   get "home/index"
