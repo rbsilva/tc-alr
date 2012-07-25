@@ -12,6 +12,8 @@ set :use_sudo, false
 server "unip.servehttp.com:465", :app, :web, :db, :primary => true
 set :deploy_to, "/srv/ruby/tc"
 
+after "deploy:update_code", "deploy:migrate"
+
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
 
