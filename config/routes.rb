@@ -8,8 +8,6 @@ TC::Application.routes.draw do
   
   post "upload/save"
 
-  get "user/index"
-
   get "home/index"
 
   # The priority is based upon order of creation:

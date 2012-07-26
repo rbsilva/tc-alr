@@ -9,7 +9,8 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-<%= link_to "Upload", :controller => "upload" %>
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= link_to "Upload", :controller => "/upload" %>
 <%= yield %>
 
 </body>
