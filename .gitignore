@@ -21,3 +21,4 @@
 
 # Ignore raw_files for test
 /app/raw_files
+/Gemfile.lock
