@@ -39,4 +39,5 @@ gem 'capistrano'
  gem 'ruby-debug19'
  gem 'ruby-debug-ide19'
 
-
+# To use devise
+gem 'devise'
