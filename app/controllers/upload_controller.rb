@@ -1,7 +1,7 @@
 class UploadController < ApplicationController
 
-  http_basic_authenticate_with :name => "admin", :password => "admin"
-  
+  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
+
   def index
     @raw_file = RawFile.new
   end

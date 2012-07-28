@@ -1,6 +1,7 @@
 TC::Application.routes.draw do
   
-  devise_for :users
+  # replace devise_for :users with:
+  devise_for :users,  :controllers => { :registrations => "users/registrations" }
 
   resources :raw_files
 
