@@ -1,0 +1,11 @@
+defaults: &defaults
+  upload_dir: app/raw_files
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

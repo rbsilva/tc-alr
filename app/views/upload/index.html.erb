@@ -1,2 +1,21 @@
-<h1>Upload</h1>
-<%= render 'form' %>
+<h1>Listing raw_files</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @raw_files.each do |raw_file| %>
+  <tr>
+    <td><%= link_to 'Show', raw_file %></td>
+    <td><%= link_to 'Edit', edit_raw_file_path(raw_file) %></td>
+    <td><%= link_to 'Destroy', raw_file, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Raw file', new_raw_file_path %>
