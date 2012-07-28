@@ -11,12 +11,20 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :path %><br />
+    <%= f.text_field :path %>
+  </div>
+  <div class="field">
+    <%= f.label :tags %><br />
+    <%= f.text_field :tags %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
 
-<%= form_for :file_upload, :url => url_for(:action => 'save'), :html => {:multipart => true} do |f| %>
+<%= form_for :file_upload, :url => url_for(:action => 'create'), :html => {:multipart => true} do |f| %>
   <% if !@nil %>
     <% if @raw_file.errors.any?%>
       <div id="error_explanation">

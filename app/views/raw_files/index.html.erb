@@ -2,6 +2,8 @@
 
 <table>
   <tr>
+    <th>Path</th>
+    <th>Tags</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +11,8 @@
 
 <% @raw_files.each do |raw_file| %>
   <tr>
+    <td><%= raw_file.path %></td>
+    <td><%= raw_file.tags %></td>
     <td><%= link_to 'Show', raw_file %></td>
     <td><%= link_to 'Edit', edit_raw_file_path(raw_file) %></td>
     <td><%= link_to 'Destroy', raw_file, confirm: 'Are you sure?', method: :delete %></td>

@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <b>Path:</b>
+  <%= @raw_file.path %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%= @raw_file.tags %>
+</p>
+
 
 <%= link_to 'Edit', edit_raw_file_path(@raw_file) %> |
 <%= link_to 'Back', raw_files_path %>

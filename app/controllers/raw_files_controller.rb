@@ -1,4 +1,4 @@
-class UploadController < ApplicationController
+class RawFilesController < ApplicationController
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
 
   # GET /raw_files
@@ -10,30 +10,6 @@ class UploadController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @raw_files }
     end
-  end
-
-  # POST /raw_files
-  # POST /raw_files.json
-  def save
-    require 'fileutils'
-    rawfile = params[:file_upload][:raw_file]
-    if rawfile.nil? then
-      @nil = true 
-    else
-      tempfile = rawfile.tempfile
-      original_filename = params[:file_upload][:raw_file].original_filename
-      upload_dir = APP_CONFIG['upload_dir']
-      FileUtils.makedirs upload_dir
-      file = File.join(upload_dir, original_filename)
-      FileUtils.cp tempfile.path, file
-      
-      path = file
-      tags = params[:file_upload][:tags]
-            
-      @raw_file = RawFile.new(:path => path, :tags => tags)
-      @raw_file.save
-    end
-    render 'index'
   end
 
   # GET /raw_files/1
@@ -67,6 +43,25 @@ class UploadController < ApplicationController
   # POST /raw_files.json
   def create
     @raw_file = RawFile.new(params[:raw_file])
+    
+    require 'fileutils'
+    rawfile = params[:file_upload][:raw_file]
+    if rawfile.nil? then
+      @nil = true 
+    else
+      tempfile = rawfile.tempfile
+      original_filename = params[:file_upload][:raw_file].original_filename
+      upload_dir = APP_CONFIG['upload_dir']
+      FileUtils.makedirs upload_dir
+      file = File.join(upload_dir, original_filename)
+      FileUtils.cp tempfile.path, file
+      
+      path = file
+      tags = params[:file_upload][:tags]
+            
+      @raw_file = RawFile.new(:path => path, :tags => tags)
+      @raw_file.save
+    end
 
     respond_to do |format|
       if @raw_file.save
