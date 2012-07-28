@@ -1,4 +1,5 @@
 class UploadController < ApplicationController
+  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
 
   # GET /raw_files
   # GET /raw_files.json

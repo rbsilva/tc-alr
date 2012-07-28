@@ -41,3 +41,6 @@ gem 'capistrano'
 
 # To use devise
 gem 'devise'
+
+# To use cancan
+gem 'cancan'
