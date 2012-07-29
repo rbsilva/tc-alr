@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Path:</b>
+  <b><%= t :path %>:</b>
   <%= @raw_file.path %>
 </p>
 
 <p>
-  <b>Tags:</b>
+  <b><%= t :tags %>:</b>
   <%= @raw_file.tags %>
 </p>
 
 
-<%= link_to 'Edit', edit_raw_file_path(@raw_file) %> |
-<%= link_to 'Back', raw_files_path %>
+<%= link_to t(:edit), edit_raw_file_path(@raw_file) %> |
+<%= link_to t(:back), raw_files_path %>

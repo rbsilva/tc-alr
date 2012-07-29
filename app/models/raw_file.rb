@@ -4,7 +4,6 @@ class RawFile < ActiveRecord::Base
   validates :path,  :presence => true
   validates :tags, :presence => true,
                     :length => { :minimum => 3 },
-                    :format => { :with => /(([0-9a-zA-Z]+)([,][0-9a-zA-Z]*)*)/,
-                      :message  => "must be separated by comma (,)" }
+                    :format => { :with => /(([0-9a-zA-Z]+)([,][0-9a-zA-Z]*)*)/ }
 
 end

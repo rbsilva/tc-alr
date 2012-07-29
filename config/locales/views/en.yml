@@ -1,0 +1,74 @@
+# encoding: UTF-8
+# en translations for TC
+
+en:
+  hello_world: "Hello world! This TC is Alive!"
+  home: "home"
+  sign_out: "sign out"
+  upload: "upload"
+  listing_files: "Listing files"
+  editing_file: "Editing file"
+  path: "file"
+  tags: "tags"
+  show: "show"
+  edit: "edit"
+  delete: "delete"
+  are_you_sure: "Are you sure?"
+  new_file: "New file"
+  back: "back"
+  prohibited_save: "prohibited this %{this} from being saved:"
+  error: "error"
+  submit_file: "Create file"
+  resend_confirmation_instructions: "Resend confirmation instructions"
+  welcome: "Welcome"
+  you_can_confirm_account: "You can confirm your account email through the link below:"
+  confirm_my_account: "Confirm my account"
+  hello: "Hello"
+  someone_requested_link: "Someone has requested a link to change your password, and you can do this through the link below."
+  change_my_password: "Change my password"
+  if_you_dont_requested_ignore: "If you didn't request this, please ignore this email."
+  your_password_until_link: "Your password won't change until you access the link above and create a new one."
+  your_account_locked: "Your account has been locked due to an excessive amount of unsuccessful sign in attempts."
+  click_to_unlock: "Click the link below to unlock your account:"
+  unlock_my_account: "Unlock my account"
+  change_your_password: "Change your password"
+  new_password: "New password"
+  confirm_new_password: "Confirm new password"
+  forgot_password: "Forgot your password?"
+  send_me_reset: "Send me reset password instructions"
+  leave_blank_password: "(leave blank if you don't want to change it)"
+  we_need_current_password: "(we need your current password to confirm your changes)"
+  update: "Update"
+  cancel_my_account: "Cancel my account"
+  sign_up: "Sign up"
+  sign_in: "Sign in"
+  didnt_receive_confirmation: "Didn't receive confirmation instructions?"
+  didnt_receive_unlock: "Didn't receive unlock instructions?"
+  sign_in_with: "Sign in with %{with}"
+  resend_unlock: "Resend unlock instructions"
+
+  helpers:
+    label:
+      upload:
+        attach_a_file: "Attach a file"
+      user:
+        current_password: "Current password"
+
+  activerecord:
+    errors:
+      models:
+        raw_file:
+          invalid: "must be separated by comma (,)"
+        user:
+          invalid: "is invalid"
+    models:
+      user: "user"
+    attributes:
+      raw_file:
+        path: "File"
+        tags: "Tags"
+      user:
+        full_name: "Full name"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        remember_me: "Remember me"

@@ -9,7 +9,9 @@
 <%= form_for(@raw_file) do |f| %>
   <% if @raw_file.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@raw_file.errors.count, "error") %> prohibited this raw_file from being saved:</h2>
+      <h2><%= pluralize(@raw_file.errors.count, t(:error)) %>
+        <%= t :prohibited_save, :this => t(:path), :count => @raw_file.errors.count %>
+      </h2>
 
       <ul>
         <% @raw_file.errors.full_messages.each do |msg| %>
@@ -29,6 +31,6 @@
     <%= f.text_field :tags %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:submit_file)%>
   </div>
 <% end %>

@@ -14,6 +14,5 @@ class User < ActiveRecord::Base
 
   validates :full_name, :presence => true,
             :length => { :minimum => 2 },
-            :format => { :with => /^[A-zÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž\s]+$/,
-                         :message  => "is invalid" }
+            :format => { :with => /^[A-zÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž\s]+$/ }
 end

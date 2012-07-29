@@ -12,9 +12,9 @@
 
 <p class="alert"><%= alert %></p>
 
-<%= link_to "Home", "/" %>
-<%= link_to "Upload", raw_files_path %>
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= link_to t(:home), "/" %>
+<%= link_to t(:upload), raw_files_path %>
+<%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
 
 <%= yield %>
 

@@ -1,9 +1,9 @@
-<h1>Listing raw_files</h1>
+<h1><%=t :listing_files%></h1>
 
 <table>
   <tr>
-    <th>Path</th>
-    <th>Tags</th>
+    <th><%= t :path %></th>
+    <th><%= t :tags %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,13 +13,13 @@
     <tr>
       <td><%= raw_file.path %></td>
       <td><%= raw_file.tags %></td>
-      <td><%= link_to 'Show', raw_file %></td>
-      <td><%= link_to 'Edit', edit_raw_file_path(raw_file) %></td>
-      <td><%= link_to 'Destroy', raw_file, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%= link_to  t(:show), raw_file %></td>
+      <td><%= link_to t(:edit), edit_raw_file_path(raw_file) %></td>
+      <td><%= link_to t(:delete), raw_file, confirm: t(:are_you_sure), method: :delete %></td>
     </tr>
   <% end %>
 </table>
 
 <br/>
 
-<%= link_to 'New Raw file', new_raw_file_path %>
+<%= link_to t(:new_file), new_raw_file_path %>

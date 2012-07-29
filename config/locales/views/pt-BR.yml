@@ -1,0 +1,76 @@
+# encoding: UTF-8
+# pt-BR translations for TC
+
+pt-BR:
+  hello_world: "Olá Mundo! Esse TC está Vivo!"
+  home: "início"
+  sign_out: "sair"
+  upload: "envio"
+  listing_files: "Listando arquivos"
+  editing_file: "Editando arquivo"
+  path: "arquivo"
+  tags: "marcadores"
+  show: "ver"
+  edit: "editar"
+  delete: "apagar"
+  are_you_sure: "Você tem certeza?"
+  new_file: "Novo arquivo"
+  back: "voltar"
+  prohibited_save:
+    one: "impediu esse %{this} de ser salvo:"
+    other: "impediram esse %{this} de ser salvo:"
+  error: "erro"
+  submit_file: "Criar arquivo"
+  resend_confirmation_instructions: "Reenviar instruções para confirmação"
+  welcome: "Bem vindo"
+  you_can_confirm_account: "Você pode confirmar sua conta de email através do link abaixo:"
+  confirm_my_account: "Confirme minha conta"
+  hello: "Olá"
+  someone_requested_link: "Alguém solicitou um link para mudar sua senha, e você pode fazer isso através do link abaixo."
+  change_my_password: "Mudar minha senha"
+  if_you_dont_requested_ignore: "Se você não solicitou isso, por favor ignore este email."
+  your_password_until_link: "Sua senha não mudará até que você acesse o link acima e crie uma nova."
+  your_account_locked: "Sua conta foi bloqueada devido há excessivas tentativas de login sem sucesso."
+  click_to_unlock: "Clique no link abaixo para desbloquear sua conta:"
+  unlock_my_account: "Desbloqueie minha conta"
+  change_your_password: "Mude sua senha"
+  new_password: "Nova senha"
+  confirm_new_password: "Confirme a nova senha"
+  forgot_password: "Esqueceu sua senha?"
+  send_me_reset: "Me envie instruções para recuperar minha senha"
+  leave_blank_password: "(deixe em branco para não alterar sua senha)"
+  we_need_current_password: "(precisamos da sua senha atual para confirmar a mudança)"
+  update: "Atualizar"
+  cancel_my_account: "Cancelar minha conta"
+  sign_up: "Cadastro"
+  sign_in: "Login"
+  didnt_receive_confirmation: "Não recebeu instruções de confirmação?"
+  didnt_receive_unlock: "Não recebeu instruções de desbloqueio?"
+  sign_in_with: "Faça login com %{with}"
+  resend_unlock: "Reenviar instruções de desbloqueio"
+
+  helpers:
+    label:
+      upload:
+        attach_a_file: "Anexar arquivo"
+      user:
+        current_password: "Senha atual"
+
+  activerecord:
+    errors:
+      models:
+        raw_file:
+          invalid: "deve ser separado por vírgula (,)"
+        user:
+          invalid: "é inválido"
+    models:
+      user: "usuário"
+    attributes:
+      raw_file:
+        path: "Arquivo"
+        tags: "Marcadores"
+      user:
+        full_name: "Nome completo"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        remember_me: "Lembrar deste login"
