@@ -27,3 +27,4 @@
 
 # Ignore public compiled assets
 /public/assets
+/.idea
