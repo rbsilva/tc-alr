@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  path: MyString
-  tags: MyString
+  path: "1343523333_pgadmin.log"
+  tags: "teste, teste, teste"
 
-two:
-  path: MyString
-  tags: MyString
+one:
+  path: "1343523333_pgadmin1.log"
+  tags: "teste1, teste1, teste1"

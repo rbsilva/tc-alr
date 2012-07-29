@@ -45,18 +45,28 @@ class RawFilesController < ApplicationController
     require 'fileutils'
     @raw_file = RawFile.new(params[:raw_file])
 
-    upload_dir = APP_CONFIG['upload_dir']
-    if !Dir.exists? upload_dir then
-      FileUtils.makedirs upload_dir
+    begin
+      if @raw_file.save then
+        upload_dir = APP_CONFIG['upload_dir']
+        if !Dir.exists? upload_dir then
+          FileUtils.makedirs upload_dir
+        end
+        filename = @raw_file.path
+        file = File.join(upload_dir, filename)
+        tempfile = File.join('tmp', filename)
+        FileUtils.mv tempfile, file
+        continue = true
+      else
+        continue = false
+      end
+    rescue Exception => e
+      logger.info e
+      @raw_file.errors.set :path, e.message
+      continue = false
     end
 
-    file = File.join(upload_dir, filename)
-    tempfile = File.join('tmp', filename)
-    FileUtils.mv tempfile.path, file
-
-
     respond_to do |format|
-      if @raw_file.save
+      if continue
         format.html { redirect_to @raw_file, notice: 'Raw file was successfully created.' }
         format.json { render json: @raw_file, status: :created, location: @raw_file }
       else
@@ -78,9 +88,7 @@ class RawFilesController < ApplicationController
       @raw_file = RawFile.new(:path => filename)
       continue = true
     rescue Exception => e
-      logger.info '  BEGIN [ERROR] raw_files_controller/create'
-      logger.info '    ' + e.to_s
-      logger.info '  END [ERROR] raw_files_controller/create'
+      logger.info e
       @raw_file.errors.set :attach_a_file, [', you must select a file']
       continue = false
     end

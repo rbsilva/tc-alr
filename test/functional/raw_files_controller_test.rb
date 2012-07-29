@@ -3,6 +3,9 @@ require 'test_helper'
 class RawFilesControllerTest < ActionController::TestCase
   setup do
     @raw_file = raw_files(:one)
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = User.first
+    sign_in @user
   end
 
   test "should get index" do
@@ -19,6 +22,14 @@ class RawFilesControllerTest < ActionController::TestCase
   test "should create raw_file" do
     assert_difference('RawFile.count') do
       post :create, raw_file: @raw_file.attributes
+    end
+
+    assert_redirected_to raw_file_path(assigns(:raw_file))
+  end
+
+  test "should attach a file" do
+    assert_difference('RawFile.count') do
+      post :attach, raw_file: @raw_file.attributes
     end
 
     assert_redirected_to raw_file_path(assigns(:raw_file))
