@@ -1,5 +1,5 @@
 <%= form_for(:upload, :url => attach_raw_files_path,
-      :html => {:multipart => true}) do |f| %>
+             :html => {:multipart => true}) do |f| %>
   <div class="field">
     <a class="input"><%= f.label :attach_a_file %></a>
     <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
@@ -12,18 +12,20 @@
       <h2><%= pluralize(@raw_file.errors.count, "error") %> prohibited this raw_file from being saved:</h2>
 
       <ul>
-      <% @raw_file.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @raw_file.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :path %><br />
+    <%= f.label :path %>
+    <br/>
     <%= f.text_field :path, :readonly => 'true' %>
   </div>
   <div class="field">
-    <%= f.label :tags %><br />
+    <%= f.label :tags %>
+    <br/>
     <%= f.text_field :tags %>
   </div>
   <div class="actions">
