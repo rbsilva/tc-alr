@@ -1,3 +1,11 @@
+<%= form_for(:upload, :url => attach_raw_files_path,
+      :html => {:multipart => true}) do |f| %>
+  <div class="field">
+    <a class="input"><%= f.label :attach_a_file %></a>
+    <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
+  </div>
+<% end %>
+
 <%= form_for(@raw_file) do |f| %>
   <% if @raw_file.errors.any? %>
     <div id="error_explanation">
@@ -10,10 +18,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :path %><br />
-    <%= f.text_field :path %>
+    <%= f.text_field :path, :readonly => 'true' %>
   </div>
   <div class="field">
     <%= f.label :tags %><br />
@@ -21,39 +28,5 @@
   </div>
   <div class="actions">
     <%= f.submit %>
-  </div>
-<% end %>
-
-<%= form_for :file_upload, :url => url_for(:action => 'create'), :html => {:multipart => true} do |f| %>
-  <% if !@nil %>
-    <% if @raw_file.errors.any?%>
-      <div id="error_explanation">
-        <h2><%= pluralize(@raw_file.errors.count, "error") %> prohibited this file from being saved:</h2>
-  
-        <ul>
-        <% @raw_file.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-  <% else %>
-    <div id="error_explanation">
-      <h2>1 error prohibited this file from being saved:</h2>
-      <ul>
-         <li>File not selected</li>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :file %>:<br/>
-    <%= f.file_field :raw_file %>
-  </div>
-  <div class="field">
-    <%= f.label :tags %>:<br/>
-    <%= f.text_field :tags %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Upload" %>
   </div>
 <% end %>

@@ -1,8 +1,10 @@
 TC::Application.routes.draw do
   # replace devise_for :users with:
   devise_for :users,  :controllers => { :registrations => "users/registrations" }
-  
-  resources :upload, :as => :raw_files, :controller => :raw_files
+
+  resources :upload, :as => :raw_files, :controller => :raw_files do
+    post 'attach', :on => :collection
+  end
 
   get "home/index"
 

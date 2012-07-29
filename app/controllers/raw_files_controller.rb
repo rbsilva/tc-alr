@@ -42,30 +42,51 @@ class RawFilesController < ApplicationController
   # POST /raw_files
   # POST /raw_files.json
   def create
-    @raw_file = RawFile.new(params[:raw_file])
-    
     require 'fileutils'
-    rawfile = params[:file_upload][:raw_file]
-    if rawfile.nil? then
-      @nil = true 
-    else
-      tempfile = rawfile.tempfile
-      original_filename = params[:file_upload][:raw_file].original_filename
-      upload_dir = APP_CONFIG['upload_dir']
+    @raw_file = RawFile.new(params[:raw_file])
+
+    upload_dir = APP_CONFIG['upload_dir']
+    if !Dir.exists? upload_dir then
       FileUtils.makedirs upload_dir
-      file = File.join(upload_dir, original_filename)
-      FileUtils.cp tempfile.path, file
-      
-      path = file
-      tags = params[:file_upload][:tags]
-            
-      @raw_file = RawFile.new(:path => path, :tags => tags)
-      @raw_file.save
     end
+
+    file = File.join(upload_dir, filename)
+    tempfile = File.join('tmp', filename)
+    FileUtils.mv tempfile.path, file
+
 
     respond_to do |format|
       if @raw_file.save
         format.html { redirect_to @raw_file, notice: 'Raw file was successfully created.' }
+        format.json { render json: @raw_file, status: :created, location: @raw_file }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @raw_file.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /raw_files/attach
+  # POST /raw_files/attach.json
+  def attach
+    require 'fileutils'
+    begin
+      tempfile = params[:upload][:attach_a_file].tempfile
+      filename = Time.now.to_i.to_s + '_' + params[:upload][:attach_a_file].original_filename
+      file = File.join('tmp', filename)
+      FileUtils.cp tempfile.path, file
+      @raw_file = RawFile.new(:path => filename)
+      continue = true
+    rescue Exception => e
+      logger.info '  BEGIN [ERROR] raw_files_controller/create'
+      logger.info '    ' + e.to_s
+      logger.info '  END [ERROR] raw_files_controller/create'
+      @raw_file.errors.set :attach_a_file, [', you must select a file']
+      continue = false
+    end
+    respond_to do |format|
+      if continue
+        format.html { render action: "new" , notice: 'The file was successfully uploaded.' }
         format.json { render json: @raw_file, status: :created, location: @raw_file }
       else
         format.html { render action: "new" }
