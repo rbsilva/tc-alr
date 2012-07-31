@@ -5,10 +5,10 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql2
-  database: tc
-  username: root
-  password: 
-  host: localhost
+  database: scilo087_tc_dev
+  username: scilo087_tc
+  password: "742147"
+  host: tcalr.co.cc
 #  adapter: sqlite3
 #  database: db/development.sqlite3
 #  pool: 5
