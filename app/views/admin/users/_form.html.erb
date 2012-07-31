@@ -1,0 +1,39 @@
+<%= form_for(@user, :url => @user.persisted? ? admin_user_path : admin_users_path ) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, t(:error)) %>
+        <%= t :prohibited_save, :this => t(:path), :count => @user.errors.count %>
+      </h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field"><%= f.label :full_name %>
+    <br/>
+    <%= f.text_field :full_name %></div>
+
+  <div class="field"><%= f.label :email %>
+    <br/>
+    <%= f.email_field :email %></div>
+
+  <div class="field"><%= f.label :password %>
+    <br/>
+    <%= f.password_field :password %></div>
+
+  <div class="field"><%= f.label :password_confirmation %>
+    <br/>
+    <%= f.password_field :password_confirmation %></div>
+  
+  <% if can? :read, Role %>
+	  <p><%= f.label :role %></p>
+	  <%= habtm_checkboxes(@user, :role_ids, @accessible_roles, :name, '') %>
+  <% end %> 
+  
+  <div class="actions">
+    <%= f.submit t(:submit_user) %>
+  </div>
+<% end %>

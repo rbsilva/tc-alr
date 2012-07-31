@@ -1,0 +1,6 @@
+<h1><%= @user == @current_user ? t(:your_account_settings) : t(:editing_user) %></h1>
+
+<%= render 'form' %>
+
+<%= link_to t(:show), @user %> |
+<%= link_to t(:back), admin_users_path %>

@@ -26,6 +26,7 @@ pt-BR:
     other: "impediram esse %{this} de ser salvo:"
   error: "erro"
   submit_file: "Criar arquivo"
+  submit_user: "Criar usuário"
   resend_confirmation_instructions: "Reenviar instruções para confirmação"
   welcome: "Bem vindo"
   you_can_confirm_account: "Você pode confirmar sua conta de email através do link abaixo:"

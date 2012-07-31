@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t :full_name %>:</b>
+  <%= @user.full_name %>
+</p>
+
+<p>
+  <b><%= t :email %>:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b><%= t :role %>:</b>
+  <%= @user.roles.first.name %>
+</p>
+
+<% if can?(:see_timestamps, User) %>
+<p>
+  <b><%= t :created_at %>:</b>
+  <%= @user.created_at %>
+</p>
+<p>
+  <b><%= t :last_sign_in_at %>:</b>
+  <%= @user.last_sign_in_at %>
+</p>
+<p>
+  <b><%= t :sign_in_count %>:</b>
+  <%= @user.sign_in_count %>
+</p>
+<% end %>
+
+<%= link_to_if(can?(:update, @user), t(:edit), edit_admin_user_path(@user)) %> |
+<%= link_to t(:back), admin_users_path %>

@@ -1,7 +1,9 @@
 TC::Application.routes.draw do
-  # replace devise_for :users with:
   devise_for :users,  :controllers => { :registrations => "users/registrations" }
-  resources :users
+  
+  namespace :admin do
+	resources :users
+  end
 
   resources :upload, :as => :raw_files, :controller => :raw_files do
     post 'attach', :on => :collection

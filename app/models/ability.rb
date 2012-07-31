@@ -29,22 +29,21 @@ class Ability
     # http://www.tonyamoyal.com/2010/07/28/rails-authentication-with-devise-and-cancan-customizing-devise-controllers/
     # que explica como fazer atribuições de permissões
 
-    #user ||= User.new # guest user
+    user ||= User.new # guest user
 
-    #if user.role? :super_admin
-    #  can :manage, :all
-    #elsif user.role? :product_admin
-    #  can :manage, [Product, Asset, Issue]
-    #elsif user.role? :product_team
-    #  can :read, [Product, Asset]
-    #  # manage products, assets he owns
-    #  can :manage, Product do |product|
-    #    product.try(:owner) == user
-    #  end
-    #  can :manage, Asset do |asset|
-    #    asset.assetable.try(:owner) == user
-    #  end
-    #end
+    if user.role? :admin
+      can :manage, :all
+    elsif user.role? :product_admin
+      can :manage, [Product, Asset, Issue]
+    elsif user.role? :product_team
+      can :read, [Product, Asset]
+      can :manage, Product do |product|
+        product.try(:owner) == user
+      end
+      can :manage, Asset do |asset|
+        asset.assetable.try(:owner) == user
+      end
+    end
 
   end
 end
