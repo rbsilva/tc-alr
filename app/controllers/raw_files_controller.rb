@@ -94,7 +94,7 @@ class RawFilesController < ApplicationController
     end
     respond_to do |format|
       if continue
-        format.html { render action: "new" , notice: 'The file was successfully uploaded.' }
+        format.html { render action: "new", notice: 'The file was successfully uploaded.' }
         format.json { render json: @raw_file, status: :created, location: @raw_file }
       else
         format.html { render action: "new" }

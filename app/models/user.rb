@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name
 
   validates :full_name, :presence => true,
-            :length => { :minimum => 2 },
-            :format => { :with => /^[A-zÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž\s]+$/ }
+            :length => {:minimum => 2},
+            :format => {:with => /^[A-zÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž\s]+$/}
 end
