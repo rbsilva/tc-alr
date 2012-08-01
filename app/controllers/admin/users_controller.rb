@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
   def index
     @users = User.accessible_by(current_ability, :index).limit(20)
     respond_to do |format|
-	  format.html # index.html.erb
+      format.html # index.html.erb
       format.json { render :json => @users }
     end
   end

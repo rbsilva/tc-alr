@@ -1,5 +1,5 @@
 TC::Application.routes.draw do
-  devise_for :users,  :controllers => { :registrations => "users/registrations" }
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
 
   namespace :admin do
     resources :users
