@@ -1,4 +1,4 @@
-<%= form_for(@user, :url => @user.persisted? ? admin_user_path : admin_users_path ) do |f| %>
+<%= form_for(@user, :url => @user.persisted? ? admin_user_path : admin_users_path) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, t(:error)) %>
@@ -27,12 +27,12 @@
   <div class="field"><%= f.label :password_confirmation %>
     <br/>
     <%= f.password_field :password_confirmation %></div>
-  
+
   <% if can? :read, Role %>
-	  <p><%= f.label :role %></p>
-	  <%= habtm_checkboxes(@user, :role_ids, @accessible_roles, :name, '') %>
-  <% end %> 
-  
+    <p><%= f.label :role %></p>
+    <%= habtm_checkboxes(@user, :role_ids, @accessible_roles, :name, '') %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit t(:submit_user) %>
   </div>

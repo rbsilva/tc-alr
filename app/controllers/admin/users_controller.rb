@@ -8,16 +8,16 @@ class Admin::UsersController < ApplicationController
   def index
     @users = User.accessible_by(current_ability, :index).limit(20)
     respond_to do |format|
-	  format.html # index.html.erb
+      format.html # index.html.erb
       format.json { render :json => @users }
     end
   end
-  
+
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-	
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-	
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  
+
   # POST /users
   # POST /users.json                                      
   def create
@@ -56,7 +56,7 @@ class Admin::UsersController < ApplicationController
       end
     end
   end
-  
+
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -65,7 +65,7 @@ class Admin::UsersController < ApplicationController
     else
       @user.errors[:base] << "The password you entered is incorrect" unless @user.valid_password?(params[:user][:current_password])
     end
-	
+
     @user = User.find(params[:id])
 
     respond_to do |format|

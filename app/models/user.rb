@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   validates :full_name, :presence => true,
             :length => {:minimum => 2},
             :format => {:with => /^[A-zÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž\s]+$/}
-			
+
   def role?(role)
-      return !!self.roles.find_by_name(role.to_s.camelize)
+    return !!self.roles.find_by_name(role.to_s.camelize)
   end
 end
