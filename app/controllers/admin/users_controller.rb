@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
+  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
   before_filter :get_user, :only => [:index, :new, :edit]
   before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
   load_and_authorize_resource :only => [:show, :new, :destroy, :edit, :update]
 
-  # GET /users
-  # GET /users.json
+  # GET /admin/users
+  # GET /admin/users.json
   def index
     @users = User.accessible_by(current_ability, :index).limit(20)
     respond_to do |format|
@@ -12,37 +13,37 @@ class Admin::UsersController < ApplicationController
       format.json { render :json => @users }
     end
   end
-  
-  # GET /users/1
-  # GET /users/1.json
+
+  # GET /admin/users/1
+  # GET /admin/users/1.json
   def show
     @user = User.find(params[:id])
-	
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
+  # GET /admin/users/new
+  # GET /admin/users/new.json
   def new
     @user = User.new
-	
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
     end
   end
 
-  # GET /users/1/edit
-  # GET /users/1/edit.json                                
+  # GET /admin/users/1/edit
+  # GET /admin/users/1/edit.json
   def edit
     @user = User.find(params[:id])
   end
-  
-  # POST /users
-  # POST /users.json                                      
+
+  # POST /admin/users
+  # POST /admin/users.json
   def create
     @user = User.new(params[:user])
 
@@ -56,16 +57,16 @@ class Admin::UsersController < ApplicationController
       end
     end
   end
-  
-  # PUT /users/1
-  # PUT /users/1.json
+
+  # PUT /admin/users/1
+  # PUT /admin/users/1.json
   def update
     if params[:user][:password].blank?
       [:password, :password_confirmation, :current_password].collect { |p| params[:user].delete(p) }
     else
       @user.errors[:base] << "The password you entered is incorrect" unless @user.valid_password?(params[:user][:current_password])
     end
-	
+
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -79,8 +80,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /admin/users/1
+  # DELETE /admin/users/1.json
   def destroy
     @user = User.find(params[:id])
     @user.destroy
