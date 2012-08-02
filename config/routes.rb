@@ -5,9 +5,9 @@ TC::Application.routes.draw do
     resources :users
   end
 
-  resources :upload, :as => :raw_files, :controller => :raw_files do
-    post 'attach', :on => :collection
-  end
+  resources :upload, :as => :raw_files, :controller => :raw_files# do
+#    post 'attach', :on => :collection
+#  end
 
   get "home/index"
 

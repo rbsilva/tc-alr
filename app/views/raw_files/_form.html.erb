@@ -1,11 +1,3 @@
-<%= form_for(:upload, :url => attach_raw_files_path,
-             :html => {:multipart => true}) do |f| %>
-  <div class="field">
-    <a class="input"><%= f.label :attach_a_file, :onclick => '$("#upload_attach_a_file").click();return false;' %></a>
-    <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
-  </div>
-<% end %>
-
 <%= form_for(@raw_file) do |f| %>
   <% if @raw_file.errors.any? %>
     <div id="error_explanation">
@@ -20,6 +12,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <a class="input"><%= f.label :attach_a_file, :onclick => '$("#raw_file_attach_a_file").click();return false;' %></a>
+    <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
+  </div>
   <div class="field">
     <%= f.label :path %>
     <br/>

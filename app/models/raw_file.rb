@@ -1,6 +1,7 @@
 # encoding: utf-8
 class RawFile < ActiveRecord::Base
-  attr_accessible :path, :tags
+  attr_writer :attach_a_file
+  attr_accessible :path, :tags, :attach_a_file
 
   validates :path, :presence => true
   validates :tags, :presence => true,

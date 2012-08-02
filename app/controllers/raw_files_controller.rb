@@ -42,22 +42,23 @@ class RawFilesController < ApplicationController
   # POST /raw_files
   # POST /raw_files.json
   def create
-    require 'fileutils'
     @raw_file = RawFile.new(params[:raw_file])
 
     begin
-      if @raw_file.save then
-        upload_dir = APP_CONFIG['upload_dir']
-        if !Dir.exists? upload_dir then
-          FileUtils.makedirs upload_dir
+      require 'fileutils'
+      filename = @raw_file.path
+      if params[:raw_file][:attach_a_file].nil? then
+        if @raw_file.save then
+          _save_file filename
+          continue = 'created'
+        else
+          continue = false
         end
-        filename = @raw_file.path
-        file = File.join(upload_dir, filename)
-        tempfile = File.join('tmp', filename)
-        FileUtils.mv tempfile, file
-        continue = true
       else
-        continue = false
+        tempfile = params[:raw_file][:attach_a_file].tempfile
+        original_filename = params[:raw_file][:attach_a_file].original_filename
+        @raw_file.path = _attach_file filename, original_filename, tempfile
+        continue = 'attached'
       end
     rescue Exception => e
       logger.info e
@@ -66,35 +67,11 @@ class RawFilesController < ApplicationController
     end
 
     respond_to do |format|
-      if continue
-        format.html { redirect_to @raw_file, notice: 'Raw file was successfully created.' }
-        format.json { render json: @raw_file, status: :created, location: @raw_file }
-      else
+      if continue == 'attached'
         format.html { render action: "new" }
-        format.json { render json: @raw_file.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # POST /raw_files/attach
-  # POST /raw_files/attach.json
-  def attach
-    require 'fileutils'
-    begin
-      tempfile = params[:upload][:attach_a_file].tempfile
-      filename = Time.now.to_i.to_s + '_' + params[:upload][:attach_a_file].original_filename
-      file = File.join('tmp', filename)
-      FileUtils.cp tempfile.path, file
-      @raw_file = RawFile.new(:path => filename)
-      continue = true
-    rescue Exception => e
-      logger.info e
-      @raw_file.errors.set :attach_a_file, [', you must select a file']
-      continue = false
-    end
-    respond_to do |format|
-      if continue
-        format.html { render action: "new", notice: 'The file was successfully uploaded.' }
+        #format.json { render json: @raw_file, status: :created, location: @raw_file }
+      elsif continue == 'created'
+        format.html { redirect_to @raw_file, notice: 'File was successfully created.' }
         format.json { render json: @raw_file, status: :created, location: @raw_file }
       else
         format.html { render action: "new" }
@@ -108,8 +85,39 @@ class RawFilesController < ApplicationController
   def update
     @raw_file = RawFile.find(params[:id])
 
+    begin
+      require 'fileutils'
+      filename = @raw_file.path
+      if params[:raw_file][:attach_a_file].nil? then
+        old_filename = @raw_file.path
+        if @raw_file.update_attributes(params[:raw_file]) then
+          _save_file @raw_file.path
+          if old_filename != @raw_file.path then
+            upload_dir = APP_CONFIG['upload_dir']
+            file = File.join(upload_dir, old_filename)
+            _rm_file file
+          end
+          continue = 'updated'
+        else
+          continue = false
+        end
+      else
+        tempfile = params[:raw_file][:attach_a_file].tempfile
+        original_filename = params[:raw_file][:attach_a_file].original_filename
+        @raw_file.path = _attach_file filename, original_filename, tempfile
+        continue = 'attached'
+      end
+    rescue Exception => e
+      logger.info e
+      @raw_file.errors.set :path, e.message
+      continue = false
+    end
+
     respond_to do |format|
-      if @raw_file.update_attributes(params[:raw_file])
+      if continue == 'attached'
+        format.html { render action: "edit" }
+        #format.json { render json: @raw_file, status: :created, location: @raw_file }
+      elsif continue == 'updated'
         format.html { redirect_to @raw_file, notice: 'Raw file was successfully updated.' }
         format.json { head :no_content }
       else
@@ -123,11 +131,51 @@ class RawFilesController < ApplicationController
   # DELETE /raw_files/1.json
   def destroy
     @raw_file = RawFile.find(params[:id])
-    @raw_file.destroy
+    filename = @raw_file.path
+    if @raw_file.destroy then
+      upload_dir = APP_CONFIG['upload_dir']
+      file = File.join(upload_dir, filename)
+      _rm_file file
+    end
 
     respond_to do |format|
       format.html { redirect_to raw_files_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def _save_file(filename)
+    begin
+      upload_dir = APP_CONFIG['upload_dir']
+      if !Dir.exists? upload_dir then
+        FileUtils.makedirs upload_dir
+      end
+      file = File.join(upload_dir, filename)
+      tempfile = File.join('tmp', filename)
+      FileUtils.mv tempfile, file
+    rescue
+      #do nothing
+    end
+  end
+
+  def _attach_file(filename, original_filename, tempfile)
+    file = File.join('tmp', filename)
+    _rm_file file
+    filename = Time.now.to_i.to_s + '_' + original_filename
+    file = File.join('tmp', filename)
+    FileUtils.cp tempfile.path, file
+    filename
+  end
+
+  def _rm_file(file)
+    if !file.nil? && File.exists?(file) then
+      begin
+        FileUtils.rm file
+      rescue
+        #do nothing
+      end
     end
   end
 end
