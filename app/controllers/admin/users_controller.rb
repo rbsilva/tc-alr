@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
   before_filter :get_user, :only => [:index, :new, :edit]
   before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
-  load_and_authorize_resource :only => [:show, :new, :destroy, :edit, :update]
+  load_and_authorize_resource :only => [:index, :show, :new, :destroy, :edit, :update]
 
   # GET /admin/users
   # GET /admin/users.json
