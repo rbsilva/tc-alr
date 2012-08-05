@@ -6,3 +6,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #authorize! :create, resource
   end
 end
+
