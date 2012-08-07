@@ -7,16 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<p class="notice"><%= notice %></p>
+	<p class="flash"><%= flash[:error] %></p>
+	<p class="alert"><%= alert %></p>
 
-<p class="notice"><%= notice %></p>
-<p class="flash"><%= flash[:error] %></p>
-<p class="alert"><%= alert %></p>
+	<%= link_to t(:home), root_url %>
+	<%= link_to t(:upload), raw_files_path %>
+	<%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
+	<div class="container">
 
-<%= link_to t(:home), root_url %>
-<%= link_to t(:upload), raw_files_path %>
-<%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
+	  <div class="main">
+		<%= yield %>
+	  </div>
 
-<%= yield %>
-
+	</div>
 </body>
 </html>
