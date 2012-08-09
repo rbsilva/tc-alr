@@ -1,10 +1,11 @@
 class RawFilesController < ApplicationController
+  before_filter :get_user
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
 
   # GET /raw_files
   # GET /raw_files.json
   def index
-    @raw_files = RawFile.all
+    @raw_files = RawFile.find_all_by_user_id current_user.id
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,8 +49,9 @@ class RawFilesController < ApplicationController
       require 'fileutils'
       filename = @raw_file.path
       if params[:raw_file][:attach_a_file].nil? then
+        @raw_file.status = 'SENT'
         if @raw_file.save then
-          _save_file filename
+          save_file filename
           continue = 'created'
         else
           continue = false
@@ -57,7 +59,7 @@ class RawFilesController < ApplicationController
       else
         tempfile = params[:raw_file][:attach_a_file].tempfile
         original_filename = params[:raw_file][:attach_a_file].original_filename
-        @raw_file.path = _attach_file filename, original_filename, tempfile
+        @raw_file.path = attach_file filename, original_filename, tempfile
         continue = 'attached'
       end
     rescue Exception => e
@@ -91,11 +93,11 @@ class RawFilesController < ApplicationController
       if params[:raw_file][:attach_a_file].nil? then
         old_filename = @raw_file.path
         if @raw_file.update_attributes(params[:raw_file]) then
-          _save_file @raw_file.path
+          save_file @raw_file.path
           if old_filename != @raw_file.path then
             upload_dir = APP_CONFIG['upload_dir']
             file = File.join(upload_dir, old_filename)
-            _rm_file file
+            rm_file file
           end
           continue = 'updated'
         else
@@ -104,7 +106,7 @@ class RawFilesController < ApplicationController
       else
         tempfile = params[:raw_file][:attach_a_file].tempfile
         original_filename = params[:raw_file][:attach_a_file].original_filename
-        @raw_file.path = _attach_file filename, original_filename, tempfile
+        @raw_file.path = attach_file filename, original_filename, tempfile
         continue = 'attached'
       end
     rescue Exception => e
@@ -135,7 +137,7 @@ class RawFilesController < ApplicationController
     if @raw_file.destroy then
       upload_dir = APP_CONFIG['upload_dir']
       file = File.join(upload_dir, filename)
-      _rm_file file
+      rm_file file
     end
 
     respond_to do |format|
@@ -146,7 +148,7 @@ class RawFilesController < ApplicationController
 
   private
 
-  def _save_file(filename)
+  def save_file(filename)
     begin
       upload_dir = APP_CONFIG['upload_dir']
       if !Dir.exists? upload_dir then
@@ -160,16 +162,16 @@ class RawFilesController < ApplicationController
     end
   end
 
-  def _attach_file(filename, original_filename, tempfile)
+  def attach_file(filename, original_filename, tempfile)
     file = File.join('tmp', filename)
-    _rm_file file
+    rm_file file
     filename = Time.now.to_i.to_s + '_' + original_filename
     file = File.join('tmp', filename)
     FileUtils.cp tempfile.path, file
     filename
   end
 
-  def _rm_file(file)
+  def rm_file(file)
     if !file.nil? && File.exists?(file) then
       begin
         FileUtils.rm file
@@ -178,4 +180,6 @@ class RawFilesController < ApplicationController
       end
     end
   end
+
+  include Utils
 end

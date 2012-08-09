@@ -1,7 +1,8 @@
 # encoding: utf-8
 class RawFile < ActiveRecord::Base
+  belongs_to :user
   attr_writer :attach_a_file
-  attr_accessible :path, :tags, :attach_a_file
+  attr_accessible :user_id,:path, :tags, :attach_a_file, :status
 
   validates :path, :presence => true
   validates :tags, :presence => true,

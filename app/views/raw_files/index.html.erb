@@ -4,7 +4,7 @@
   <tr>
     <th><%= t :path %></th>
     <th><%= t :tags %></th>
-    <th></th>
+    <th><%= t :status %></th>
     <th></th>
     <th></th>
   </tr>
@@ -13,6 +13,7 @@
     <tr>
       <td><%= raw_file.path %></td>
       <td><%= raw_file.tags %></td>
+      <td><%= raw_file.status %></td>
       <td><%= link_to t(:show), raw_file %></td>
       <td><%= link_to t(:edit), edit_raw_file_path(raw_file) %></td>
       <td><%= link_to t(:delete), raw_file, confirm: t(:are_you_sure), method: :delete %></td>
