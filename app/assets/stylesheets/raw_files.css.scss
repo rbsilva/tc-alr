@@ -2,9 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .input label {
-  cursor: pointer
+  cursor: pointer;
 }
 
 #raw_file_attach_a_file {
   display: none;
+}
+
+table, td, th {
+  border:1px solid green;
+  padding:5px;
+  font-size: 12pt;
+}
+
+th {
+  background-color:green;
+  color:white;
 }

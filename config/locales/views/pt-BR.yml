@@ -58,6 +58,8 @@ pt-BR:
   #status
   SENT: "Enviado"
   PROCESSED: "Processado"
+  status: "status"
+  created_at: "data de envio"
 
   helpers:
     label:
