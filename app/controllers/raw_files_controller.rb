@@ -5,7 +5,7 @@ class RawFilesController < ApplicationController
   # GET /raw_files
   # GET /raw_files.json
   def index
-    @raw_files = RawFile.find_all_by_user_id current_user.id
+    @raw_files = RawFile.find_all_by_user_id current_user.id, :order => 'created_at desc'
 
     respond_to do |format|
       format.html # index.html.erb

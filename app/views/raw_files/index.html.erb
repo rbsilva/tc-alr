@@ -5,6 +5,7 @@
     <th><%= t :path %></th>
     <th><%= t :tags %></th>
     <th><%= t :status %></th>
+    <th><%= t :created_at %></th>
     <th></th>
     <th></th>
   </tr>
@@ -14,6 +15,7 @@
       <td><%= link_to raw_file.path, download_raw_file_path(raw_file) %></td>
       <td><%= raw_file.tags %></td>
       <td><%= t raw_file.status %></td>
+      <td><%= t raw_file.created_at %></td>
       <td><%= link_to t(:edit), edit_raw_file_path(raw_file) %></td>
       <td><%= link_to t(:delete), raw_file, confirm: t(:are_you_sure), method: :delete %></td>
     </tr>
