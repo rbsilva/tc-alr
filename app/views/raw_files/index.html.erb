@@ -11,10 +11,9 @@
 
   <% @raw_files.each do |raw_file| %>
     <tr>
-      <td><%= raw_file.path %></td>
+      <td><%= link_to raw_file.path, download_raw_file_path(raw_file) %></td>
       <td><%= raw_file.tags %></td>
-      <td><%= raw_file.status %></td>
-      <td><%= link_to t(:show), raw_file %></td>
+      <td><%= t raw_file.status %></td>
       <td><%= link_to t(:edit), edit_raw_file_path(raw_file) %></td>
       <td><%= link_to t(:delete), raw_file, confirm: t(:are_you_sure), method: :delete %></td>
     </tr>

@@ -16,12 +16,22 @@ class RawFilesController < ApplicationController
   # GET /raw_files/1
   # GET /raw_files/1.json
   def show
-    @raw_file = RawFile.find(params[:id])
+    @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @raw_file }
     end
+  end
+
+  # GET /raw_files/1
+  # GET /raw_files/1.json
+  def download
+    require 'fileutils'
+    @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
+    upload_dir = APP_CONFIG['upload_dir']
+    file = File.join(upload_dir, @raw_file.path)
+    send_file file, :x_sendfile=>true
   end
 
   # GET /raw_files/new
@@ -37,7 +47,7 @@ class RawFilesController < ApplicationController
 
   # GET /raw_files/1/edit
   def edit
-    @raw_file = RawFile.find(params[:id])
+    @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
   end
 
   # POST /raw_files
@@ -85,7 +95,7 @@ class RawFilesController < ApplicationController
   # PUT /raw_files/1
   # PUT /raw_files/1.json
   def update
-    @raw_file = RawFile.find(params[:id])
+    @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
 
     begin
       require 'fileutils'
@@ -132,7 +142,7 @@ class RawFilesController < ApplicationController
   # DELETE /raw_files/1
   # DELETE /raw_files/1.json
   def destroy
-    @raw_file = RawFile.find(params[:id])
+    @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
     filename = @raw_file.path
     if @raw_file.destroy then
       upload_dir = APP_CONFIG['upload_dir']

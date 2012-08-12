@@ -10,6 +10,11 @@
   <%= @raw_file.tags %>
 </p>
 
+<p>
+  <b><%= t :status %>:</b>
+  <%= t @raw_file.status %>
+</p>
+
 
 <%= link_to t(:edit), edit_raw_file_path(@raw_file) %> |
 <%= link_to t(:back), raw_files_path %>

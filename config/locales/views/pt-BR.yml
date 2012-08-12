@@ -54,6 +54,10 @@ pt-BR:
   didnt_receive_unlock: "Não recebeu instruções de desbloqueio?"
   sign_in_with: "Faça login com %{with}"
   resend_unlock: "Reenviar instruções de desbloqueio"
+  full_name: "Nome completo"
+  #status
+  SENT: "Enviado"
+  PROCESSED: "Processado"
 
   helpers:
     label:
@@ -61,6 +65,7 @@ pt-BR:
         attach_a_file: "Anexar arquivo"
       user:
         current_password: "Senha atual"
+        role: "Permissões"
 
   activerecord:
     errors:
@@ -71,6 +76,7 @@ pt-BR:
           invalid: "é inválido"
     models:
       user: "usuário"
+      role: "permissão"
     attributes:
       raw_file:
         path: "Arquivo"

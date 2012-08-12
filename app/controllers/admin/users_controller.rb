@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.json
   def index
-    @users = User.accessible_by(current_ability, :index).limit(20)
+    @users = User.accessible_by(current_ability, :index)#future pagination .limit(20)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }

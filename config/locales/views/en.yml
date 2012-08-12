@@ -50,6 +50,10 @@ en:
   didnt_receive_unlock: "Didn't receive unlock instructions?"
   sign_in_with: "Sign in with %{with}"
   resend_unlock: "Resend unlock instructions"
+  full_name: "Full name"
+  #status
+  SENT: "Sent"
+  PROCESSED: "Processed"
 
   helpers:
     label:
@@ -57,6 +61,7 @@ en:
         attach_a_file: "Attach a file"
       user:
         current_password: "Current password"
+        role: "Role"
 
   activerecord:
     errors:
@@ -67,6 +72,7 @@ en:
           invalid: "is invalid"
     models:
       user: "user"
+      role: "role"
     attributes:
       raw_file:
         path: "File"
