@@ -1,5 +1,6 @@
 defaults: &defaults
   upload_dir: app/raw_files
+  processed_dir: app/raw_files/processed
 
 development:
   <<: *defaults

@@ -29,8 +29,12 @@ class RawFilesController < ApplicationController
   def download
     require 'fileutils'
     @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
-    upload_dir = APP_CONFIG['upload_dir']
-    file = File.join(upload_dir, @raw_file.path)
+    if @raw_file.status == 'SENT' then
+      download_dir = APP_CONFIG['upload_dir']
+    elsif @raw_file.status == 'PROCESSED' then
+      download_dir = APP_CONFIG['processed_dir']
+    end
+    file = File.join(download_dir, @raw_file.path)
     send_file file, :x_sendfile=>true
   end
 
