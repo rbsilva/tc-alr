@@ -4,22 +4,27 @@
   <title>TC</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= favicon_link_tag %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-	<p class="flash"><%= flash[:error] %></p>
-	<p class="alert"><%= alert %></p>
-
-	<%= link_to t(:home), root_url %>
-	<%= link_to t(:upload), raw_files_path %>
-	<%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
-	<div class="container">
-
-	  <div class="main">
-		<%= yield %>
-	  </div>
-
-	</div>
+  <div class="container">
+    <div id="messages">
+      <p class="notice"><%= notice %></p>
+      <p class="flash"><%= flash[:error] %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <div id="header">
+      <%= image_tag("logo.png", :size => "400x108") %>
+    </div>
+    <div id="menu">
+      <%= link_to t(:home), root_url %>
+      <%= link_to t(:upload), raw_files_path %>
+      <%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
+    </div>
+    <div class="main">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
