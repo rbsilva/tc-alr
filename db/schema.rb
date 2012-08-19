@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819001027) do
+ActiveRecord::Schema.define(:version => 20120819003312) do
 
   create_table "raw_files", :force => true do |t|
     t.string   "path"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20120819001027) do
     t.datetime "updated_at", :null => false
     t.string   "models"
   end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name", :unique => true
 
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
