@@ -1,0 +1,25 @@
+<%= form_for(@role, :url => @role.persisted? ? admin_role_path : admin_roles_path) do |f| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@role.errors.count, t(:error)) %>
+        <%= t :prohibited_save, :this => t(:path), :count => @role.errors.count %>
+      </h2>
+
+      <ul>
+        <% @role.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field"><%= f.label :name %>
+    <br/>
+    <%= f.text_field :name %></div>
+
+  <p><%= t :areas %></p>
+  <%= areas %>
+
+  <div class="actions">
+    <%= f.submit t(:submit_role) %>
+  </div>
+<% end %>

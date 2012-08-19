@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809202055) do
+ActiveRecord::Schema.define(:version => 20120819001027) do
 
   create_table "raw_files", :force => true do |t|
     t.string   "path"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120809202055) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "models"
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
@@ -49,9 +50,13 @@ ActiveRecord::Schema.define(:version => 20120809202055) do
     t.string   "full_name"
     t.integer  "user_id"
     t.string   "status"
+    t.string   "user"
+    t.integer  "delete_flag"
+    t.integer  "active_flag"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["user"], :name => "index_users_on_user", :unique => true
 
 end
