@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-  begin
     user ||= User.new # guest user
 
     user.roles.each do |role|
@@ -14,8 +13,5 @@ class Ability
         end
       end
     end
-  end
-  rescue => e
-   log e
   end
 end
