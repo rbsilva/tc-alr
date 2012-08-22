@@ -13,18 +13,23 @@ class RawFileTransformer < ActiveRecord::Base
 	  
 	  @raw_files = RawFile.where("status = 'SENT'")
 	  @raw_files.each do |raw_file| 
+		begin
 		  filename = raw_file.path
 		  file = File.join(upload_dir, filename)
 		  processed_file = File.join(processed_dir, filename)
 		  filename_yml = filename + '.yml'
+		  puts raw_file.path
 		  inbound_file = File.join(inbound_dir, filename_yml)
 		  inbound = Excel.new(file)
 		  inbound = inbound.to_yaml
 		  File.open(inbound_file, 'w') {|f| f.write(inbound) }
 		  raw_file.status = 'PROCESSED'
-		  RawFile.update_attributes(raw_file)
+		  raw_file.save
 		  FileUtils.mv file, processed_file
 		  true
+		rescue Exception => e
+		  logger.fatal e
+		end
 	  end
     rescue Exception => e
 	  logger.fatal e
