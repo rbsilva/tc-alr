@@ -46,3 +46,6 @@ gem 'devise'
 
 # To use cancan
 gem 'cancan'
+
+gem 'roo'
+gem 'rufus-scheduler'

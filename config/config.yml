@@ -1,6 +1,7 @@
 defaults: &defaults
   upload_dir: app/raw_files
   processed_dir: app/raw_files/processed
+  inbound_dir: app/raw_files/inbound
 
 development:
   <<: *defaults

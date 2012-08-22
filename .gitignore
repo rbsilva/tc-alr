@@ -28,3 +28,4 @@
 # Ignore public compiled assets
 /public/assets
 /.idea
+Thumbs.db
