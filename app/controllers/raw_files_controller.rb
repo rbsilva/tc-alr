@@ -2,9 +2,6 @@ class RawFilesController < ApplicationController
   before_filter :get_user
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
 
-  caches_action :index
-  cache_sweeper :raw_file_sweeper
-
   # GET /raw_files
   # GET /raw_files.json
   def index
