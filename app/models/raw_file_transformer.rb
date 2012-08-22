@@ -1,3 +1,15 @@
+Excel.class_eval do
+  def get_workbook
+    @workbook
+  end
+end
+
+Spreadsheet::Excel::Workbook.class_eval do
+  def get_io
+    @io
+  end
+end
+
 class RawFileTransformer < ActiveRecord::Base
   def self.transform
     begin
@@ -20,9 +32,11 @@ class RawFileTransformer < ActiveRecord::Base
 		  filename_yml = filename + '.yml'
 		  puts raw_file.path
 		  inbound_file = File.join(inbound_dir, filename_yml)
-		  inbound = Excel.new(file)
-		  inbound = inbound.to_yaml
-		  File.open(inbound_file, 'w') {|f| f.write(inbound) }
+		  inbound = Excel.new(file) 
+		  content = inbound.to_yaml
+		  inbound.get_workbook.get_io.close
+		  
+		  File.open(inbound_file, 'w') {|f| f.write(content) }
 		  raw_file.status = 'PROCESSED'
 		  raw_file.save
 		  FileUtils.mv file, processed_file
