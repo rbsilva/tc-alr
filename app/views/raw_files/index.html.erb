@@ -1,5 +1,10 @@
 <h1><%= t :listing_files %></h1>
 
+<%= form_tag(:action => :index) do %>
+  <%= text_field_tag :filter %>
+  <%= submit_tag 'Filtrar' %>
+<% end %>
+
 <table>
   <tr>
     <th><%= t :path %></th>

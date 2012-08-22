@@ -5,11 +5,15 @@ class RawFilesController < ApplicationController
   # GET /raw_files
   # GET /raw_files.json
   def index
-    @raw_files = RawFile.find_all_by_user_id current_user.id, :order => 'created_at desc'
+    if params[:filter].nil? then
+      @raw_files = RawFile.find_all_by_user_id current_user.id, :order => 'created_at desc'
+    else
+      @raw_files = RawFile.where("path like ? and user_id = ?", "%#{params[:filter]}%", current_user.id).order('created_at desc')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @raw_files }
+                  #format.json { render json: @raw_files }
     end
   end
 
