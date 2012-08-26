@@ -1,6 +1,6 @@
 <h1><%= t :listing_files %></h1>
 
-<%= form_tag(:action => :index) do %>
+<%= form_tag(:action => :search) do %>
   <%= text_field_tag :filter %>
   <%= submit_tag 'Filtrar' %>
 <% end %>

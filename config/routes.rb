@@ -7,8 +7,12 @@ TC::Application.routes.draw do
   end
 
   resources :upload, :as => :raw_files, :controller => :raw_files do
-    get 'download', :on => :member
-    post 'index', :on => :collection
+    member do
+      get :download
+    end
+    collection do
+      post :search
+    end
   end
 
   get "home/index"
