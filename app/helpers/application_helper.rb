@@ -14,17 +14,7 @@ module ApplicationHelper
   end
 
   def models
-    begin
-      models = []
-      Module.constants.select do |constant_name|
-        constant = eval constant_name.to_s
-        if !constant.nil? and constant.is_a? Class and constant.extend? ActiveRecord::Base
-          models << constant_name.to_s
-        end
-      end
-      models
-    rescue
-    end
+    models = %w(User Role RawFile)
   end
 
   def habtm_checkboxes(obj, column, assignment_objects, assignment_object_display_column, label_css_class)
