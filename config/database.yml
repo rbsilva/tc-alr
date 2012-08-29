@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  adapter: mysql2
+  adapter: <%= defined?(JRUBY_VERSION) ? 'jdbcmysql' : 'mysql2' %>
   database: tc_dev
   username: root
   password: "742147"

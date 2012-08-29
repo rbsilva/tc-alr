@@ -5,9 +5,20 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'sqlite3'
-gem 'mysql2'
 
+if defined?(JRUBY_VERSION)
+  gem 'jdbc-mysql'
+  gem 'activerecord-jdbc-adapter'
+  gem 'activerecord-jdbcmysql-adapter'
+  gem 'jruby-pageant'
+  gem 'jruby-openssl'
+else
+  gem 'mysql2'
+  # To use debugger
+  gem 'ruby-debug-base19'
+  gem 'ruby-debug19'
+  gem 'ruby-debug-ide19'
+end
 
 
 # Gems used only for assets and not required
@@ -35,11 +46,6 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 gem 'capistrano'
-
-# To use debugger
- gem 'ruby-debug-base19'
- gem 'ruby-debug19'
- gem 'ruby-debug-ide19'
 
 # To use devise
 gem 'devise'
