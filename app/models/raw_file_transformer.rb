@@ -40,6 +40,11 @@ class RawFileTransformer < ActiveRecord::Base
       inbound = Excel.new(file) rescue is_valid = false
 
       if !is_valid then
+        inbound = Excelx.new(file) rescue logger.fatal($!)
+        is_valid = true
+      end
+
+      if !is_valid then
         inbound = CSV.read(file) rescue logger.fatal($!)
         is_valid = true
       end
