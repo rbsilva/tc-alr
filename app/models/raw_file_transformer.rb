@@ -35,19 +35,16 @@ class RawFileTransformer < ActiveRecord::Base
       processed_file = File.join(processed_dir, filename)
       filename_yml = filename + '.yml'
       inbound_file = File.join(inbound_dir, filename_yml)
+      is_valid = true
 
-      begin
-        inbound = Excel.new(file) 
-      rescue 
-        logger.info("#{raw_file.id} - #{file} is not a Excel file.")
-        
-        begin
-          inbound = CSV.read(file)  
-        rescue 
-          logger.info("#{raw_file.id} - #{file} is not a CSV file.")
-        end
-        
+      inbound = Excel.new(file) rescue is_valid = false
+
+      if !is_valid then
+        inbound = CSV.read(file) rescue logger.fatal($!)
+        is_valid = true
       end
+
+      if !is_valid then raise 'Fatal Error' end
 
       content = inbound.to_yaml
 

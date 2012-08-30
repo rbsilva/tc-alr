@@ -5,11 +5,7 @@ class RawFilesController < ApplicationController
   # GET /raw_files
   # GET /raw_files.json
   def index
-    if params[:filter].nil? then
-      @raw_files = RawFile.find_all_by_user_id current_user.id, :order => 'created_at desc'
-    else
-      @raw_files = RawFile.where("path like ? and user_id = ?", "%#{params[:filter]}%", current_user.id).order('created_at desc')
-    end
+    @raw_files = RawFile.find_all_by_user_id current_user.id, :order => 'created_at desc'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,11 +14,16 @@ class RawFilesController < ApplicationController
   end
 
   def search
+    if !params[:filter].empty? then
+      @raw_files = RawFile.where("path like ? and user_id = ?", "%#{params[:filter]}%", current_user.id).order('created_at desc')
+
+      respond_to do |format|
+        format.html { render action: "index" }
+      end
+    else
+      redirect_to raw_files_path
+    end
   end
-
-  alias search index
-
-  undef search
 
   # GET /raw_files/1
   # GET /raw_files/1.json

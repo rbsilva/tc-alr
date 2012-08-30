@@ -12,6 +12,7 @@ if defined?(JRUBY_VERSION)
   gem 'activerecord-jdbcmysql-adapter'
   gem 'jruby-pageant'
   gem 'jruby-openssl'
+  gem 'warbler'
 else
   gem 'mysql2'
   # To use debugger
