@@ -9,11 +9,6 @@
 </head>
 <body>
   <div class="container">
-    <div id="messages">
-      <p class="notice"><%= notice %></p>
-      <p class="flash"><%= flash[:error] %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
     <div id="header">
       <% image_tag("logo.png", :size => "400x108") %>
     </div>
@@ -25,6 +20,11 @@
       <%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
     </div>
     <div class="main">
+      <div id="messages">
+        <p class="notice"><%= notice %></p>
+        <p class="flash"><%= flash[:error] %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
       <%= yield %>
     </div>
   </div>

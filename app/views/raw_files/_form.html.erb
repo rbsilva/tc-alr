@@ -13,13 +13,14 @@
     </div>
   <% end %>
   <div class="field">
-    <a class="input"><%= f.label :attach_a_file, :onclick => '$("#raw_file_attach_a_file").click();return false;' %></a>
+    <a class="input"></a>
     <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
   </div>
   <div class="field">
     <%= f.label :path %>
     <br/>
     <%= f.text_field :path, :readonly => 'true' %>
+    <%= image_tag "attach.png", :onclick => '$("#raw_file_attach_a_file").click();return false;' %>
   </div>
   <div class="field">
     <%= f.label :tags %>
