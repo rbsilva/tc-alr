@@ -4,6 +4,7 @@ TC::Application.routes.draw do
   namespace :admin do
     resources :users
     resources :roles
+    get "inbound/list"
   end
 
   resources :upload, :as => :raw_files, :controller => :raw_files do

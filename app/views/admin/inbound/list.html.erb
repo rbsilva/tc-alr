@@ -1,0 +1,24 @@
+<% @inbounds.each do |inbound| %>
+  <% if inbound.is_a? Array %>
+    <% if inbound[0].is_a? Hash %>
+      <h2><%= inbound[1].path %></h2>
+      <br/>
+      <table>
+        <tr>
+        <% row = 1; inbound[0].each_value do |meta_data| %>
+          <% if row != meta_data['row'] %>
+            <%= '</tr><tr>'.html_safe %>
+            <% row = meta_data['row'] %>
+          <% end %>
+          <td><%= meta_data['value'] %></td>
+        <% end %>
+      </table>
+      <br/>
+    <% else %>
+      <h2><%= inbound[1].path %></h2>
+      <p class="flash"><%= inbound[2] %></p>
+      <textarea rows="5" cols="100"><%= inbound[0] %></textarea>
+      <br/>
+    <% end %>
+  <% end %>
+<% end %>
