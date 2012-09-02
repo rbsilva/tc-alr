@@ -1,7 +1,10 @@
+# encoding: UTF-8
 class Admin::InboundController < ApplicationController
   def list
     require 'csv'
     require 'yaml'
+
+    YAML::ENGINE.yamler='psych'
 
     @inbounds = []
 
@@ -13,14 +16,18 @@ class Admin::InboundController < ApplicationController
       begin
         path = raw_file.path + '.yml'
         file = File.join(inbound_dir, path)
-        @inbounds << [YAML::load_file(file), raw_file]
-      rescue
-        @inbounds << [File.open(file).gets, raw_file, $!] rescue @inbounds << ['',raw_file, $!]
+
+        @inbounds << [YAML::load(IO.read(file)), raw_file]
+      rescue SyntaxError, StandardError
+        @inbounds << [IO.read(file), raw_file, $!] rescue @inbounds << ['',raw_file, $!]
       end
     end
-
-    respond_to do |format|
-      format.html
+    begin
+      respond_to do |format|
+        format.html
+      end
+    rescue
+      logger.fatal $!
     end
   end
 end

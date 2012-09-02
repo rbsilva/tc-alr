@@ -39,7 +39,7 @@ class RawFileTransformer < ActiveRecord::Base
 
       if !is_valid then raise 'Fatal Error' end
 
-      content = inbound.to_yaml
+      content = inbound.to_yaml(:encoding => :utf8)
 
       if inbound.is_a? Excel then
         inbound.get_workbook.get_io.close
