@@ -56,4 +56,4 @@ gem 'cancan'
 
 gem 'roo'
 gem 'rufus-scheduler'
-gem 'psych'
+gem 'psych', :platforms => :ruby

@@ -39,6 +39,15 @@ class Admin::FactsController < ApplicationController
   # GET /admin/facts/1/edit
   def edit
     @fact = Fact.find(params[:id])
+    begin
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @fact }
+      end
+    rescue
+      logger.fatal $!.annoted_source_code
+      logger.fatal $!
+    end
   end
 
   # POST /admin/facts

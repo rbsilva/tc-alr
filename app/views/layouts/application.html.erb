@@ -17,6 +17,9 @@
       <%= link_to t(:upload), raw_files_path %>
       <%= link_to t(:users), admin_users_path %>
       <%= link_to t(:roles), admin_roles_path %>
+      <%= link_to t(:data_warehouse),url_for(:action => 'list', :controller => 'admin/data_warehouse') %>
+      <%= link_to t(:dimensions), admin_dimensions_path %>
+      <%= link_to t(:facts), admin_facts_path %>
       <%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
     </div>
     <div class="main">

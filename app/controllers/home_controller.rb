@@ -4,5 +4,14 @@ class HomeController < ApplicationController
   caches_page :index
 
   def index
+    begin
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @fact }
+      end
+    rescue
+      logger.fatal $!
+      logger.fatal $!.annoted_source_code
+    end
   end
 end
