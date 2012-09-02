@@ -3,6 +3,8 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+encoding: utf8
+
 development:
   adapter: <%= defined?(JRUBY_VERSION) ? 'jdbcmysql' : 'mysql2' %>
   database: tc_dev
