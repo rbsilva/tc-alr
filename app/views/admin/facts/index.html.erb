@@ -1,0 +1,23 @@
+<h1>Listing admin_facts</h1>
+
+<table>
+  <tr>
+    <th><%= t :fact %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @facts.each do |fact| %>
+  <tr>
+    <td><%= fact.name %></td>
+    <td><%= link_to 'Show', admin_fact_path(:id => fact.name) %></td>
+    <td><%= link_to 'Edit', edit_admin_fact_path(:id => fact.name) %></td>
+    <td><%= link_to 'Destroy', admin_fact_path(:id => fact.name), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fact', new_admin_fact_path %>

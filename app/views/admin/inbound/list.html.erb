@@ -3,16 +3,7 @@
     <% if inbound[0].is_a? Hash %>
       <h2><%= inbound[1].path %></h2>
       <br/>
-      <table>
-        <tr>
-        <% row = 1; inbound[0].each_value do |meta_data| %>
-          <% if row != meta_data['row'] %>
-            <%= '</tr><tr>'.html_safe %>
-            <% row = meta_data['row'] %>
-          <% end %>
-          <td><%= meta_data['value'] %></td>
-        <% end %>
-      </table>
+      <%= inbound_table(inbound[0]) %>
       <br/>
     <% else %>
       <h2><%= inbound[1].path %></h2>

@@ -1,0 +1,25 @@
+<% url = (params[:id].nil?) ? admin_dimensions_path(:id => @dimension.name) : admin_dimension_path %>
+
+<%= form_for(@dimension, :url => url, :method => ((params[:id].nil?) ? :post : :put)) do |f| %>
+  <% if @dimension.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dimension.errors.count, "error") %> prohibited this admin_dimension from being saved:</h2>
+
+      <ul>
+      <% @dimension.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <br/>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t(:submit_dimension) %>
+  </div>
+<% end %>

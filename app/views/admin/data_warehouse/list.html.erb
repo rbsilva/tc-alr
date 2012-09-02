@@ -1,0 +1,13 @@
+<% @tables.each_pair do |table, columns| %>
+  <%= table.to_s %>
+  <table>
+    <% columns.each_pair do |column, values| %>
+      <tr>
+        <th><%= column %></th>
+        <% values.each do |value| %>
+          <td><%= value[0] %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

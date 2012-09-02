@@ -1,0 +1,25 @@
+<% url = (params[:id].nil?) ? admin_facts_path(:id => @fact.name) : admin_fact_path %>
+
+<%= form_for(@fact, :url => url, :method => ((params[:id].nil?) ? :post : :put)) do |f| %>
+  <% if @fact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fact.errors.count, "error") %> prohibited this admin_fact from being saved:</h2>
+
+      <ul>
+      <% @fact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <br/>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
