@@ -1,5 +1,10 @@
 # encoding: UTF-8
 class Admin::InboundController < ApplicationController
+  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
+  before_filter :get_user
+  before_filter :accessible_roles
+  load_and_authorize_resource
+
   def list
     require 'csv'
     require 'yaml'
@@ -30,4 +35,7 @@ class Admin::InboundController < ApplicationController
       logger.fatal $!
     end
   end
+
+  private
+  include Utils
 end

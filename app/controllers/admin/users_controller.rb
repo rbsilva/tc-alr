@@ -93,6 +93,5 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
   include Utils
 end

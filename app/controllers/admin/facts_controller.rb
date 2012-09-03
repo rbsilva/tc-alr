@@ -1,4 +1,9 @@
 class Admin::FactsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :get_user, :only => [:index, :new, :edit]
+  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
+  load_and_authorize_resource :only => [:index, :show, :new, :destroy, :edit, :update]
+
   # GET /admin/facts
   # GET /admin/facts.json
   def index
@@ -93,4 +98,7 @@ class Admin::FactsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  include Utils
 end

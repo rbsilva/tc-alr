@@ -1,6 +1,8 @@
 class RawFilesController < ApplicationController
-  before_filter :get_user
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
+  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
+  before_filter :get_user, :only => [:index, :new, :edit]
+  load_and_authorize_resource :only => [:index, :show, :new, :destroy, :edit, :update]
 
   # GET /raw_files
   # GET /raw_files.json
@@ -209,5 +211,6 @@ class RawFilesController < ApplicationController
     end
   end
 
+  private
   include Utils
 end
