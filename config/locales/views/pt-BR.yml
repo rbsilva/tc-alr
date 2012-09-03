@@ -113,6 +113,8 @@ pt-BR:
         columns: "colunas"
       fact:
         name: "nome"
+        columns: "colunas"
+        foreign_keys: "chaves estrangeiras"
 
   activerecord:
     errors:
@@ -130,6 +132,19 @@ pt-BR:
         tags: "marcadores"
       user:
         full_name: "nome completo"
+        email: "email"
         password: "senha"
         password_confirmation: "confirmação de senha"
         remember_me: "lembrar deste login"
+      role:
+        user: "usuário"
+        name: "nome"
+  activemodel:
+    attributes:
+      dimension:
+        name: "nome"
+        columns: "colunas"
+      fact:
+        name: "nome"
+        columns: "colunas"
+        foreign_keys: "chaves estrangeiras"

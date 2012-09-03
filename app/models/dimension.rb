@@ -7,6 +7,8 @@ class Dimension
 
   validates :name, :presence => true,
             :length => {:minimum => 2}
+  validates :columns, :presence => true,
+            :length => {:minimum => 2}
 
   def columns=(value)
     @columns = value.gsub(/\s+/, "").split(',')
@@ -34,16 +36,17 @@ class Dimension
   end
 
   def save
-    sql = "CREATE TABLE #{name}_dimension ( id int(11) PRIMARY KEY AUTO_INCREMENT"
-    @columns.each do |column|
-      meta = column.split(':')
-      sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+    if valid? then
+      sql = "CREATE TABLE #{name}_dimension ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+      @columns.each do |column|
+        meta = column.split(':')
+        sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+      end
+      sql += ')' 
+      ActiveRecord::Base.connection.execute(sql)
+      true
     end
-    sql += ')' 
-    ActiveRecord::Base.connection.execute(sql)
-    true
   rescue
-    errors.add(:name, $!)
     false
   end
 

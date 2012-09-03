@@ -107,6 +107,8 @@ en:
         columns: "columns"
       fact:
         name: "name"
+        columns: "columns"
+        foreign_keys: "foreign keys"
 
   activerecord:
     errors:
@@ -124,6 +126,19 @@ en:
         tags: "tags"
       user:
         full_name: "full name"
+        email: "email"
         password: "password"
         password_confirmation: "password confirmation"
         remember_me: "remember me"
+      role:
+        user: "user"
+        name: "name"
+  activemodel:
+    attributes:
+      dimension:
+        name: "name"
+        columns: "columns"
+      fact:
+        name: "name"
+        columns: "columns"
+        foreign_keys: "foreign keys"

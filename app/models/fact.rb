@@ -7,6 +7,10 @@ class Fact
 
   validates :name, :presence => true,
             :length => {:minimum => 2}
+  validates :columns, :presence => true,
+            :length => {:minimum => 2}
+  validates :foreign_keys, :presence => true,
+            :length => {:minimum => 2}
 
   def columns=(value)
     @columns = value.gsub(/\s+/, "").split(',')
@@ -38,21 +42,23 @@ class Fact
   end
 
   def save
-    sql = "CREATE TABLE #{name}_fact ( id int(11) PRIMARY KEY AUTO_INCREMENT"
-    @columns.each do |column|
-      meta = column.split(':')
-      sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+    if valid? then
+      sql = "CREATE TABLE #{name}_fact ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+      @columns.each do |column|
+        meta = column.split(':')
+        sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+      end
+      
+      @foreign_keys.each do |column|
+        meta = column.split(':')
+        sql += ',' + meta[0] + ' int(11) '
+        sql += ', FOREIGN KEY (' + meta[0] + ') REFERENCES '+ meta[1] +'_dimension(id)'
+      end
+      
+      sql += ')' 
+      ActiveRecord::Base.connection.execute(sql)
+      true
     end
-    
-    @foreign_keys.each do |column|
-      meta = column.split(':')
-      sql += ',' + meta[0] + ' int(11) '
-      sql += ', FOREIGN KEY (' + meta[0] + ') REFERENCES '+ meta[1] +'_dimension(id)'
-    end
-    
-    sql += ')' 
-    ActiveRecord::Base.connection.execute(sql)
-    true
   rescue
     errors.add(:name, $!)
     false
