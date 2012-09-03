@@ -2,6 +2,7 @@
 # pt-BR translations for TC
 
 pt-BR:
+  all: "todas"
   are_you_sure: "você tem certeza?"
   areas: "Áreas"
   back: "voltar"
