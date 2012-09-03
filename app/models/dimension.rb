@@ -8,7 +8,14 @@ class Dimension
   validates :name, :presence => true,
             :length => {:minimum => 2}
 
-
+  def columns=(value)
+    @columns = value.gsub(/\s+/, "").split(',')
+  end
+  
+  def id
+    @name
+  end
+            
   def self.all
     dimensions = []
     all = ActiveRecord::Base.connection.tables.grep(/.*_dimension$/)
@@ -27,7 +34,13 @@ class Dimension
   end
 
   def save
-    ActiveRecord::Base.connection.execute("CREATE TABLE #{name}_dimension (id int(11) PRIMARY KEY AUTO_INCREMENT)")
+    sql = "CREATE TABLE #{name}_dimension ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+    @columns.each do |column|
+      meta = column.split(':')
+      sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+    end
+    sql += ')' 
+    ActiveRecord::Base.connection.execute(sql)
     true
   rescue
     errors.add(:name, $!)
@@ -50,6 +63,12 @@ class Dimension
   end
 
   def persisted?
-    false
+    result = ActiveRecord::Base.connection.tables.grep(/^#{@name}_dimension$/)[0]
+
+    if result.nil? then
+      false
+    else
+      true
+    end
   end
 end

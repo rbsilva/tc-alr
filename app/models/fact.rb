@@ -3,11 +3,23 @@ class Fact
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :name, :columns
+  attr_accessor :name, :columns, :foreign_keys
 
   validates :name, :presence => true,
             :length => {:minimum => 2}
 
+  def columns=(value)
+    @columns = value.gsub(/\s+/, "").split(',')
+  end
+  
+  def id
+    @name
+  end
+  
+  def foreign_keys=(value)
+    @foreign_keys = value.gsub(/\s+/, "").split(',')
+  end
+            
   def self.all
     facts = []
     all = ActiveRecord::Base.connection.tables.grep(/.*_fact$/)
@@ -26,7 +38,20 @@ class Fact
   end
 
   def save
-    ActiveRecord::Base.connection.execute("CREATE TABLE #{name}_fact (id int(11) PRIMARY KEY AUTO_INCREMENT)")
+    sql = "CREATE TABLE #{name}_fact ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+    @columns.each do |column|
+      meta = column.split(':')
+      sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
+    end
+    
+    @foreign_keys.each do |column|
+      meta = column.split(':')
+      sql += ',' + meta[0] + ' int(11) '
+      sql += ', FOREIGN KEY (' + meta[0] + ') REFERENCES '+ meta[1] +'_dimension(id)'
+    end
+    
+    sql += ')' 
+    ActiveRecord::Base.connection.execute(sql)
     true
   rescue
     errors.add(:name, $!)
@@ -49,6 +74,12 @@ class Fact
   end
 
   def persisted?
-    false
+    result = ActiveRecord::Base.connection.tables.grep(/^#{@name}_fact$/)[0]
+
+    if result.nil? then
+      false
+    else
+      true
+    end
   end
 end

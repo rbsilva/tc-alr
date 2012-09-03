@@ -110,6 +110,7 @@ pt-BR:
         name: "nome"
       dimension:
         name: "nome"
+        columns: "colunas"
       fact:
         name: "nome"
 

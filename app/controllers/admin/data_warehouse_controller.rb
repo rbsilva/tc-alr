@@ -15,6 +15,16 @@ class Admin::DataWarehouseController < ApplicationController
 
       @tables.store(table, @columns.dup)
     end
+ 
+    ActiveRecord::Base.connection.tables.grep(/.*_fact$/).each do |table|
+      @columns = {}
+      ActiveRecord::Base.connection.columns(table).each do |column|
+        values = ActiveRecord::Base.connection.execute("SELECT #{column.name} FROM #{table}")
+        @columns.store(column.name, values)
+      end
+
+      @tables.store(table, @columns.dup)
+    end
   end
 
   private

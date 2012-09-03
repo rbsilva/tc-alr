@@ -2,12 +2,6 @@ defaults: &defaults
   upload_dir: app/raw_files
   processed_dir: app/raw_files/processed
   inbound_dir: app/raw_files/inbound
-  data_warehouse:
-    adapter: mysql2
-    database: tc_dw
-    username: root
-    password: "742147"
-    host: localhost
 
 development:
   <<: *defaults

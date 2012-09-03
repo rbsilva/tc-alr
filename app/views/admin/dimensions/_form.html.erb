@@ -1,10 +1,10 @@
-<% url = (params[:id].nil?) ? admin_dimensions_path(:id => @dimension.name) : admin_dimension_path %>
+<% url = (@dimension.persisted?) ? admin_dimension_path(:id => @dimension.name) : admin_dimensions_path %>
 
-<%= form_for(@dimension, :url => url, :method => ((params[:id].nil?) ? :post : :put)) do |f| %>
+<%= form_for(@dimension, :url => url, :method => ((@dimension.persisted?) ? :put : :post )) do |f| %>
   <% if @dimension.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@dimension.errors.count, "error") %>
-        <%= t :prohibited_save, :this => t(:dimension), :count => @dimension.errors.count %>
+        <%= t :prohibited_save, :this => t(:dimension, :count => @dimension.errors.count),  :count => @dimension.errors.count %>
       </h2>
 
       <ul>
@@ -19,6 +19,12 @@
     <%= f.label :name %>
     <br/>
     <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :columns %>
+    <br/>
+    <%= f.text_field :columns %>
   </div>
 
   <div class="actions">

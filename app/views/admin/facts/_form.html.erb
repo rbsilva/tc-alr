@@ -1,10 +1,10 @@
-<% url = (params[:id].nil?) ? admin_facts_path(:id => @fact.name) : admin_fact_path %>
+<% url = (@fact.persisted?) ? admin_fact_path(:id => @fact.name) : admin_facts_path %>
 
-<%= form_for(@fact, :url => url, :method => ((params[:id].nil?) ? :post : :put)) do |f| %>
+<%= form_for(@fact, :url => url, :method => ((@fact.persisted?) ? :put : :post)) do |f| %>
   <% if @fact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@fact.errors.count, "error") %>
-        <%= t :prohibited_save, :this => t(:fact), :count => @fact.errors.count %>
+        <%= t :prohibited_save, :this => t(:fact, :count => @fact.errors.count), :count => @fact.errors.count %>
       </h2>
 
       <ul>
@@ -19,6 +19,18 @@
     <%= f.label :name %>
     <br/>
     <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :columns %>
+    <br/>
+    <%= f.text_field :columns %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :foreign_keys %>
+    <br/>
+    <%= f.text_field :foreign_keys %>
   </div>
 
   <div class="actions">

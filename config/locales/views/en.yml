@@ -104,6 +104,7 @@ en:
         name: "name"
       dimension:
         name: "name"
+        columns: "columns"
       fact:
         name: "name"
 
