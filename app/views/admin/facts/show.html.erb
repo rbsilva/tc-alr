@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <b><%= t(:fact) %>:</b>
+  <%= @fact.name %>
+</p>
 
-<%= link_to 'Edit', edit_admin_fact_path(:id => @fact.name) %> |
-<%= link_to 'Back', admin_facts_path %>
+<%= link_to t(:edit), edit_admin_fact_path(:id => @fact.name) %> |
+<%= link_to t(:back), admin_facts_path %>

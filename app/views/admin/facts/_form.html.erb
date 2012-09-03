@@ -3,7 +3,9 @@
 <%= form_for(@fact, :url => url, :method => ((params[:id].nil?) ? :post : :put)) do |f| %>
   <% if @fact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@fact.errors.count, "error") %> prohibited this admin_fact from being saved:</h2>
+      <h2><%= pluralize(@fact.errors.count, "error") %>
+        <%= t :prohibited_save, :this => t(:fact), :count => @fact.errors.count %>
+      </h2>
 
       <ul>
       <% @fact.errors.full_messages.each do |msg| %>
@@ -20,6 +22,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:submit_fact)%>
   </div>
 <% end %>

@@ -7,7 +7,7 @@
 
 <p>
   <b><%= t :models %>:</b>
-  <%= @role.models %>
+  <%= roles_splitted(@role) %>
 </p>
 
 <%= link_to_if(can?(:update, @role), t(:edit), edit_admin_role_path(@role)) %> |

@@ -49,7 +49,7 @@ class Admin::RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to admin_role_path(@role), :notice =>  'Role was successfully created.' }
+        format.html { redirect_to admin_role_path(@role), :notice =>  I18n.t(:role_created_successfully) }
         format.json { render :json =>  @role, :status =>  :created, :location =>  @role }
       else
         format.html { render :action =>  "new" }
@@ -71,7 +71,7 @@ class Admin::RolesController < ApplicationController
 
     respond_to do |format|
       if @role.errors[:base].empty? and @role.update_attributes(params[:role])
-        format.html { redirect_to admin_role_path(@role), :notice =>  'Role was successfully updated.' }
+        format.html { redirect_to admin_role_path(@role), :notice =>  I18n.t(:role_updated_successfully) }
         format.json { head :no_content }
       else
         format.html { render :action =>  "edit" }

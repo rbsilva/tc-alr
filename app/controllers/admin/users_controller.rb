@@ -49,7 +49,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
+        format.html { redirect_to admin_user_path(@user), notice: I18n.t(:user_created_successfully) }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -71,7 +71,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.errors[:base].empty? and @user.update_attributes(params[:user])
-        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_user_path(@user), notice: I18n.t(:user_updated_successfully) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

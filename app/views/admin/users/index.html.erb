@@ -4,7 +4,7 @@
   <tr>
     <th><%= t :full_name %></th>
     <th><%= t :email %></th>
-    <th><%= t :permissions %></th>
+    <th><%= t(:role, :count => 2) %></th>
     <th></th>
     <th></th>
   </tr>
@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to_if(can?(:read, user), "#{user.full_name}", admin_user_path(user)) {} %></td>
       <td><%= "#{user.email}" %></td>
-      <td><%= "#{user.roles.collect { |role| role.name }}" %></td>
+      <td><%= "#{user.roles.collect { |role| role.name }.join(', ')}" %></td>
       <td><%= link_to_if(can?(:edit, user), t(:edit), edit_admin_user_path(user)) {} %></td>
       <td><%= link_to_if(can?(:delete, user), t(:delete), admin_user_path(user),:confirm => t(:are_you_sure), :method => :delete) {} %></td>
     </tr>

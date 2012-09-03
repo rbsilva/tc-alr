@@ -64,7 +64,7 @@ class Admin::DimensionsController < ApplicationController
 
     respond_to do |format|
       if @dimension.save
-        format.html { redirect_to admin_dimension_url(:id => @dimension.name), notice: 'Dimension was successfully created.' }
+        format.html { redirect_to admin_dimension_url(:id => @dimension.name), notice: I18n.t(:dimension_created_successfully) }
         format.json { render json: @dimension, status: :created, location: @dimension }
       else
         format.html { render action: "new" }
@@ -82,7 +82,7 @@ class Admin::DimensionsController < ApplicationController
 
     respond_to do |format|
       if @dimension.update_attributes(params[:admin_dimension])
-        format.html { redirect_to @dimension, notice: 'Dimension was successfully updated.' }
+        format.html { redirect_to @dimension, notice: I18n.t(:dimension_updated_successfully) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

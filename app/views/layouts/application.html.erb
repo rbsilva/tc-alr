@@ -10,16 +10,16 @@
 <body>
   <div class="container">
     <div id="header">
-      <% image_tag("logo.png", :size => "400x108") %>
+      <%= link_to image_tag("logo.png", :size => "300x124"), root_url %>
     </div>
     <div id="menu">
-      <%= link_to t(:home), root_url %>
       <%= link_to t(:upload), raw_files_path %>
-      <%= link_to t(:users), admin_users_path %>
-      <%= link_to t(:roles), admin_roles_path %>
-      <%= link_to t(:data_warehouse),url_for(:action => 'list', :controller => 'admin/data_warehouse') %>
-      <%= link_to t(:dimensions), admin_dimensions_path %>
-      <%= link_to t(:facts), admin_facts_path %>
+      <%= link_to t(:inbound).pluralize, url_for(:action => 'list', :controller => 'admin/inbound') %>
+      <%= link_to t(:user).pluralize, admin_users_path %>
+      <%= link_to t(:role, :count => 2).pluralize, admin_roles_path %>
+      <%= link_to t(:data_warehouse), url_for(:action => 'list', :controller => 'admin/data_warehouse') %>
+      <%= link_to t(:dimension, :count => 2).pluralize, admin_dimensions_path %>
+      <%= link_to t(:fact).pluralize, admin_facts_path %>
       <%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
     </div>
     <div class="main">
@@ -29,6 +29,9 @@
         <p class="alert"><%= alert %></p>
       </div>
       <%= yield %>
+    </div>
+    <div id="footer">
+      Copyright Adilson, Leonardo, Rodrigo (Unip Campinas) &copy; <%= Time.now.year %>
     </div>
   </div>
 </body>

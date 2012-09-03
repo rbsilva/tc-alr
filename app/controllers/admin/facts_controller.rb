@@ -57,7 +57,7 @@ class Admin::FactsController < ApplicationController
 
     respond_to do |format|
       if @fact.save
-        format.html { redirect_to admin_fact_url(:id => @fact.name), notice: 'Fact was successfully created.' }
+        format.html { redirect_to admin_fact_url(:id => @fact.name), notice: I18n.t(:fact_created_successfully) }
         format.json { render json: @fact, status: :created, location: @fact }
       else
         format.html { render action: "new" }
@@ -73,7 +73,7 @@ class Admin::FactsController < ApplicationController
 
     respond_to do |format|
       if @fact.update_attributes(params[:admin_fact])
-        format.html { redirect_to @fact, notice: 'Fact was successfully updated.' }
+        format.html { redirect_to @fact, notice: I18n.t(:fact_updated_successfully) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

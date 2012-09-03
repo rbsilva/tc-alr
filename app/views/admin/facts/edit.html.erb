@@ -1,6 +1,6 @@
-<h1>Editing admin_fact</h1>
+<h1><%= t(:editing_fact) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', admin_fact_path(:id => @fact.name) %> |
-<%= link_to 'Back', admin_facts_path(:id => @fact.name) %>
+<%= link_to t(:show), admin_fact_path(:id => @fact.name) %> |
+<%= link_to t(:back), admin_facts_path(:id => @fact.name) %>

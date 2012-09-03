@@ -1,6 +1,6 @@
-<h1>Editing admin_dimension</h1>
+<h1><%= t(:editing_dimension) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', admin_dimension_path(admin_dimension_path(:id => @dimension.name) )%> |
-<%= link_to 'Back', admin_dimensions_path %>
+<%= link_to t(:show), admin_dimension_path(admin_dimension_path(:id => @dimension.name) )%> |
+<%= link_to t(:back), admin_dimensions_path %>

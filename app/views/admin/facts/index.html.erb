@@ -1,8 +1,8 @@
-<h1>Listing admin_facts</h1>
+<h1><%= t(:listing_facts) %></h1>
 
 <table>
   <tr>
-    <th><%= t :fact %></th>
+    <th><%= t(:fact) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +11,13 @@
 <% @facts.each do |fact| %>
   <tr>
     <td><%= fact.name %></td>
-    <td><%= link_to 'Show', admin_fact_path(:id => fact.name) %></td>
-    <td><%= link_to 'Edit', edit_admin_fact_path(:id => fact.name) %></td>
-    <td><%= link_to 'Destroy', admin_fact_path(:id => fact.name), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:show), admin_fact_path(:id => fact.name) %></td>
+    <td><%= link_to t(:edit), edit_admin_fact_path(:id => fact.name) %></td>
+    <td><%= link_to t(:delete), admin_fact_path(:id => fact.name), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Fact', new_admin_fact_path %>
+<%= link_to t(:new_fact), new_admin_fact_path %>

@@ -1,8 +1,8 @@
-<h1>Listing admin_dimensions</h1>
+<h1><%= t(:listing_dimensions) %></h1>
 
 <table>
   <tr>
-    <th><%= t :dimension %></th>
+    <th><%= t(:dimension, :count => 2)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +11,13 @@
 <% @dimensions.each do |dimension| %>
   <tr>
     <td><%= dimension.name %></td>
-    <td><%= link_to 'Show', admin_dimension_path(:id => dimension.name) %></td>
-    <td><%= link_to 'Edit', edit_admin_dimension_path(:id => dimension.name) %></td>
-    <td><%= link_to 'Destroy', admin_dimension_path(:id => dimension.name), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:show), admin_dimension_path(:id => dimension.name) %></td>
+    <td><%= link_to t(:edit), edit_admin_dimension_path(:id => dimension.name) %></td>
+    <td><%= link_to t(:delete), admin_dimension_path(:id => dimension.name), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Dimension', new_admin_dimension_path %>
+<%= link_to t(:new_dimension), new_admin_dimension_path %>
