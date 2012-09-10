@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Dimension
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -6,7 +7,8 @@ class Dimension
   attr_accessor :name, :columns
 
   validates :name, :presence => true,
-            :length => {:minimum => 2}
+            :length => {:minimum => 2},
+            :format => { :with => /^[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*$/}
   validates :columns, :presence => true,
             :length => {:minimum => 2}
 
@@ -16,6 +18,11 @@ class Dimension
   
   def id
     @name
+  end
+
+  def name=(value)
+    # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo
+    @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
   end
             
   def self.all
