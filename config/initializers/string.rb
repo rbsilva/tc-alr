@@ -1,5 +1,5 @@
 # encoding: utf-8
-class str_ing
+class String
   def sub_accents
     str_in = self.split('')
     str_out = Array.new
