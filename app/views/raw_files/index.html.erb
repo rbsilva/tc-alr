@@ -7,8 +7,8 @@
 <br/>
 <table width="100%">
   <tr>
-    <th><%= t :path %></th>
-    <th><%= t :tags %></th>
+    <th><%= t :filename %></th>
+    <th><%= t :template %></th>
     <th><%= t :status %></th>
     <th><%= t :created_at %></th>
     <th></th>
@@ -17,8 +17,8 @@
 
   <% @raw_files.each do |raw_file| %>
     <tr>
-      <td><%= link_to raw_file.path, download_raw_file_path(raw_file) %></td>
-      <td><%= raw_file.tags %></td>
+      <td><%= link_to raw_file.filename, download_raw_file_path(raw_file) %></td>
+      <td><%= raw_file.template %></td>
       <td><%= t raw_file.status %></td>
       <td><%= t raw_file.created_at %></td>
       <td><%= link_to t(:edit), edit_raw_file_path(raw_file) %></td>

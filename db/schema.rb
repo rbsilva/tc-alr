@@ -11,15 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819003312) do
+ActiveRecord::Schema.define(:version => 20120913150137) do
+
+  create_table "inbounds", :force => true do |t|
+    t.binary   "file"
+    t.integer  "raw_file_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "raw_files", :force => true do |t|
-    t.string   "path"
-    t.string   "tags"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.binary   "file"
+    t.string   "template"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "user_id"
     t.string   "status"
+    t.string   "filename",     :default => "", :null => false
+    t.string   "content_type", :default => "", :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -35,6 +44,18 @@ ActiveRecord::Schema.define(:version => 20120819003312) do
     t.integer "role_id"
     t.integer "user_id"
   end
+
+  create_table "teste_dimension", :force => true do |t|
+    t.integer "teste"
+    t.integer "teste2"
+  end
+
+  create_table "teste_fact", :force => true do |t|
+    t.integer "teste"
+    t.integer "teste2"
+  end
+
+  add_index "teste_fact", ["teste2"], :name => "teste2"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

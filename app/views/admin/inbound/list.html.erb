@@ -1,12 +1,12 @@
 <% @inbounds.each do |inbound| %>
   <% if inbound.is_a? Array %>
     <% if inbound[0].is_a? Hash %>
-      <h2><%= inbound[1].path %></h2>
+      <h2><%= inbound[1].filename %></h2>
       <br/>
       <%= inbound_table(inbound[0]) %>
       <br/>
     <% else %>
-      <h2><%= inbound[1].path %></h2>
+      <h2><%= inbound[1].filename %></h2>
       <p class="flash"><%= inbound[2] %></p>
       <textarea rows="5" cols="100"><%= inbound[0] %></textarea>
       <br/>

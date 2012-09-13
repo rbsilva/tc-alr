@@ -13,19 +13,15 @@
     </div>
   <% end %>
   <div class="field">
-    <a class="input"></a>
-    <%= f.file_field :attach_a_file, :onchange => 'submit()' %>
+    <%= f.label :file %>
+    <br/>
+	<%= f.file_field :file %>
+    <%= image_tag "attach.png", :onclick => '$("#raw_file_file").click();return false;' %>
   </div>
   <div class="field">
-    <%= f.label :path %>
+    <%= f.label :template %>
     <br/>
-    <%= f.text_field :path, :readonly => 'true' %>
-    <%= image_tag "attach.png", :onclick => '$("#raw_file_attach_a_file").click();return false;' %>
-  </div>
-  <div class="field">
-    <%= f.label :tags %>
-    <br/>
-    <%= f.text_field :tags %>
+    <%= f.text_field :template %>
   </div>
   <%= f.hidden_field :user_id, :value => @current_user.id %>
   <div class="actions">
