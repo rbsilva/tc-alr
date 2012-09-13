@@ -45,18 +45,6 @@ ActiveRecord::Schema.define(:version => 20120913150137) do
     t.integer "user_id"
   end
 
-  create_table "teste_dimension", :force => true do |t|
-    t.integer "teste"
-    t.integer "teste2"
-  end
-
-  create_table "teste_fact", :force => true do |t|
-    t.integer "teste"
-    t.integer "teste2"
-  end
-
-  add_index "teste_fact", ["teste2"], :name => "teste2"
-
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
