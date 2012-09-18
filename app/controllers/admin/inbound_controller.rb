@@ -8,7 +8,6 @@ class Admin::InboundController < ApplicationController
   def list
     require 'csv'
     require 'xmlsimple'
-    require 'yaml'
 
     @inbounds = []
 
@@ -17,8 +16,7 @@ class Admin::InboundController < ApplicationController
     @raw_files.each do |raw_file|
       begin
         file = Inbound.where("raw_file_id = #{raw_file.id}").first.file
-
-        @inbounds << [YAML::load(file), raw_file]
+        @inbounds << [XmlSimple.xml_in(ActiveRecord::Base.connection.unescape_bytea(file)), raw_file]
       rescue SyntaxError, StandardError
         @inbounds << [file, raw_file, $!] rescue @inbounds << ['',raw_file, $!]
       end

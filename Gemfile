@@ -48,3 +48,6 @@ gem 'cancan'
 
 # To read excel
 gem 'roo'
+
+# To use XML Simple
+gem 'xml-simple'
