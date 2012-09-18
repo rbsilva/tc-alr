@@ -12,16 +12,16 @@
     <div id="header">
       <%= link_to image_tag("logo.png", :size => "300x124"), root_url %>
     </div>
-    <div id="menu">
-      <%= link_to t(:upload), raw_files_path %>
-      <%= link_to t(:inbound).pluralize, url_for(:action => 'list', :controller => 'admin/inbound') %>
-      <%= link_to t(:user).pluralize, admin_users_path %>
-      <%= link_to t(:role, :count => 2).pluralize, admin_roles_path %>
-      <%= link_to t(:data_warehouse), url_for(:action => 'list', :controller => 'admin/data_warehouse') %>
-      <%= link_to t(:dimension, :count => 2).pluralize, admin_dimensions_path %>
-      <%= link_to t(:fact).pluralize, admin_facts_path %>
-      <%= link_to t(:sign_out), destroy_user_session_path, :method => :delete %>
-    </div>
+    <ul id="menu">
+      <li><%= link_to t(:upload).capitalize, raw_files_path %></li>
+      <li><%= link_to t(:inbound).pluralize.capitalize, url_for(:action => 'list', :controller => 'admin/inbound') %></li>
+      <li><%= link_to t(:user).pluralize.capitalize, admin_users_path %></li>
+      <li><%= link_to t(:role, :count => 2).pluralize.capitalize, admin_roles_path %></li>
+      <li><%= link_to t(:data_warehouse).camelize, url_for(:action => 'list', :controller => 'admin/data_warehouse') %></li>
+      <li><%= link_to t(:dimension, :count => 2).pluralize.capitalize, admin_dimensions_path %></li>
+      <li><%= link_to t(:fact).pluralize.capitalize, admin_facts_path %></li>
+      <li><%= link_to t(:sign_out).capitalize, destroy_user_session_path, :method => :delete %></li>
+    </ul>
     <div class="main">
       <div id="messages">
         <p class="notice"><%= notice %></p>

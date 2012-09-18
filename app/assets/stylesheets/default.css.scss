@@ -27,15 +27,26 @@ input {color:#000;}
 }
 
 #menu {
+  width: 100%;
+  float: left;
   background-color: #35322F;
-  padding: 15px;
+}
+
+#menu li {
+  display: inline;
+}
+
+#menu .userInfo {
+  padding-top: 10px;
 }
 
 #menu a {
-  font-size: 17pt;
-  text-decoration: none;
   padding: 10px;
+  margin: 6px;
+  font-size: 14pt;
+  text-decoration: none;
   color: #fff;
+  float: left;
   &:visited {
     color: #fff;
   }

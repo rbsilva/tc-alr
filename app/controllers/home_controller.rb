@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user! #, :except => [:some_action_without_auth]
+  before_filter :get_user, :only => [:index, :new, :edit]
 
   caches_page :index
 
@@ -15,4 +16,7 @@ class HomeController < ApplicationController
       logger.fatal $!.annoted_source_code
     end
   end
+
+  private
+  include Utils
 end

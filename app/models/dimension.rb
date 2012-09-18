@@ -48,6 +48,7 @@ class Dimension
     end
   rescue
     false
+
   end
 
   def update_attributes(attributes = {})
