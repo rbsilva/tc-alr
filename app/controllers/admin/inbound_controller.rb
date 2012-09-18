@@ -7,9 +7,8 @@ class Admin::InboundController < ApplicationController
 
   def list
     require 'csv'
+    require 'xmlsimple'
     require 'yaml'
-
-    YAML::ENGINE.yamler='psych'
 
     @inbounds = []
 
