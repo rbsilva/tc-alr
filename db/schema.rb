@@ -11,15 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819003312) do
+ActiveRecord::Schema.define(:version => 20120913150137) do
+
+  create_table "inbounds", :force => true do |t|
+    t.binary   "file"
+    t.integer  "raw_file_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "raw_files", :force => true do |t|
-    t.string   "path"
-    t.string   "tags"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.binary   "file"
+    t.string   "template"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "user_id"
     t.string   "status"
+    t.string   "filename",     :default => "", :null => false
+    t.string   "content_type", :default => "", :null => false
   end
 
   create_table "roles", :force => true do |t|

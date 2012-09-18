@@ -3,27 +3,15 @@ class RawFileTransformer < ActiveRecord::Base
     require 'csv'
     require 'yaml'
 
-    upload_dir = APP_CONFIG['upload_dir']
-    processed_dir = APP_CONFIG['processed_dir']
-    inbound_dir = APP_CONFIG['inbound_dir']
-
-    if !Dir.exists? processed_dir then
-      FileUtils.makedirs processed_dir
-    end
-
-    if !Dir.exists? inbound_dir then
-        FileUtils.makedirs inbound_dir
-    end
-
     @raw_files = RawFile.where("status = 'SENT'")
 
     @raw_files.each do |raw_file|
-      filename = raw_file.path
-      file = File.join(upload_dir, filename)
-      processed_file = File.join(processed_dir, filename)
-      filename_yml = filename + '.yml'
-      inbound_file = File.join(inbound_dir, filename_yml)
-      is_valid = true
+      file = "tmp/#{raw_file.filename}"  
+      tempfile = File.new(file,'wb')
+      tempfile << raw_file.file
+      tempfile.close
+      
+      is_valid = true      
 
       inbound = Excel.new(file) rescue is_valid = false
 
@@ -44,11 +32,13 @@ class RawFileTransformer < ActiveRecord::Base
       if inbound.is_a? Excel then
         inbound.get_workbook.get_io.close
       end
-
-      File.open(inbound_file, 'w') {|f| f.write(content) }
+      yaml_file = StringIO.new()
+      yaml_file << content
+      Inbound.new(:raw_file_id => raw_file.id, :file => yaml_file.read).save
+      yaml_file.close
       raw_file.status = 'PROCESSED'
       raw_file.save
-      FileUtils.mv file, processed_file
+      File.delete(file)
       ActiveRecord::Base.connection.close
       true
     end

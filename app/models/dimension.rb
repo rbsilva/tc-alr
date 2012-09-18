@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Dimension
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -6,18 +7,24 @@ class Dimension
   attr_accessor :name, :columns
 
   validates :name, :presence => true,
-            :length => {:minimum => 2}
+            :length => {:minimum => 2},
+            :format => { :with => /^[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*$/}
   validates :columns, :presence => true,
             :length => {:minimum => 2}
 
   def columns=(value)
     @columns = value.gsub(/\s+/, "").split(',')
   end
-  
+
   def id
     @name
   end
-            
+
+  def name=(value)
+    # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo
+    @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
+  end
+
   def self.all
     dimensions = []
     all = ActiveRecord::Base.connection.tables.grep(/.*_dimension$/)
@@ -42,13 +49,12 @@ class Dimension
         meta = column.split(':')
         sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
       end
-      sql += ')' 
+      sql += ')'
       ActiveRecord::Base.connection.execute(sql)
       true
     end
   rescue
     false
-
   end
 
   def update_attributes(attributes = {})

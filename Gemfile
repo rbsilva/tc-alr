@@ -6,20 +6,12 @@ gem 'rails', '3.2.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-if defined?(JRUBY_VERSION)
-  gem 'jdbc-mysql'
-  gem 'activerecord-jdbc-adapter'
-  gem 'activerecord-jdbcmysql-adapter'
-  gem 'jruby-pageant'
-  gem 'jruby-openssl'
-  gem 'warbler'
-else
-  gem 'mysql2'
-  # To use debugger
-  gem 'ruby-debug-base19'
-  gem 'ruby-debug19'
-  gem 'ruby-debug-ide19'
-end
+gem 'pg'
+
+# To use debugger
+gem 'ruby-debug-base19'
+gem 'ruby-debug19'
+gem 'ruby-debug-ide19'
 
 
 # Gems used only for assets and not required

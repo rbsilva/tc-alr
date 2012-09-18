@@ -13,18 +13,15 @@ class Admin::InboundController < ApplicationController
 
     @inbounds = []
 
-    inbound_dir = APP_CONFIG['inbound_dir']
-
     @raw_files = RawFile.where("status = 'PROCESSED'")
 
     @raw_files.each do |raw_file|
       begin
-        path = raw_file.path + '.yml'
-        file = File.join(inbound_dir, path)
+        file = Inbound.where("raw_file_id = #{raw_file.id}").first.file
 
-        @inbounds << [YAML::load(IO.read(file)), raw_file]
+        @inbounds << [YAML::load(file), raw_file]
       rescue SyntaxError, StandardError
-        @inbounds << [IO.read(file), raw_file, $!] rescue @inbounds << ['',raw_file, $!]
+        @inbounds << [file, raw_file, $!] rescue @inbounds << ['',raw_file, $!]
       end
     end
     begin

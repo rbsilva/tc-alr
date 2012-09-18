@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Fact
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -6,7 +7,8 @@ class Fact
   attr_accessor :name, :columns, :foreign_keys
 
   validates :name, :presence => true,
-            :length => {:minimum => 2}
+            :length => {:minimum => 2},
+            :format => { :with => /^[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*$/}
   validates :columns, :presence => true,
             :length => {:minimum => 2}
   validates :foreign_keys, :presence => true,
@@ -18,6 +20,11 @@ class Fact
   
   def id
     @name
+  end
+
+  def name=(value)
+    # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo
+    @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
   end
   
   def foreign_keys=(value)
