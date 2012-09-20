@@ -1,7 +1,6 @@
 # encoding: utf-8
 class RawFile < ActiveRecord::Base
   belongs_to :user
-  attr_writer :attach_a_file
   attr_accessible :user_id, :file, :filename, :content_type, :template, :status
 
   validates :file, :presence => true
@@ -10,13 +9,9 @@ class RawFile < ActiveRecord::Base
             :format => {:with => /^[A-z0-9_\-ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž]+([,][A-z0-9_\-ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž]*)*$/}
             
   def uploaded_file=(incoming_file)
-      self.filename = incoming_file.original_filename
-      self.content_type = incoming_file.content_type
-      self.file = incoming_file.read
-  end
-
-  def filename=(new_filename)
-      write_attribute("filename", sanitize_filename(new_filename))
+      write_attribute(:filename, sanitize_filename(incoming_file.original_filename))
+      write_attribute(:file, ActiveRecord::Base.connection.escape_bytea(incoming_file.read))
+      write_attribute(:content_type, incoming_file.content_type)
   end
 
   private
