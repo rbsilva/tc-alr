@@ -51,3 +51,6 @@ gem 'roo'
 
 # To use XML Simple
 gem 'xml-simple'
+
+# To annotate files with schema information
+gem 'annotate'

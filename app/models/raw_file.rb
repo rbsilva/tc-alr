@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: raw_files
+#
+#  id           :integer          not null, primary key
+#  file         :binary
+#  template     :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#  status       :string(255)
+#  filename     :string(255)      default(""), not null
+#  content_type :string(255)      default(""), not null
+#
+
 class RawFile < ActiveRecord::Base
   belongs_to :user
   attr_accessible :user_id, :file, :filename, :content_type, :template, :status
