@@ -1,15 +1,9 @@
-class Class
-  def extend?(_class)
-    not superclass.nil? and ( superclass == _class or superclass.extend? _class )
-  end
-end
-
 module ApplicationHelper
   def get_time(time='')
-    if time.empty? then
+    if time.to_s.empty? then
       I18n.localize(Time.now)
     else
-      I18n.localize(Time.parse(time))
+      I18n.localize(Time.parse(time.to_s))
     end
   end
 
