@@ -1,8 +1,4 @@
-class Admin::DimensionsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :get_user, :only => [:index, :new, :edit]
-  before_filter :accessible_roles, :only => [:new, :edit, :show, :update, :create]
-  load_and_authorize_resource :only => [:index, :show, :new, :destroy, :edit, :update]
+class Admin::DimensionsController < BaseController
 
   # GET /admin/dimensions
   # GET /admin/dimensions.json
@@ -112,6 +108,4 @@ class Admin::DimensionsController < ApplicationController
     redirect_to admin_dimensions_url, flash: {:error => $!.to_s}
   end
 
-  private
-  include Utils
 end

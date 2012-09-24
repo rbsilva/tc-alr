@@ -1,9 +1,5 @@
 # encoding: UTF-8
-class Admin::InboundController < ApplicationController
-  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
-  before_filter :get_user
-  before_filter :accessible_roles
-  load_and_authorize_resource
+class Admin::InboundController < BaseController
 
   def list
     require 'csv'
@@ -30,6 +26,4 @@ class Admin::InboundController < ApplicationController
     end
   end
 
-  private
-  include Utils
 end
