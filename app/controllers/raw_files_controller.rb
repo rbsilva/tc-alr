@@ -13,7 +13,7 @@ class RawFilesController < BaseController
 
   def search
     if !params[:filter].empty? then
-      @raw_files = RawFile.where("path LIKE ? AND user_id = ?", "%#{params[:filter]}%", current_user.id).order('created_at DESC')
+      @raw_files = RawFile.where("UPPER(filename) LIKE UPPER(?) OR UPPER(template) LIKE UPPER(?) AND user_id = ?", "%#{params[:filter]}%", "%#{params[:filter]}%", current_user.id).order('created_at DESC')
 
       respond_to do |format|
         format.html { render :action => "index" }
@@ -37,7 +37,7 @@ class RawFilesController < BaseController
   # GET /raw_files/1
   def download
     @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?', current_user.id])
-    send_data @raw_file.file, :filename => @raw_file.filename, :disposition => "inline", :type => @raw_file.content_type  
+    send_data ActiveRecord::Base.connection.unescape_bytea(@raw_file.file), :filename => @raw_file.filename, :disposition => "inline", :type => @raw_file.content_type
   end
 
   # GET /raw_files/new
@@ -61,9 +61,9 @@ class RawFilesController < BaseController
   def create
     RawFile.transaction do
       @raw_file = RawFile.new(params[:raw_file])
-      
+
       @raw_file.uploaded_file = params[:raw_file][:file]
-      
+
       @raw_file.status = 'SENT'
 
       respond_to do |format|
@@ -83,7 +83,7 @@ class RawFilesController < BaseController
   def update
     RawFile.transaction do
       @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?',current_user.id])
-      
+
       @raw_file.uploaded_file = params[:raw_file][:file]
 
       respond_to do |format|

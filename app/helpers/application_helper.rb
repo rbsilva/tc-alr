@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def models
-    models = %w(User Role RawFile Dimension Fact DataWarehouse Inbound)
+    Role::MODELS
   end
 
   def habtm_checkboxes(obj, column, assignment_objects, assignment_object_display_column, label_css_class)

@@ -10,16 +10,16 @@
 <script src="../../ui/jquery.ui.dialog.js"></script>
 <link rel="stylesheet" href="../demos.css">
 
-<% @tables.each_pair do |table, columns| %>
-  <%= table.to_s %>
-  <table>
-    <% columns.each_pair do |column, values| %>
-      <tr>
-        <th><%= column %></th>
-        <% values.each do |value| %>
-          <td><%= value[0] %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
+<h1><%= t :dimensions %></h1>
+
+<% @dimensions.each_pair do |table, data| %>
+  <%= data_warehouse_table(table, data) %>
+  <br></br>
+<% end %>
+
+<h1><%= t :facts %></h1>
+
+<% @facts.each_pair do |table, data| %>
+  <%= data_warehouse_table(table, data) %>
+  <br></br>
 <% end %>

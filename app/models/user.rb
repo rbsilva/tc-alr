@@ -51,14 +51,6 @@ attr_accessible :email, :password, :password_confirmation, :remember_me, :full_n
     self.update_attributes(:active_flag => 0)
   end
 
-  def logical_destroy
-    self.update_attributes(:delete_flag => 1)
-  end
-
-  def logical_undestroy
-    self.update_attributes(:delete_flag => 0)
-  end
-
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

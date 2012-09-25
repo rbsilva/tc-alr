@@ -12,6 +12,10 @@ class Dimension
   validates :columns, :presence => true,
             :length => {:minimum => 2}
 
+  def columns
+    @columns.join(',') unless @columns.nil?
+  end
+
   def columns=(value)
     @columns = value.gsub(/\s+/, "").split(',')
   end
@@ -44,7 +48,9 @@ class Dimension
 
   def save
     if valid? then
-      sql = "CREATE TABLE #{name}_dimension ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+      sql = "CREATE SEQUENCE #{name}_dimension_seq START 1"
+      ActiveRecord::Base.connection.execute(sql)
+      sql = "CREATE TABLE #{name}_dimension ( id integer PRIMARY KEY DEFAULT nextval('#{name}_dimension_seq')"
       @columns.each do |column|
         meta = column.split(':')
         sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
@@ -54,6 +60,8 @@ class Dimension
       true
     end
   rescue
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE #{name}_dimension_seq")
+    errors.add(:name, $!)
     false
   end
 
@@ -64,6 +72,7 @@ class Dimension
 
   def destroy
     ActiveRecord::Base.connection.execute("DROP TABLE #{name}_dimension")
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE #{name}_dimension_seq")
   end
 
   def initialize(attributes = {})
