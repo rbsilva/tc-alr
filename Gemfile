@@ -46,6 +46,11 @@ gem 'devise'
 # To use cancan
 gem 'cancan'
 
+# To read excel
 gem 'roo'
-gem 'rufus-scheduler'
-gem 'psych'
+
+# To use XML Simple
+gem 'xml-simple'
+
+# To annotate files with schema information
+gem 'annotate'

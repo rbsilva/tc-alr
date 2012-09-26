@@ -1,15 +1,9 @@
 # encoding: UTF-8
-class Admin::InboundController < ApplicationController
-  before_filter :authenticate_user! #, :except => [:some_action_without_auth]
-  before_filter :get_user
-  before_filter :accessible_roles
-  load_and_authorize_resource
+class Admin::InboundController < BaseController
 
   def list
     require 'csv'
-    require 'yaml'
-
-    YAML::ENGINE.yamler='psych'
+    require 'xmlsimple'
 
     @inbounds = []
 
@@ -18,8 +12,7 @@ class Admin::InboundController < ApplicationController
     @raw_files.each do |raw_file|
       begin
         file = Inbound.where("raw_file_id = #{raw_file.id}").first.file
-
-        @inbounds << [YAML::load(file), raw_file]
+        @inbounds << [XmlSimple.xml_in(ActiveRecord::Base.connection.unescape_bytea(file)), raw_file]
       rescue SyntaxError, StandardError
         @inbounds << [file, raw_file, $!] rescue @inbounds << ['',raw_file, $!]
       end
@@ -33,6 +26,4 @@ class Admin::InboundController < ApplicationController
     end
   end
 
-  private
-  include Utils
 end

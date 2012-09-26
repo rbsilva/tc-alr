@@ -1,20 +1,14 @@
-class Class
-  def extend?(_class)
-    not superclass.nil? and ( superclass == _class or superclass.extend? _class )
-  end
-end
-
 module ApplicationHelper
   def get_time(time='')
-    if time.empty? then
+    if time.to_s.empty? then
       I18n.localize(Time.now)
     else
-      I18n.localize(Time.parse(time))
+      I18n.localize(Time.parse(time.to_s))
     end
   end
 
   def models
-    models = %w(User Role RawFile Dimension Fact DataWarehouse Inbound)
+    Role::MODELS
   end
 
   def habtm_checkboxes(obj, column, assignment_objects, assignment_object_display_column, label_css_class)

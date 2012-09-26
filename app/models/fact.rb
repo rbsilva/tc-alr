@@ -14,10 +14,14 @@ class Fact
   validates :foreign_keys, :presence => true,
             :length => {:minimum => 2}
 
+  def columns
+    @columns.join(',') unless @columns.nil?
+  end
+
   def columns=(value)
     @columns = value.gsub(/\s+/, "").split(',')
   end
-  
+
   def id
     @name
   end
@@ -26,11 +30,15 @@ class Fact
     # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo
     @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
   end
-  
+
+  def foreign_keys
+    @foreign_keys.join(',') unless @foreign_keys.nil?
+  end
+
   def foreign_keys=(value)
     @foreign_keys = value.gsub(/\s+/, "").split(',')
   end
-            
+
   def self.all
     facts = []
     all = ActiveRecord::Base.connection.tables.grep(/.*_fact$/)
@@ -50,23 +58,25 @@ class Fact
 
   def save
     if valid? then
-      sql = "CREATE TABLE #{name}_fact ( id int(11) PRIMARY KEY AUTO_INCREMENT"
+      sql = "CREATE SEQUENCE #{name}_fact_seq START 1"
+      ActiveRecord::Base.connection.execute(sql)
+      sql = "CREATE TABLE #{name}_fact ( id integer PRIMARY KEY DEFAULT nextval('#{name}_fact_seq')"
       @columns.each do |column|
         meta = column.split(':')
         sql += ',' + meta[0] + ' ' + meta[1] + ' ' + (meta[2] == 1 ? 'NOT NULL' : '')
       end
-      
+
       @foreign_keys.each do |column|
-        meta = column.split(':')
-        sql += ',' + meta[0] + ' int(11) '
-        sql += ', FOREIGN KEY (' + meta[0] + ') REFERENCES '+ meta[1] +'_dimension(id)'
+        sql += ',' + column + '_id integer '
+        sql += ', FOREIGN KEY (' + column + '_id) REFERENCES '+ column +'_dimension(id)'
       end
-      
-      sql += ')' 
+
+      sql += ')'
       ActiveRecord::Base.connection.execute(sql)
       true
     end
   rescue
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE #{name}_fact_seq")
     errors.add(:name, $!)
     false
   end
@@ -78,6 +88,7 @@ class Fact
 
   def destroy
     ActiveRecord::Base.connection.execute("DROP TABLE #{name}_fact")
+    ActiveRecord::Base.connection.execute("DROP SEQUENCE #{name}_fact_seq")
   end
 
   def initialize(attributes = {})
