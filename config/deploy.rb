@@ -9,8 +9,8 @@ set :user, "deploy"
 set :scm_passphrase, "742147"  # The deploy user's password
 set :use_sudo, false
 
-server "unip.servehttp.com:465", :app, :web, :db, :primary => true
-set :deploy_to, "/srv/ruby/tc"
+server "guacuserver.zapto.org:465", :app, :web, :db, :primary => true
+set :deploy_to, "/srv/rails/tc"
 
 after "deploy:update_code", "deploy:migrate"
 
