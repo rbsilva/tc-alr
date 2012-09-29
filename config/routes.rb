@@ -6,8 +6,9 @@ TC::Application.routes.draw do
     resources :roles
     resources :dimensions
     resources :facts
-    get "inbound/list"
-    get "data_warehouse/list"
+    resources :inbound, :only => :index
+    resources :data_warehouse, :only => :index
+    resources :dashboard, :only => :index
   end
 
   resources :upload, :as => :raw_files, :controller => :raw_files do

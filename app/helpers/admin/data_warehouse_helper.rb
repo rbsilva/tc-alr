@@ -1,7 +1,7 @@
 module Admin::DataWarehouseHelper
 
   def data_warehouse_table(table, data)
-    html = table.to_s
+    html = "<h3>#{table.to_s}</h3>"
     html += '<table>'
     html += ' <tr>'
     data[0].each do |column|

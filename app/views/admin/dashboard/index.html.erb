@@ -1,0 +1,10 @@
+<div id="dashboard_facts">
+  <% @facts.each_pair do |table, data| %>
+    <%= data_warehouse_table(table, data) %>
+  <% end %>
+</div>
+<div id="dashboard_report">
+
+</div>
+
+<div class="clear"></div>

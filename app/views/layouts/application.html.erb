@@ -13,11 +13,12 @@
       <%= link_to image_tag("logo.png", :size => "300x124"), root_url %>
     </div>
     <ul id="menu">
+      <li><%= link_to t(:dashboard), url_for(:action => 'index', :controller => 'admin/dashboard') %></li>
       <li><%= link_to t(:upload).capitalize, raw_files_path %></li>
-      <li><%= link_to t(:inbound).pluralize.capitalize, url_for(:action => 'list', :controller => 'admin/inbound') %></li>
+      <li><%= link_to t(:inbound).pluralize.capitalize, url_for(:action => 'index', :controller => 'admin/inbound') %></li>
       <li><%= link_to t(:user).pluralize.capitalize, admin_users_path %></li>
       <li><%= link_to t(:role, :count => 2).pluralize.capitalize, admin_roles_path %></li>
-      <li><%= link_to t(:data_warehouse).camelize, url_for(:action => 'list', :controller => 'admin/data_warehouse') %></li>
+      <li><%= link_to t(:data_warehouse).camelize, url_for(:action => 'index', :controller => 'admin/data_warehouse') %></li>
       <li><%= link_to t(:dimension, :count => 2).pluralize.capitalize, admin_dimensions_path %></li>
       <li><%= link_to t(:fact).pluralize.capitalize, admin_facts_path %></li>
       <li><%= link_to t(:sign_out).capitalize, destroy_user_session_path, :method => :delete %></li>

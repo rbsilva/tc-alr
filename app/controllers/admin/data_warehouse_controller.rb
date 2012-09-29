@@ -1,6 +1,6 @@
 class Admin::DataWarehouseController < BaseController
 
-  def list
+  def index
     @dimensions = DataWarehouse.dimensions
     @facts = DataWarehouse.facts
 

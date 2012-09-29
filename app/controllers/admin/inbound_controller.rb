@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class Admin::InboundController < BaseController
 
-  def list
+  def index
     require 'csv'
     require 'xmlsimple'
 

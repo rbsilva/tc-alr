@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
 */
+.clear {
+  height: 0px;
+  clear: both;
+}
