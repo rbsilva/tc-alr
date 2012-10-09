@@ -16,8 +16,9 @@
 
 class RawFile < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :user_id, :file, :filename, :content_type, :template, :status
+  attr_accessible :user_id, :file, :filename, :content_type, :template, :status, :header
 
+  validates :header, :inclusion => { :in => ['COL','LIN'] }
   validates :file, :presence => true
   validates :template, :presence => true,
             :length => {:minimum => 3},

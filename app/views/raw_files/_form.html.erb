@@ -23,6 +23,11 @@
     <br/>
     <%= f.text_field :template %>
   </div>
+  <div class="field">
+    <%= f.label :header %>
+    <br/>
+    <%= f.select :header, [['Columns','COL'],['Lines','LIN']] %>
+  </div>
   <%= f.hidden_field :user_id, :value => @current_user.id %>
   <div class="actions">
     <%= f.submit t(:submit_file) %>

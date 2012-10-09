@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913150137) do
+ActiveRecord::Schema.define(:version => 20121009175602) do
 
   create_table "inbounds", :force => true do |t|
     t.binary   "file"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120913150137) do
     t.string   "status"
     t.string   "filename",     :default => "", :null => false
     t.string   "content_type", :default => "", :null => false
+    t.string   "header"
   end
 
   create_table "roles", :force => true do |t|

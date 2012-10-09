@@ -3,7 +3,6 @@
 <head>
   <title>TC</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= favicon_link_tag %>
   <%= csrf_meta_tags %>
 </head>
@@ -35,5 +34,6 @@
       Copyright Adilson, Leonardo, Rodrigo (Unip Campinas) &copy; <%= Time.now.year %>
     </div>
   </div>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
