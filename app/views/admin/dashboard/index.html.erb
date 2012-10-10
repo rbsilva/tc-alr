@@ -1,17 +1,30 @@
 <div id="dashboard_inbounds">
-
+  <% @inbounds.each do |inbound| %>
+  <div>
+    <% if inbound.is_a? Array %>
+      <% if inbound[0].is_a? Hash %>
+        <h2><%= inbound[1].filename %></h2>
+        <br/>
+        <%= inbound_table inbound[0] %>
+        <br/>
+      <% else %>
+        <h2><%= inbound[1].filename %></h2>
+        <p class="flash"><%= inbound[2] %></p>
+        <textarea rows="5" cols="100"><%= inbound[0] %></textarea>
+        <br/>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
 </div>
 <div id="dashboard_facts">
   <% @facts.each_pair do |table, data| %>
     <%= data_warehouse_table(table, data) %>
   <% end %>
-  <p>testeeee</p>
-  <p>testeee</p>
-  <p>teste</p>
 </div>
 <div id="dashboard_report" width="200px;">
 	<table style="background-color: gray;">
-		<tr>	
+		<tr>
 			<th>123</th>
 			<td></td>
 		</tr>
