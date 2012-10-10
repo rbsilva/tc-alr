@@ -23,7 +23,8 @@ class RawFile < ActiveRecord::Base
   validates :template, :presence => true,
             :length => {:minimum => 3},
             :format => {:with => /^[A-z0-9_\-ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž]+([,][A-z0-9_\-ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž]*)*$/}
-            
+  before_destroy :valid_processed?
+
   def uploaded_file=(incoming_file)
       write_attribute(:filename, sanitize_filename(incoming_file.original_filename))
       write_attribute(:file, ActiveRecord::Base.connection.escape_bytea(incoming_file.read))
@@ -38,4 +39,13 @@ class RawFile < ActiveRecord::Base
       #replace all non-alphanumeric, underscore or periods with underscores
       just_filename.gsub(/[^\w\.\-]/, '_')
   end
+
+  def valid_processed?
+
+    if status == 'PROCESSED' then
+      raise I18n.t(:operation_not_permitted_raw_file)
+    end
+
+  end
+
 end

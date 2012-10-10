@@ -22,7 +22,7 @@ class RawFileTransformer < ActiveRecord::Base
         inbound = Openoffice.new(file) rescue is_valid = false
       end
 
-      if !is_valid then raise 'Fatal Error' end
+      if !is_valid then raise I18.t(:fatal_error) end
 
       content = inbound.to_xml()
 

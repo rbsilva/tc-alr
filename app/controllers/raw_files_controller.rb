@@ -54,6 +54,11 @@ class RawFilesController < BaseController
   # GET /raw_files/1/edit
   def edit
     @raw_file = RawFile.find(params[:id],:conditions => ['user_id = ?', current_user.id])
+    if @raw_file.status == 'PROCESSED' then
+      raise t(:operation_not_permitted_raw_file)
+    end
+  rescue
+    redirect_to raw_files_url, flash: {:error => $!.to_s}
   end
 
   # POST /raw_files
@@ -110,6 +115,8 @@ class RawFilesController < BaseController
         format.json { head :no_content }
       end
     end
+  rescue
+    redirect_to raw_files_url, flash: {:error => $!.to_s}
   end
 
 end

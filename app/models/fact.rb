@@ -50,7 +50,7 @@ class Fact
     result = ActiveRecord::Base.connection.tables.grep(/^#{id}_fact$/)[0]
 
     if result.nil? then
-      raise 'Fact not found'
+      raise I18.t(:fact_not_found)
     else
       Fact.new(:name => result.scan(/(.*)_fact$/).last.first)
     end

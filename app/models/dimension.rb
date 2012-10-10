@@ -40,7 +40,7 @@ class Dimension
     result = ActiveRecord::Base.connection.tables.grep(/^#{id}_dimension$/)[0]
 
     if result.nil? then
-      raise 'Dimension not found'
+      raise I18.t(:dimension_not_found)
     else
       Dimension.new(:name => result.scan(/(.*)_dimension$/).last.first)
     end

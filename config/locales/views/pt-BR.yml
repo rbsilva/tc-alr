@@ -20,6 +20,7 @@ pt-BR:
   dimension:
     one: "dimensão"
     other: "dimensões"
+  dimension_not_found: "Dimensão não encontrada."
   dimension_created_successfully: "Dimensão criada com sucesso."
   dimension_updated_successfully: "Dimensão atualizada com sucesso."
   edit: "editar"
@@ -33,6 +34,8 @@ pt-BR:
   fact: "fato"
   fact_created_successfully: "Fato criada com sucesso."
   fact_updated_successfully: "Fato atualizada com sucesso."
+  fact_not_found: "Fato não encontrado."
+  fatal_error: "Erro fatal."
   forgot_password: "Esqueceu sua senha?"
   full_name: "nome completo"
   hello: "olá"
@@ -55,6 +58,7 @@ pt-BR:
   new_password: "nova senha"
   new_role: "nova permissão"
   new_user: "novo usuário"
+  operation_not_permitted_raw_file: "Operação não permitida devido ao status atual do arquivo."
   path: "arquivo"
   prohibited_save:
     one: "impediu esse %{this} de ser salvo:"
