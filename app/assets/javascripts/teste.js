@@ -34,9 +34,30 @@ $(function() {
         function loadFact( $item, $column ) {
           var $index = $item.index() + 1;
           var $table = $item.parent().parent();
+          var $index_to = $column.index() + 1;
+          var $table_to = $column.parent().parent();
+          var $headers = $column.parent().find('th');
+          var $row_count = $table_to.find('tr').length;
+          var $cont = 1;
+
           $table.find('td:nth-child('+$index+')').each( function(){
-            $column.parent().parent().append('<tr><td>'+$(this).html()+'</td></tr>');
-            console.log($index + ' ' + $table.find('td:nth-child('+$index+')').html());
+            var $content = $(this).html();
+
+            if ($row_count < 2) {
+              $table_to.append('<tr></tr>');
+
+              var $last_row = $table_to.find('tr:last');
+
+              $headers.each( function() {
+                $last_row.append('<td></td>');
+              });
+
+              $last_row.find('td:nth-child('+$index_to+')').append($content);
+            } else {
+              $table_to.find('tr').eq($cont).find('td:nth-child('+$index_to+')').append($content);
+            }
+
+            $cont++;
           });
         }
     });
