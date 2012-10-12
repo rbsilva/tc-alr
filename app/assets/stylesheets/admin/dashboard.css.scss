@@ -23,6 +23,18 @@
   background-color: #eee;
   height: 900px;
   color: #000;
+  padding: 10px;
+}
+
+#report .title {
+  color: #000;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+#report .title input{
+  color: #000;
+  font-size: 20px;
 }
 
 #load_facts_modal #inbound {

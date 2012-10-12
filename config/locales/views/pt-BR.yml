@@ -65,6 +65,7 @@ pt-BR:
     one: "impediu esse %{this} de ser salvo:"
     other: "impediram esse %{this} de ser salvo:"
   raw_file: "envio"
+  report_of: "Relatório de"
   resend_confirmation_instructions: "Reenviar instruções para confirmação"
   resend_unlock: "Reenviar instruções de desbloqueio"
   role:
