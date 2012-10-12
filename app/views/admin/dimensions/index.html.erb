@@ -5,14 +5,12 @@
     <th><%= t(:dimension, :count => 2)%></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @dimensions.each do |dimension| %>
   <tr>
     <td><%= dimension.name %></td>
     <td><%= link_to t(:show), admin_dimension_path(:id => dimension.name) %></td>
-    <td><%= link_to t(:edit), edit_admin_dimension_path(:id => dimension.name) %></td>
     <td><%= link_to t(:delete), admin_dimension_path(:id => dimension.name), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>

@@ -42,7 +42,7 @@ class Dimension
     if result.nil? then
       raise I18.t(:dimension_not_found)
     else
-      Dimension.new(:name => result.scan(/(.*)_dimension$/).last.first)
+      DataWarehouse.find_table 'dimension', id
     end
   end
 

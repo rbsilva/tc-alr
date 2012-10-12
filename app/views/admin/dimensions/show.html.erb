@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b><%= t(:dimension, :count => 1) %>:</b>
-  <%= @dimension.name %>
-</p>
-
-<%= link_to t(:edit), edit_admin_dimension_path(@dimension.name) %> |
+<% @dimension.each_pair do |table, data| %>
+  <p>
+    <b><%= t(:dimension, :count => 1) %>:</b>
+    <%= data_warehouse_table(table, data) %>
+  </p>
+<% end %>
+<br><br/>
 <%= link_to t(:back), admin_dimensions_path %>

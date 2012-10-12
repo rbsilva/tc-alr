@@ -5,14 +5,12 @@
     <th><%= t(:fact) %></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @facts.each do |fact| %>
   <tr>
     <td><%= fact.name %></td>
     <td><%= link_to t(:show), admin_fact_path(:id => fact.name) %></td>
-    <td><%= link_to t(:edit), edit_admin_fact_path(:id => fact.name) %></td>
     <td><%= link_to t(:delete), admin_fact_path(:id => fact.name), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>

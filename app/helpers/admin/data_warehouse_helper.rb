@@ -1,21 +1,20 @@
 module Admin::DataWarehouseHelper
 
   def data_warehouse_table(table, data)
-    html = "<h3>#{table.to_s}</h3>"
-    html += '<table>'
-    html += ' <tr>'
+    html = '<table class="data_warehouse_table">'
+    html += '<thead><tr>'
     data[0].each do |column|
       html += "<th>#{column}</th>"
     end
-    html += ' </tr>'
+    html += '</tr></thead><tbody>'
     data[1].each do |values|
-      html += ' <tr>'
+      html += '<tr>'
       values.each do |value|
         html += "<td>#{value[1]}</td>"
       end
       html += ' </tr>'
     end
-    html += '</table>'
+    html += '</tbody></table>'
     html.html_safe
   end
 end

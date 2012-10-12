@@ -1,34 +1,42 @@
-<div id="dashboard_inbounds">
+<div id="dashboard_inbounds" class="dashboard_list">
   <% @inbounds.each do |inbound| %>
-  <div>
-    <% if inbound.is_a? Array %>
-      <% if inbound[0].is_a? Hash %>
-        <h2><%= inbound[1].filename %></h2>
-        <br/>
-        <%= inbound_table inbound[0] %>
-        <br/>
-      <% else %>
-        <h2><%= inbound[1].filename %></h2>
-        <p class="flash"><%= inbound[2] %></p>
-        <textarea rows="5" cols="100"><%= inbound[0] %></textarea>
-        <br/>
-      <% end %>
-    <% end %>
+  <div class="group">
+    <h3 class="inbound_title"><%= inbound.raw_file.filename %></h3>
+    <div class="data_table" id="<%=inbound.id%>">
+      <%= inbound_table inbound.xml_file %>
+    </div>
   </div>
   <% end %>
 </div>
-<div id="dashboard_facts">
-  <% @facts.each_pair do |table, data| %>
-    <%= data_warehouse_table(table, data) %>
-  <% end %>
-</div>
+
 <div id="dashboard_report" width="200px;">
-	<table style="background-color: gray;">
-		<tr>
-			<th>123</th>
-			<td></td>
-		</tr>
-	</table>
+  <a href="#" id="opener"><%= t(:open_load_fact) %></a>
+  <br></br>
+  <div id="report">
+  </div>
 </div>
 
+<div id="dashboard_facts" class="dashboard_list">
+    <% @facts.each_pair do |table, data| %>
+    <div class="group">
+      <h3 class="data_warehouse_title"><%= table.to_s %></h3>
+      <div class="data_table" id="<%=table.to_s%>">
+        <%= data_warehouse_table(table, data) %>
+      </div>
+    </div>
+    <% end %>
+</div>
+
+
 <div class="clear"></div>
+
+<div id="load_facts_modal" title="<%= t(:load_facts)%>">
+  <div id="inbound" class="data_table">
+    <h3></h3>
+    <table></table>
+  </div>
+  <div id="data_warehouse" class="data_table">
+    <h3></h3>
+    <table></table>
+  </div>
+</div>

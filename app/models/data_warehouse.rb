@@ -11,9 +11,9 @@ class DataWarehouse
 
   private
 
-    def self.find_table(type='dimension')
+    def self.find_table(type='dimension', id='.*')
       tables = {}
-      ActiveRecord::Base.connection.tables.grep(/.*_#{type}$/).each do |table|
+      ActiveRecord::Base.connection.tables.grep(/#{id}_#{type}$/).each do |table|
         columns = []
         joins = {}
         joins_columns = []

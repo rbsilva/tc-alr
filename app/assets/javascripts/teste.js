@@ -1,17 +1,76 @@
+$.fx.speeds._default = 1000;
+
 $(function() {
+
         var $dashboard_facts = $( "#dashboard_facts" ),
             $dashboard_report = $( "#dashboard_report" ),
-            $dashboard_inbounds = $("#dashboard_inbounds");
+            $modal_inbounds = $("#load_facts_modal #inbound");
+            $modal_facts = $("#load_facts_modal #data_warehouse");
+
+        $( "#load_facts_modal" ).dialog({
+            width: 1000,
+            modal: true,
+            autoOpen: false,
+            show: "blind",
+            hide: "explode",
+            buttons: {
+                "Save": function() {
+                    $( this ).dialog( "close" );
+                },
+                "Cancel": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $( ".dashboard_list" )
+            .accordion({
+                header: "> div > h3"
+            })
+            .sortable({
+                axis: "y",
+                handle: "h3",
+                stop: function( event, ui ) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children( "h3" ).triggerHandler( "focusout" );
+                }
+            });
+
+        $( "#opener" )
+            .button()
+            .click(function( event ) {
+                event.preventDefault();
+                $( "#load_facts_modal" ).dialog( "open" );
+
+                var $modal = $("#load_facts_modal");
+
+                $("#inbound h3", $modal).html($(".ui-accordion-header-active").parent().find('.inbound_title').html());
+                $("#inbound table", $modal).html($(".ui-accordion-header-active").parent().find('.inbound_table').html());
+
+                $("#data_warehouse h3", $modal).html($(".ui-accordion-header-active").parent().find('.data_warehouse_title').html());
+                $("#data_warehouse table", $modal).html($(".ui-accordion-header-active").parent().find('.data_warehouse_table').html());
+
+                $( "td", $modal_inbounds ).draggable({
+                  helper: "clone",
+                  cursor: "move"
+                });
+
+                $("th", $modal_facts).droppable({
+                    accept: "#load_facts_modal #inbound table td",
+                    drop: function( event, ui ) {
+                        loadFact( ui.draggable, $(this) );
+                    }
+                });
+
+                return false;
+            });
 
         $( "th", $dashboard_facts ).draggable({
             helper: "clone",
             cursor: "move"
         });
 
-        $( "td", $dashboard_inbounds ).draggable({
-          helper: "clone",
-          cursor: "move"
-        });
 
         $dashboard_report.droppable({
             accept: "#dashboard_facts table th",
@@ -20,15 +79,9 @@ $(function() {
             }
         });
 
-        $("th", $dashboard_facts).droppable({
-            accept: "#dashboard_inbounds table td",
-            drop: function( event, ui ) {
-                loadFact( ui.draggable, $(this) );
-            }
-        });
 
         function loadReport( $item ) {
-          $("td", $dashboard_report).text($item.clone().html());
+          $("#report", $dashboard_report).text($item.clone().html());
         }
 
         function loadFact( $item, $column ) {
@@ -54,7 +107,7 @@ $(function() {
 
               $last_row.find('td:nth-child('+$index_to+')').append($content);
             } else {
-              $table_to.find('tr').eq($cont).find('td:nth-child('+$index_to+')').append($content);
+              $table_to.find('tr').eq($cont).find('td:nth-child('+$index_to+')').text($content);
             }
 
             $cont++;

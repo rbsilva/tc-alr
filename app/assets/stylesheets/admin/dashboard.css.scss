@@ -2,18 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #dashboard_facts {
-  width: 33%;
-  float: left;
+  width: 23%;
+  float: right;
+  margin: 1%;
 }
 
 #dashboard_inbounds {
-  width: 33%;
+  width: 23%;
   float: left;
+  margin: 1%;
 }
 
 #dashboard_report {
-  width: 33%;
-  float: right;
-  background-color: #333;
-  height: 900px;
+  float: left;
+  margin: 1%;
+  width: 48%;
 }
+
+#report {
+  background-color: #eee;
+  height: 900px;
+  color: #000;
+}
+
+#load_facts_modal #inbound {
+
+}
+
+#load_facts_modal #data_warehouse {
+
+} 

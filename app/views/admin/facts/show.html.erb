@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b><%= t(:fact) %>:</b>
-  <%= @fact.name %>
-</p>
-
-<%= link_to t(:edit), edit_admin_fact_path(:id => @fact.name) %> |
+<% @fact.each_pair do |table, data| %>
+  <p>
+    <b><%= t(:fact) %>:</b>
+    <%= data_warehouse_table(table, data) %>
+  </p>
+<% end %>
+<br><br/>
 <%= link_to t(:back), admin_facts_path %>

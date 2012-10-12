@@ -52,7 +52,7 @@ class Fact
     if result.nil? then
       raise I18.t(:fact_not_found)
     else
-      Fact.new(:name => result.scan(/(.*)_fact$/).last.first)
+      DataWarehouse.find_table 'fact', id
     end
   end
 

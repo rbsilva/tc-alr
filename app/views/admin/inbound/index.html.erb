@@ -1,18 +1,9 @@
 <% @inbounds.each do |inbound| %>
-<div class="floating_table">
-  <% if inbound.is_a? Array %>
-    <% if inbound[0].is_a? Hash %>
-      <h2><%= inbound[1].filename %></h2>
-      <br/>
-      <%= inbound_table inbound[0] %>
-      <br/>
-    <% else %>
-      <h2><%= inbound[1].filename %></h2>
-      <p class="flash"><%= inbound[2] %></p>
-      <textarea rows="5" cols="100"><%= inbound[0] %></textarea>
-      <br/>
-    <% end %>
-  <% end %>
-</div>
+  <div class="floating_table">
+    <h2><%= inbound.raw_file.filename %></h2>
+    <br/>
+    <%= inbound_table inbound.xml_file %>
+    <br/>
+  </div>
 <% end %>
-<div class="clear"></div>
+  <div class="clear"></div>

@@ -37,20 +37,6 @@ class Admin::FactsController < BaseController
     end
   end
 
-  # GET /admin/facts/1/edit
-  def edit
-    @fact = Fact.find(params[:id])
-    begin
-      respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @fact }
-      end
-    rescue
-      logger.fatal $!.annoted_source_code
-      logger.fatal $!
-    end
-  end
-
   # POST /admin/facts
   # POST /admin/facts.json
   def create
@@ -62,22 +48,6 @@ class Admin::FactsController < BaseController
         format.json { render json: @fact, status: :created, location: @fact }
       else
         format.html { render action: "new" }
-        format.json { render json: @fact.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /admin/facts/1
-  # PUT /admin/facts/1.json
-  def update
-    @fact = Fact.find(params[:id])
-
-    respond_to do |format|
-      if @fact.update_attributes(params[:admin_fact])
-        format.html { redirect_to @fact, notice: I18n.t(:fact_updated_successfully) }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @fact.errors, status: :unprocessable_entity }
       end
     end

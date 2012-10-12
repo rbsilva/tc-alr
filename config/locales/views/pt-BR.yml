@@ -50,6 +50,7 @@ pt-BR:
   listing_files: "listando arquivos"
   listing_roles: "listando permissões"
   listing_users: "listando usuários"
+  load_facts: "Carregar fatos"
   models: "áreas"
   name: "nome"
   new_dimension: "nova dimensão"
