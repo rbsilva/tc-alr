@@ -1,4 +1,4 @@
-<h1><%= t :listing_files %></h1>
+<h1><%= t(:listing_files) %></h1>
 
 <%= form_tag(:action => :search) do %>
   <%= text_field_tag :filter %>
@@ -7,10 +7,10 @@
 <br/>
 <table width="100%">
   <tr>
-    <th><%= t :filename %></th>
-    <th><%= t :template %></th>
-    <th><%= t :status %></th>
-    <th><%= t :created_at %></th>
+    <th><%= t(:filename) %></th>
+    <th><%= t(:template) %></th>
+    <th><%= t(:status) %></th>
+    <th><%= t(:created_at) %></th>
     <th></th>
     <th></th>
   </tr>

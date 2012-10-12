@@ -4,7 +4,7 @@
   <% if @fact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@fact.errors.count, "error") %>
-        <%= t :prohibited_save, :this => t(:fact, :count => 1), :count => @fact.errors.count %>
+        <%= t(:prohibited_save, :this => t(:fact, :count => 1), :count => @fact.errors.count) %>
       </h2>
 
       <ul>

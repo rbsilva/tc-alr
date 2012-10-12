@@ -4,7 +4,7 @@
   <% if @dimension.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@dimension.errors.count, "error") %>
-        <%= t :prohibited_save, :this => t(:dimension, :count => 1),  :count => @dimension.errors.count %>
+        <%= t(:prohibited_save, :this => t(:dimension, :count => 1),  :count => @dimension.errors.count) %>
       </h2>
 
       <ul>
