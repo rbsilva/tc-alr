@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009175602) do
+ActiveRecord::Schema.define(:version => 20121012214819) do
 
   create_table "inbounds", :force => true do |t|
     t.binary   "file"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(:version => 20121009175602) do
     t.string   "content_type", :default => "", :null => false
     t.string   "header"
   end
+
+  create_table "reports", :force => true do |t|
+    t.string   "description"
+    t.text     "fields"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "reports", ["user_id"], :name => "index_reports_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

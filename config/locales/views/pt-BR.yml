@@ -15,6 +15,7 @@ pt-BR:
   created_at: "data de envio"
   data_warehouse: "data warehouse"
   delete: "apagar"
+  description: "descrição"
   didnt_receive_confirmation: "Não recebeu instruções de confirmação?"
   didnt_receive_unlock: "Não recebeu instruções de desbloqueio?"
   dimension:
@@ -36,6 +37,7 @@ pt-BR:
   fact_updated_successfully: "Fato atualizada com sucesso."
   fact_not_found: "Fato não encontrado."
   fatal_error: "Erro fatal."
+  fields: "campos"
   forgot_password: "Esqueceu sua senha?"
   full_name: "nome completo"
   hello: "olá"
@@ -48,6 +50,7 @@ pt-BR:
   listing_dimensions: "listando dimensões"
   listing_facts: "listando fatos"
   listing_files: "listando arquivos"
+  listing_reports: "listando relatórios"
   listing_roles: "listando permissões"
   listing_users: "listando usuários"
   load_facts: "Carregar fatos"
@@ -65,6 +68,7 @@ pt-BR:
     one: "impediu esse %{this} de ser salvo:"
     other: "impediram esse %{this} de ser salvo:"
   raw_file: "envio"
+  report: "relatório"
   resend_confirmation_instructions: "Reenviar instruções para confirmação"
   resend_unlock: "Reenviar instruções de desbloqueio"
   role:

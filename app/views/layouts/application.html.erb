@@ -20,6 +20,7 @@
       <li><%= link_to t(:data_warehouse).camelize, url_for(:action => 'index', :controller => 'admin/data_warehouse') %></li>
       <li><%= link_to t(:dimension, :count => 2).pluralize.capitalize, admin_dimensions_path %></li>
       <li><%= link_to t(:fact).pluralize.capitalize, admin_facts_path %></li>
+      <li><%= link_to t(:report).pluralize.capitalize, admin_reports_path %></li>
       <li><%= link_to t(:sign_out).capitalize, destroy_user_session_path, :method => :delete %></li>
     </ul>
     <div class="main">

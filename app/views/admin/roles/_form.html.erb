@@ -2,7 +2,7 @@
   <% if @role.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@role.errors.count, t(:error)) %>
-        <%= t :prohibited_save, :this => t(:path), :count => @role.errors.count %>
+        <%= t(:prohibited_save, :this => t(:path), :count => @role.errors.count) %>
       </h2>
 
       <ul>
