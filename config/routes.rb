@@ -8,7 +8,11 @@ TC::Application.routes.draw do
     resources :dimensions, :except => [:edit, :update]
     resources :facts, :except => [:edit, :update]
     resources :inbound, :only => :index
-    resources :data_warehouse, :only => :index
+    resources :data_warehouse, :only => :index do
+      collection do
+        post :load
+      end
+    end
     resources :dashboard, :only => :index
     resources :reports, :except => [:new, :edit]
   end

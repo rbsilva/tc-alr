@@ -15,7 +15,15 @@ $(function() {
             hide: "explode",
             buttons: {
                 "Save": function() {
-                    $( this ).dialog( "close" );
+                    $.ajax({
+                      type: "POST",
+                      url: "data_warehouse/load.json",
+                      data: $("#data_warehouse_load").serialize()
+                    }).done(function( msg ) {
+
+                    });
+
+                    resetDataLoadForm();
                 },
                 "Cancel": function() {
                     $( this ).dialog( "close" );
@@ -49,7 +57,7 @@ $(function() {
                 $("#inbound table", $modal).html($(".ui-accordion-header-active").parent().find('.inbound_table').html());
 
                 $("#data_warehouse h3", $modal).html($(".ui-accordion-header-active").parent().find('.data_warehouse_title').html());
-                $("#data_warehouse table", $modal).html($(".ui-accordion-header-active").parent().find('.data_warehouse_table').html());
+                $("#data_warehouse table thead", $modal).html($(".ui-accordion-header-active").parent().find('.data_warehouse_table thead').html());
 
                 $( "td", $modal_inbounds ).draggable({
                   helper: "clone",
@@ -80,8 +88,18 @@ $(function() {
         });
 
 
+        function resetDataLoadForm() {
+          $("#data_warehouse_load input[name=load_data\\[\\]]").each( function() {
+            $(this).remove();
+          });
+
+          $("#data_warehouse_load input[name=load_header\\[\\]]").each( function() {
+            $(this).remove();
+          });
+        }
+
         function loadReport( $item ) {
-          $("#report", $dashboard_report).text($item.clone().html());
+          $("#report #body table thead tr", $dashboard_report).append("<th>"+$item.clone().html()+"</th>");
         }
 
         function loadFact( $item, $column ) {
@@ -92,6 +110,10 @@ $(function() {
           var $headers = $column.parent().find('th');
           var $row_count = $table_to.find('tr').length;
           var $cont = 1;
+          var $hidden_data = '<input name="load_data[]" type="hidden"';
+          var $hidden_header = '<input name="load_header[]" type="hidden"';
+
+          $("#data_warehouse_load #fact").val($('#data_warehouse').find('h3').text());
 
           $table.find('td:nth-child('+$index+')').each( function(){
             var $content = $(this).html();
@@ -107,8 +129,13 @@ $(function() {
 
               $last_row.find('td:nth-child('+$index_to+')').append($content);
             } else {
-              $table_to.find('tr').eq($cont).find('td:nth-child('+$index_to+')').text($content);
+              $table_to.find('tr').eq($cont).find('td:nth-child('+$index_to+')').html($content);
             }
+
+
+            $("#data_warehouse_load").append($hidden_data + 'id="load_data_' + $cont + '_' + $index_to +'" value="' + $content + '"></input>');
+
+            $("#data_warehouse_load").append($hidden_header + 'id="load_header_' + $cont + '_' + $index_to +'" value="' + $column.text() + '"></input>');
 
             $cont++;
           });

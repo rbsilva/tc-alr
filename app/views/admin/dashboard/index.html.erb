@@ -13,20 +13,32 @@
   <a href="#" id="opener"><%= t(:open_load_fact) %></a>
   <br></br>
   <div id="report">
-    <span class="title"><%= t(:report_of)%> </span>
-    <span class="title"><%= text_field_tag 'description' %></span>
+    <div id="title">
+      <span class="title"><%= t(:report_of)%> </span>
+      <span class="title"><%= text_field_tag 'description' %></span>
+    </div>
+    <div id="body">
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
 <div id="dashboard_facts" class="dashboard_list">
-    <% @facts.each_pair do |table, data| %>
-    <div class="group">
-      <h3 class="data_warehouse_title"><%= table.to_s %></h3>
-      <div class="data_table" id="<%=table.to_s%>">
-        <%= data_warehouse_table(table, data) %>
-      </div>
+  <% @facts.each_pair do |table, data| %>
+  <div class="group">
+    <h3 class="data_warehouse_title"><%= table.to_s %></h3>
+    <div class="data_table" id="<%=table.to_s%>">
+      <%= data_warehouse_table(table, data) %>
     </div>
-    <% end %>
+  </div>
+  <% end %>
 </div>
 
 
@@ -37,8 +49,9 @@
     <h3></h3>
     <table></table>
   </div>
+  <%= render 'facts_form'%>
   <div id="data_warehouse" class="data_table">
     <h3></h3>
-    <table></table>
+    <table><thead></thead></table>
   </div>
 </div>

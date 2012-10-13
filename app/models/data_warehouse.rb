@@ -9,6 +9,29 @@ class DataWarehouse
     find_table 'fact'
   end
 
+  def self.load(fact, data, headers)
+    sql = ''
+
+    data.zip(headers).each do |datum, header|
+      if header.match(/.*_dim_.*$/)
+        table = header.scan(/.*_dim_(.*)$/).last.first + '_dimension'
+        column = header.scan(/(.*)_dim_.*$/).last.first
+      else
+        table = fact
+        column = "#{header}, contas_id"
+        datum = "#{datum}"
+      end
+
+      sql = "INSERT INTO #{table}(#{column}) VALUES ('#{datum}', 1)"
+
+      ActiveRecord::Base.connection.execute(sql)
+    end
+
+    true
+  rescue
+    false
+  end
+
   private
 
     def self.find_table(type='dimension', id='.*')
@@ -22,8 +45,8 @@ class DataWarehouse
           if column.name.match(/.*_id$/) then
             ref_table = column.name.scan(/(.*)_id$/).last.first
 
-            ActiveRecord::Base.connection.columns(ref_table+'_dimension').each do |ref_column|
-              joins_columns << ref_column.name  unless ref_column.name == 'id'
+            ActiveRecord::Base.connection.columns("#{ref_table}_dimension").each do |ref_column|
+              joins_columns << "#{ref_column.name}_dim_#{ref_table}" unless ref_column.name == 'id'
             end
 
             joins.store(column.name, ref_table)
