@@ -7,5 +7,5 @@ class HomeController < ApplicationController
       format.json { render json: @fact }
     end
   end
-  
+
 end

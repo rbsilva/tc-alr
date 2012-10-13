@@ -1,5 +1,5 @@
 <h1><%= t(:new_role) %></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :role => role } %>
 
 <%= link_to t(:back), admin_roles_path %>

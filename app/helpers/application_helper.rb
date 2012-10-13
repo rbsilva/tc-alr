@@ -1,11 +1,11 @@
 module ApplicationHelper
-  def get_time(time='')
-    if time.to_s.empty? then
-      I18n.localize(Time.now)
-    else
-      I18n.localize(Time.parse(time.to_s))
-    end
-  end
+  #def get_time(time='')
+  #  if time.to_s.empty? then
+  #    I18n.localize(Time.now)
+  #  else
+  #    I18n.localize(Time.parse(time.to_s))
+  #  end
+  #end
 
   def models
     Role::MODELS

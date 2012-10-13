@@ -1,5 +1,5 @@
 <h1><%= t(:new_dimension)%></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :dimension => dimension } %>
 
 <%= link_to t(:back), admin_dimensions_path %>

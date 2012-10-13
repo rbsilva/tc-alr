@@ -31,6 +31,22 @@ class RawFile < ActiveRecord::Base
       write_attribute(:content_type, incoming_file.content_type)
   end
 
+  def self.find_all_by_user(raw_file_user_id)
+    find_all_by_user_id raw_file_user_id, :order => 'created_at DESC'
+  end
+
+  def self.find_by_user(raw_file_id, raw_file_user_id)
+    find(raw_file_id,:conditions => ['user_id = ?',raw_file_user_id])
+  end
+
+  def self.search(filter, raw_file_user_id)
+    where("UPPER(filename) LIKE UPPER(?) OR UPPER(template) LIKE UPPER(?) AND user_id = ?",
+          "%#{filter}%",
+          "%#{filter}%",
+          raw_file_user_id)
+    .order('created_at DESC')
+  end
+
   private
 
   def sanitize_filename(filename)

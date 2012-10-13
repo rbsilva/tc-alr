@@ -5,7 +5,7 @@ class Admin::RolesController < BaseController
   def index
     @roles = Role.accessible_by(current_ability, :index).limit(20)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index, :locals => { :roles => @roles } } # index.html.erb
       format.json { render :json => @roles }
     end
   end
@@ -16,7 +16,7 @@ class Admin::RolesController < BaseController
     @role = Role.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :show, :locals => { :role => @role } } # show.html.erb
       format.json { render :json =>  @role }
     end
   end
@@ -27,7 +27,7 @@ class Admin::RolesController < BaseController
     @role = Role.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :new, :locals => { :role => @role } } # new.html.erb
       format.json { render :json =>  @role }
     end
   end
@@ -48,7 +48,7 @@ class Admin::RolesController < BaseController
         format.html { redirect_to admin_role_path(@role), :notice =>  I18n.t(:role_created_successfully) }
         format.json { render :json =>  @role, :status =>  :created, :location =>  @role }
       else
-        format.html { render :action =>  "new" }
+        format.html { render "new", :locals => { :role => @role } }
         format.json { render :json =>  @role.errors, :status =>  :unprocessable_entity }
       end
     end
@@ -70,7 +70,7 @@ class Admin::RolesController < BaseController
         format.html { redirect_to admin_role_path(@role), :notice =>  I18n.t(:role_updated_successfully) }
         format.json { head :no_content }
       else
-        format.html { render :action =>  "edit" }
+        format.html { render  "edit", :locals => { :role => @role } }
         format.json { render :json =>  @role.errors, :status =>  :unprocessable_entity }
       end
     end

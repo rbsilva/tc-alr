@@ -8,7 +8,7 @@
     <th></th>
   </tr>
 
-  <% @roles.each do |role| %>
+  <% roles.each do |role| %>
     <tr>
       <td><%= link_to_if(can?(:read, role), "#{role.name}", admin_role_path(role)) {} %></td>
       <td><%= roles_splitted(role)  %></td>

@@ -6,7 +6,7 @@ class Admin::DimensionsController < BaseController
     @dimensions = Dimension.all
     begin
       respond_to do |format|
-        format.html # index.html.erb
+        format.html { render :index, :locals => { :dimensions => @dimensions } } # index.html.erb
         format.json { render json: @dimensions }
       end
     rescue
@@ -20,7 +20,7 @@ class Admin::DimensionsController < BaseController
     @dimension = Dimension.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :show, :locals => { :dimension => @dimension } }  # show.html.erb
       format.json { render json: @dimension }
     end
   rescue
@@ -34,7 +34,7 @@ class Admin::DimensionsController < BaseController
 
     begin
       respond_to do |format|
-        format.html # new.html.erb
+        format.html { render :new, :locals => { :dimension => @dimension } } # new.html.erb
         format.json { render json: @dimension }
       end
     rescue
@@ -48,7 +48,7 @@ class Admin::DimensionsController < BaseController
 
     begin
       respond_to do |format|
-        format.html # new.html.erb
+        format.html { render :edit, :locals => { :dimension => @dimension } } # new.html.erb
         format.json { render json: @dimension }
       end
     rescue
@@ -68,7 +68,7 @@ class Admin::DimensionsController < BaseController
         format.html { redirect_to admin_dimension_url(:id => @dimension.name), notice: I18n.t(:dimension_created_successfully) }
         format.json { render json: @dimension, status: :created, location: @dimension }
       else
-        format.html { render action: "new" }
+        format.html { render "new", :locals => { :dimension => @dimension } }
         format.json { render json: @dimension.errors, status: :unprocessable_entity }
       end
     end
@@ -86,7 +86,7 @@ class Admin::DimensionsController < BaseController
         format.html { redirect_to @dimension, notice: I18n.t(:dimension_updated_successfully) }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit", :locals => { :dimension => @dimension } }
         format.json { render json: @dimension.errors, status: :unprocessable_entity }
       end
     end

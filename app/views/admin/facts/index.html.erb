@@ -7,7 +7,7 @@
     <th></th>
   </tr>
 
-<% @facts.each do |fact| %>
+<% facts.each do |fact| %>
   <tr>
     <td><%= fact.name %></td>
     <td><%= link_to t(:show), admin_fact_path(:id => fact.name) %></td>

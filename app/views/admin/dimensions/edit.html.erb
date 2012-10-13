@@ -1,6 +1,6 @@
 <h1><%= t(:editing_dimension) %></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :dimension => dimension } %>
 
-<%= link_to t(:show), admin_dimension_path(admin_dimension_path(:id => @dimension.name) )%> |
+<%= link_to t(:show), admin_dimension_path(admin_dimension_path(:id => dimension.name) )%> |
 <%= link_to t(:back), admin_dimensions_path %>

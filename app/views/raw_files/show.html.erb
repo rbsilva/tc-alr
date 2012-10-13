@@ -2,19 +2,19 @@
 
 <p>
   <b><%= t(:filename) %>:</b>
-  <%= @raw_file.filename %>
+  <%= raw_file.filename %>
 </p>
 
 <p>
   <b><%= t(:template) %>:</b>
-  <%= @raw_file.template %>
+  <%= raw_file.template %>
 </p>
 
 <p>
   <b><%= t(:status) %>:</b>
-  <%= t @raw_file.status %>
+  <%= t raw_file.status %>
 </p>
 
 
-<%= link_to t(:edit), edit_raw_file_path(@raw_file) %> |
+<%= link_to t(:edit), edit_raw_file_path(raw_file) %> |
 <%= link_to t(:back), raw_files_path %>

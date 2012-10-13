@@ -5,7 +5,7 @@ class Admin::UsersController < BaseController
   def index
     @users = User.accessible_by(current_ability, :index)#future pagination .limit(20)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index, :locals => { :users => @users } }# index.html.erb
       format.json { render :json => @users }
     end
   end
@@ -16,7 +16,7 @@ class Admin::UsersController < BaseController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :show, :locals => { :user => @user } }# show.html.erb
       format.json { render json: @user }
     end
   end
@@ -27,7 +27,7 @@ class Admin::UsersController < BaseController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :new, :locals => { :user => @user, :accessible_roles => @accessible_roles } }# new.html.erb
       format.json { render json: @user }
     end
   end
@@ -48,7 +48,7 @@ class Admin::UsersController < BaseController
         format.html { redirect_to admin_user_path(@user), notice: I18n.t(:user_created_successfully) }
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html { render action: "new" }
+        format.html { render "new", :locals => { :user => @user } }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -70,7 +70,7 @@ class Admin::UsersController < BaseController
         format.html { redirect_to admin_user_path(@user), notice: I18n.t(:user_updated_successfully) }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit", :locals => { :user => @user } }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

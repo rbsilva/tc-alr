@@ -1,5 +1,5 @@
 <h1><%= t(:new_fact) %></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :fact => fact } %>
 
-<%= link_to t(:back), admin_facts_path(:id => @fact.name) %>
+<%= link_to t(:back), admin_facts_path(:id => fact.name) %>

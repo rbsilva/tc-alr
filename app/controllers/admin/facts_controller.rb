@@ -6,7 +6,7 @@ class Admin::FactsController < BaseController
     @facts = Fact.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index, :locals => { :facts => @facts } } # index.html.erb
       format.json { render json: @facts }
     end
   end
@@ -17,7 +17,7 @@ class Admin::FactsController < BaseController
     @fact = Fact.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :show, :locals => { :fact => @fact } } # show.html.erb
       format.json { render json: @fact }
     end
   end
@@ -29,7 +29,7 @@ class Admin::FactsController < BaseController
 
     begin
       respond_to do |format|
-        format.html # new.html.erb
+        format.html { render :new, :locals => { :fact => @fact } } # new.html.erb
         format.json { render json: @fact }
       end
     rescue
@@ -47,7 +47,7 @@ class Admin::FactsController < BaseController
         format.html { redirect_to admin_fact_url(:id => @fact.name), notice: I18n.t(:fact_created_successfully) }
         format.json { render json: @fact, status: :created, location: @fact }
       else
-        format.html { render action: "new" }
+        format.html { render "new", :locals => { :fact => @fact } }
         format.json { render json: @fact.errors, status: :unprocessable_entity }
       end
     end

@@ -2,13 +2,13 @@
 
 <p>
   <b><%= t(:name) %>:</b>
-  <%= @role.name %>
+  <%= role.name %>
 </p>
 
 <p>
   <b><%= t(:models) %>:</b>
-  <%= roles_splitted(@role) %>
+  <%= roles_splitted(role) %>
 </p>
 
-<%= link_to_if(can?(:update, @role), t(:edit), edit_admin_role_path(@role)) %> |
+<%= link_to_if(can?(:update, role), t(:edit), edit_admin_role_path(role)) %> |
 <%= link_to t(:back), admin_roles_path %>

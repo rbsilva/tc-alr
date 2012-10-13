@@ -5,7 +5,7 @@ class Admin::ReportsController < ApplicationController
     @admin_reports = Report.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index, :locals => { :admin_reports => @admin_reports } } # index.html.erb
       format.json { render json: @admin_reports }
     end
   end
@@ -16,7 +16,7 @@ class Admin::ReportsController < ApplicationController
     @admin_report = Report.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :show, :locals => { :admin_report => @admin_report } } # show.html.erb
       format.json { render json: @admin_report }
     end
   end
@@ -31,7 +31,7 @@ class Admin::ReportsController < ApplicationController
         format.html { redirect_to @admin_report, notice: 'Report was successfully created.' }
         format.json { render json: @admin_report, status: :created, location: @admin_report }
       else
-        format.html { render action: "new" }
+        format.html { render "new", :locals => { :admin_report => @admin_report } }
         format.json { render json: @admin_report.errors, status: :unprocessable_entity }
       end
     end
@@ -47,7 +47,7 @@ class Admin::ReportsController < ApplicationController
         format.html { redirect_to @admin_report, notice: 'Report was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit", locals => { :admin_report => @admin_report } }
         format.json { render json: @admin_report.errors, status: :unprocessable_entity }
       end
     end

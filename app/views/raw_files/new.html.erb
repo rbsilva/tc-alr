@@ -1,5 +1,5 @@
 <h1><%= t(:new_file) %></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :raw_file => raw_file } %>
 
 <%= link_to t(:back), raw_files_path %>

@@ -7,7 +7,7 @@
     <th></th>
   </tr>
 
-<% @dimensions.each do |dimension| %>
+<% dimensions.each do |dimension| %>
   <tr>
     <td><%= dimension.name %></td>
     <td><%= link_to t(:show), admin_dimension_path(:id => dimension.name) %></td>

@@ -1,4 +1,4 @@
-<% @dimension.each_pair do |table, data| %>
+<% dimension.each_pair do |table, data| %>
   <p>
     <b><%= t(:dimension, :count => 1) %>:</b>
     <%= data_warehouse_table(table, data) %>
