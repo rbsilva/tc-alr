@@ -20,7 +20,11 @@ class Admin::DataWarehouseController < BaseController
 
     begin
       respond_to do |format|
-        format.json { render json: result }
+        if result then
+          format.json { render json: [I18n.t(:success)], :status =>  :created }
+        else
+          format.json { render json: [I18n.t(:invalid_operation)], :status =>  :unprocessable_entity }
+        end
       end
     rescue
       logger.fatal $!

@@ -18,9 +18,16 @@ $(function() {
                     $.ajax({
                       type: "POST",
                       url: "data_warehouse/load.json",
-                      data: $("#data_warehouse_load").serialize()
-                    }).done(function( msg ) {
-
+                      data: $("#data_warehouse_load").serialize(),
+                      success: function( data ) {
+                        alert(data);
+                        $( "#load_facts_modal" ).dialog( "close" );
+                      },
+                      error: function( xhr, msg, status ) {
+                        var responseText = jQuery.parseJSON(xhr.responseText);
+                        alert(responseText + ' Status: ' + status + ' ' + msg);
+                        $( "#load_facts_modal" ).dialog( "close" );
+                      }
                     });
 
                     resetDataLoadForm();
