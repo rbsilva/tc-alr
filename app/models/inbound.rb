@@ -29,8 +29,6 @@ class Inbound < ActiveRecord::Base
           <cell row="2" column="1" type="string">#{file}</cell>
           <cell row="2" column="2" type="string">#{$!}</cell>
         </sheet>
-        <sheet name="Planilha2"/>
-        <sheet name="Planilha3"/>
       </spreadsheet>
     )
 

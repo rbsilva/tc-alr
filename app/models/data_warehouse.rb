@@ -11,25 +11,128 @@ class DataWarehouse
 
   def self.load(fact, data, headers)
     sql = ''
+    operation = {}
 
-    data.zip(headers).each do |datum, header|
-      if header.match(/.*_dim_.*$/)
+    headers.uniq.each do |header|
+      if header.match(/.*_dim_.*$/) then
         table = header.scan(/.*_dim_(.*)$/).last.first + '_dimension'
         column = header.scan(/(.*)_dim_.*$/).last.first
       else
         table = fact
-        column = "#{header}, contas_id"
-        datum = "#{datum}"
+        column = header
       end
 
-      sql = "INSERT INTO #{table}(#{column}) VALUES ('#{datum}', 1)"
-
-      ActiveRecord::Base.connection.execute(sql)
+      unless header.match(/.*_id$/) || header.match(/^id$/) then
+        if operation[table].nil? then
+          operation[table] = {column => []}
+        else
+          operation[table].store(column, [])
+        end
+      end
     end
 
+    data.zip(headers).each do |datum, header|
+      if header.match(/.*_dim_.*$/) then
+        table = header.scan(/.*_dim_(.*)$/).last.first + '_dimension'
+        column = header.scan(/(.*)_dim_.*$/).last.first
+      else
+        table = fact
+        column = header
+      end
+
+      unless header.match(/.*_id$/) || header.match(/^id$/) then
+        operation[table][column] << datum
+      end
+    end
+
+    indexes = {}
+
+    operation.each_pair do |table, columns|
+      if table.match(/.*_dimension$/) then
+        sql = "INSERT INTO #{table} ("
+        values = []
+
+        sql += "#{columns.keys.join(',')}) VALUES "
+
+        columns.each_value do |data|
+          values << data
+        end
+
+        aux_values = values
+
+        values = aux_values.first
+
+        aux_values.each do |data|
+          unless aux_values.first == data then
+            values = values.zip data
+          end
+        end
+
+        aux_values = []
+
+        values.each do |value|
+          aux_values << "('#{value.join('\',\'')}')"
+        end
+
+        sql += aux_values.join(',')
+
+        ActiveRecord::Base.connection.execute(sql)
+
+        last_id = ActiveRecord::Base.connection.execute("SELECT currval('#{table}_seq')")
+
+        indexes.store("#{table.scan(/(.*)_dimension$/).last.first}_id", last_id.first["currval"])
+      end
+    end
+
+    sql = "INSERT INTO #{fact} ("
+    values = []
+
+    columns = operation[fact]
+
+    sql += "#{columns.keys.join(',')}) VALUES "
+
+    columns.each_value do |data|
+      values << data
+    end
+
+    aux_values = values
+
+    values = aux_values.first
+
+    aux_values.each do |data|
+      unless aux_values.first == data then
+        values = values.zip data
+      end
+    end
+
+    aux_values = []
+
+    values.each do |value|
+      aux_values << "('#{value.join('\',\'')}')"
+    end
+
+    sql += aux_values.join(',')
+
+    ActiveRecord::Base.connection.execute(sql)
+
+    last_id = ActiveRecord::Base.connection.execute("SELECT currval('#{fact}_seq')")
+
+    sql = "UPDATE #{fact} SET "
+
+    sets = []
+
+    indexes.each_pair do |column,value|
+       sets << "#{column}='#{value}'"
+    end
+
+    sql += sets.join(',')
+    sql += " WHERE id = #{last_id.first["currval"]}"
+
+    ActiveRecord::Base.connection.execute(sql)
+
     true
-  rescue
-    false
+#  rescue
+ #   $!
   end
 
   private

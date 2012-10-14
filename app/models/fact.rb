@@ -31,9 +31,9 @@ class Fact
     @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
   end
 
-  #def foreign_keys
-  #  @foreign_keys.join(',') unless @foreign_keys.nil?
-  #end
+  def foreign_keys
+    @foreign_keys.join(',') unless @foreign_keys.nil?
+  end
 
   def foreign_keys=(value)
     @foreign_keys = value.gsub(/\s+/, "").split(',')
