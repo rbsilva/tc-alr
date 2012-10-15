@@ -49,93 +49,81 @@ class DataWarehouse
 
     operation.each_pair do |table, columns|
       if table.match(/.*_dimension$/) then
-        sql = "INSERT INTO #{table} ("
-        values = []
+        last_id = insert_load table, columns
 
-        sql += "#{columns.keys.join(',')}) VALUES "
-
-        columns.each_value do |data|
-          values << data
-        end
-
-        aux_values = values
-
-        values = aux_values.first
-
-        aux_values.each do |data|
-          unless aux_values.first == data then
-            values = values.zip data
-          end
-        end
-
-        aux_values = []
-
-        values.each do |value|
-          aux_values << "('#{value.join('\',\'')}')"
-        end
-
-        sql += aux_values.join(',')
-
-        ActiveRecord::Base.connection.execute(sql)
-
-        last_id = ActiveRecord::Base.connection.execute("SELECT currval('#{table}_seq')")
-
-        indexes.store("#{table.scan(/(.*)_dimension$/).last.first}_id", last_id.first["currval"])
+        indexes.store("#{table.scan(/(.*)_dimension$/).last.first}_id", last_id)
       end
     end
 
-    sql = "INSERT INTO #{fact} ("
-    values = []
-
-    columns = operation[fact]
-
-    sql += "#{columns.keys.join(',')}) VALUES "
-
-    columns.each_value do |data|
-      values << data
-    end
-
-    aux_values = values
-
-    values = aux_values.first
-
-    aux_values.each do |data|
-      unless aux_values.first == data then
-        values = values.zip data
-      end
-    end
-
-    aux_values = []
-
-    values.each do |value|
-      aux_values << "('#{value.join('\',\'')}')"
-    end
-
-    sql += aux_values.join(',')
-
-    ActiveRecord::Base.connection.execute(sql)
-
-    last_id = ActiveRecord::Base.connection.execute("SELECT currval('#{fact}_seq')")
+    last_id = insert_load fact, operation[fact]
 
     sql = "UPDATE #{fact} SET "
+    backup_sql = sql
 
     sets = []
 
-    indexes.each_pair do |column,value|
-       sets << "#{column}='#{value}'"
+    indexes.each_pair do |column,values|
+      values.zip(last_id).each do |value, id|
+        sets << "#{column}=#{value}"
+
+        sql += sets.join(',')
+        sql += " WHERE id = #{id}"
+
+        ActiveRecord::Base.connection.execute(sql)
+
+        sql = backup_sql
+        sets = []
+      end
     end
 
-    sql += sets.join(',')
-    sql += " WHERE id = #{last_id.first["currval"]}"
-
-    ActiveRecord::Base.connection.execute(sql)
-
     true
-#  rescue
- #   $!
+  rescue
+   ActiveRecord::Base.logger.fatal $!
+   false
   end
 
   private
+
+    def self.insert_load(table, columns)
+      sql = "INSERT INTO #{table} ("
+      values = []
+
+      sql += "#{columns.keys.join(',')}) VALUES "
+
+      columns.each_value do |data|
+        values << data
+      end
+
+      aux_values = values
+
+      values = aux_values.first
+
+      aux_values.each do |data|
+        unless aux_values.first == data then
+          values = values.zip data
+        end
+      end
+
+      last_id = []
+
+      backup_sql = sql
+
+      values.each do |value|
+        begin
+          sql += "('#{value.join('\',\'')}')"
+        rescue
+          sql += "('#{value}')"
+        end
+
+        ActiveRecord::Base.connection.execute(sql)
+
+        sql = backup_sql
+
+        last_id << ActiveRecord::Base.connection.execute("SELECT currval('#{table}_seq')").first["currval"]
+      end
+
+      last_id
+    end
 
     def self.find_table(type='dimension', id='.*')
       tables = {}
