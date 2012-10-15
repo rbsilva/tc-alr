@@ -9,7 +9,7 @@ class DataWarehouse
     find_table 'fact'
   end
 
-  def self.load(fact, data, headers)
+  def self.load(fact, data, headers, types)
     sql = ''
     operation = {}
 
@@ -31,7 +31,7 @@ class DataWarehouse
       end
     end
 
-    data.zip(headers).each do |datum, header|
+    data.zip(headers, types).each do |datum, header, type|
       if header.match(/.*_dim_.*$/) then
         table = header.scan(/.*_dim_(.*)$/).last.first + '_dimension'
         column = header.scan(/(.*)_dim_.*$/).last.first
@@ -41,6 +41,9 @@ class DataWarehouse
       end
 
       unless header.match(/.*_id$/) || header.match(/^id$/) then
+        if type == 'string' then 
+          datum = "'#{datum}'" 
+        end
         operation[table][column] << datum
       end
     end
@@ -110,9 +113,9 @@ class DataWarehouse
 
       values.each do |value|
         begin
-          sql += "('#{value.join('\',\'')}')"
+          sql += "(#{value.join(',')})"
         rescue
-          sql += "('#{value}')"
+          sql += "(#{value})"
         end
 
         ActiveRecord::Base.connection.execute(sql)

@@ -103,6 +103,10 @@ $(function() {
           $("#data_warehouse_load input[name=load_header\\[\\]]").each( function() {
             $(this).remove();
           });
+		  
+		  $("#data_warehouse_load input[name=load_type\\[\\]]").each( function() {
+            $(this).remove();
+          });
         }
 
         function loadReport( $item ) {
@@ -119,11 +123,13 @@ $(function() {
           var $cont = 1;
           var $hidden_data = '<input name="load_data[]" type="hidden"';
           var $hidden_header = '<input name="load_header[]" type="hidden"';
+		  var $hidden_type = '<input name="load_type[]" type="hidden"';
 
           $("#data_warehouse_load #fact").val($('#data_warehouse').find('h3').text());
 
           $table.find('td:nth-child('+$index+')').each( function(){
             var $content = $(this).html();
+			var $type = $(this).attr('type');
 
             if ($row_count < 2) {
               $table_to.append('<tr></tr>');
@@ -143,6 +149,8 @@ $(function() {
             $("#data_warehouse_load").append($hidden_data + 'id="load_data_' + $cont + '_' + $index_to +'" value="' + $content + '"></input>');
 
             $("#data_warehouse_load").append($hidden_header + 'id="load_header_' + $cont + '_' + $index_to +'" value="' + $column.text() + '"></input>');
+			
+			$("#data_warehouse_load").append($hidden_type + 'id="load_type_' + $cont + '_' + $index_to +'" value="' + $type + '"></input>');
 
             $cont++;
           });
