@@ -18,7 +18,7 @@ module Admin::InboundHelper
         header = false
       end
       tag = header ? 'th' : 'td';
-      html += "<#{tag}>#{meta_data['content']}</#{tag}>"
+      html += "<#{tag} type='#{meta_data['type']}'>#{meta_data['content']}</#{tag}>"
     end
     html += '</tbody></table>'
 
