@@ -1,0 +1,7 @@
+- Problema ao arrastar dados na tela de load
+- Validação dos dados na tela de load
+- Desfazer operação
+- Gerar relatório a partir dos campos arrastados
+- Pensar sobre os filtros nos relatórios
+- Pensar sobre a geração de relatórios em PDF
+- 
