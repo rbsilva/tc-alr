@@ -49,10 +49,11 @@ input {color:#000;}
   padding: 10px;
   margin: 6px;
   font-size: 14pt;
+  display: inline-block;
   text-decoration: none;
   color: #fff;
-  float: left;
   &:visited {
+    float: left;
     color: #fff;
   }
   &:hover {

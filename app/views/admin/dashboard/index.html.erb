@@ -11,22 +11,32 @@
 
 <div id="dashboard_report" width="200px;">
   <a href="#" id="opener"><%= t(:open_load_fact) %></a>
-  <br></br>
-  <div id="report">
-    <div id="title">
-      <span class="title"><%= t(:report_of)%> </span>
-      <span class="title"><%= text_field_tag 'description' %></span>
-    </div>
-    <div id="body">
-      <table>
-        <thead>
-          <tr></tr>
-        </thead>
-        <tbody>
-          <tr></tr>
-        </tbody>
-      </table>
-    </div>
+  <br />
+  <br />
+
+  <div class="ui-accordion-content ui-helper-reset ui-corner-bottom ui-accordion-content-active" style="width:700px; overflow:auto; display:block;">
+    <table>
+      <tr>
+        <td>
+          <div id="report">
+            <div id="title">
+              <span class="title"><%= t(:report_of)%> </span>
+              <span class="title"><%= text_field_tag 'description' %></span>
+            </div>
+            <div id="body">
+              <table>
+                <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
@@ -46,9 +56,9 @@
 
 <div id="load_facts_modal" title="<%= t(:load_facts)%>">
   <div id="inbound" class="data_table">
-    <h3></h3>
-    <table></table>
-  </div>
+  <h3></h3>
+  <table></table>
+</div>
   <%= render 'facts_form'%>
   <div id="data_warehouse" class="data_table">
     <h3></h3>
