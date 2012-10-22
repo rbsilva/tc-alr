@@ -103,7 +103,7 @@ $(function() {
           $("#data_warehouse_load input[name=load_header\\[\\]]").each( function() {
             $(this).remove();
           });
-		  
+
 		  $("#data_warehouse_load input[name=load_type\\[\\]]").each( function() {
             $(this).remove();
           });
@@ -111,6 +111,7 @@ $(function() {
 
         function loadReport( $item ) {
           $("#report #body table thead tr", $dashboard_report).append("<th>"+$item.clone().html()+"</th>");
+
         }
 
         function loadFact( $item, $column ) {
@@ -149,7 +150,7 @@ $(function() {
             $("#data_warehouse_load").append($hidden_data + 'id="load_data_' + $cont + '_' + $index_to +'" value="' + $content + '"></input>');
 
             $("#data_warehouse_load").append($hidden_header + 'id="load_header_' + $cont + '_' + $index_to +'" value="' + $column.text() + '"></input>');
-			
+
 			$("#data_warehouse_load").append($hidden_type + 'id="load_type_' + $cont + '_' + $index_to +'" value="' + $type + '"></input>');
 
             $cont++;

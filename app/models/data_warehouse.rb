@@ -41,8 +41,8 @@ class DataWarehouse
       end
 
       unless header.match(/.*_id$/) || header.match(/^id$/) then
-        if type == 'string' then 
-          datum = "'#{datum}'" 
+        if type == 'string' || type == 'datetime' then
+          datum = "'#{datum}'"
         end
         operation[table][column] << datum
       end
