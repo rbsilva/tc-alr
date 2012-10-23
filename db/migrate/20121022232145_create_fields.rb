@@ -1,7 +1,7 @@
 class CreateFields < ActiveRecord::Migration
   def change
     create_table :fields do |t|
-      t.string :type
+      t.string :db_type
       t.string :description
       t.boolean :is_null
       t.references :data_table

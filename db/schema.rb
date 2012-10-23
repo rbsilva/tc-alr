@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(:version => 20121022234620) do
   add_index "data_tables", ["user_id"], :name => "index_data_tables_on_user_id"
 
   create_table "fields", :force => true do |t|
-    t.string   "type"
+    t.string   "db_type"
     t.string   "description"
     t.boolean  "is_null"
-    t.integer  "table_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "data_table_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "fields", ["table_id"], :name => "index_fields_on_table_id"
+  add_index "fields", ["data_table_id"], :name => "index_fields_on_table_id"
 
   create_table "inbounds", :force => true do |t|
     t.binary   "file"
