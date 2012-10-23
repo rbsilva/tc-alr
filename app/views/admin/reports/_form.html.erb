@@ -1,10 +1,10 @@
-<%= form_for(admin_report) do |f| %>
-  <% if admin_report.errors.any? %>
+<%= form_for(report) do |f| %>
+  <% if report.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(admin_report.errors.count, "error") %> prohibited this admin_report from being saved:</h2>
+      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
 
       <ul>
-      <% admin_report.errors.full_messages.each do |msg| %>
+      <% report.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

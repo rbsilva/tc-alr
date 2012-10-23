@@ -2,19 +2,19 @@
 
 <p>
   <b>Name:</b>
-  <%= @admin_data_table.name %>
+  <%= @data_table.name %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @admin_data_table.user %>
+  <%= @data_table.user.full_name %>
 </p>
 
 <p>
   <b>Fact:</b>
-  <%= @admin_data_table.fact %>
+  <%= @data_table.fact %>
 </p>
 
 
-<%= link_to 'Edit', edit_admin_data_table_path(@admin_data_table) %> |
+<%= link_to 'Edit', edit_admin_data_table_path(@data_table) %> |
 <%= link_to 'Back', admin_data_tables_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022232450) do
+ActiveRecord::Schema.define(:version => 20121022234620) do
 
   create_table "data_tables", :force => true do |t|
     t.string   "name"
@@ -22,12 +22,6 @@ ActiveRecord::Schema.define(:version => 20121022232450) do
   end
 
   add_index "data_tables", ["user_id"], :name => "index_data_tables_on_user_id"
-
-  create_table "dm_viadagem_dimension", :force => true do |t|
-    t.string "nome"
-    t.string "vdg1"
-    t.string "vdg2"
-  end
 
   create_table "fields", :force => true do |t|
     t.string   "type"
@@ -115,20 +109,5 @@ ActiveRecord::Schema.define(:version => 20121022232450) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["user"], :name => "index_users_on_user", :unique => true
   add_index "users", ["user_id"], :name => "index_users_on_user_id"
-
-  create_table "viadagem2_fact", :force => true do |t|
-    t.string  "nome"
-    t.string  "idade"
-    t.string  "sexo"
-    t.integer "dm_viadagem_id"
-  end
-
-  create_table "viadagem_fact", :force => true do |t|
-    t.string  "nome"
-    t.string  "vdg1"
-    t.string  "vdg2"
-    t.string  "vdg_data"
-    t.integer "dm_viadagem_id"
-  end
 
 end

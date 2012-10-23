@@ -10,13 +10,13 @@
     <th></th>
   </tr>
 
-<% admin_reports.each do |admin_report| %>
+<% reports.each do |report| %>
   <tr>
-    <td><%= admin_report.description %></td>
-    <td><%= admin_report.fields %></td>
-    <td><%= admin_report.user %></td>
-    <td><%= link_to t(:show), admin_report %></td>
-    <td><%= link_to t(:delete), admin_report, confirm: t(:are_you_sure), method: :delete %></td>
+    <td><%= report.description %></td>
+    <td><%= report.fields %></td>
+    <td><%= report.user %></td>
+    <td><%= link_to t(:show), report %></td>
+    <td><%= link_to t(:delete), report, confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>
 </table>

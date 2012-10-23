@@ -1,10 +1,10 @@
-<%= form_for(admin_data_table) do |f| %>
-  <% if admin_data_table.errors.any? %>
+<%= form_for(data_table, :url => data_table.persisted? ? admin_data_table_path : admin_data_tables_path) do |f| %>
+  <% if data_table.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(admin_data_table.errors.count, "error") %> prohibited this admin_data_table from being saved:</h2>
+      <h2><%= pluralize(data_table.errors.count, "error") %> prohibited this data_table from being saved:</h2>
 
       <ul>
-      <% admin_data_table.errors.full_messages.each do |msg| %>
+      <% data_table.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,9 +15,8 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
+  <div>
+    <%= f.hidden_field :user_id, :value => @current_user.id %>
   </div>
   <div class="field">
     <%= f.label :fact %><br />

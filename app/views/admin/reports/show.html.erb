@@ -2,19 +2,19 @@
 
 <p>
   <b><%= t(:description).capitalize %>:</b>
-  <%= admin_report.description %>
+  <%= report.description %>
 </p>
 
 <p>
   <b><%= t(:fields).capitalize %></b>
-  <%= admin_report.fields %>
+  <%= report.fields %>
 </p>
 
 <p>
   <b><%= t(:user).capitalize %></b>
-  <%= admin_report.user %>
+  <%= report.user %>
 </p>
 
 
-<%= link_to t(:edit), edit_admin_report_path(admin_report) %> |
-<%= link_to t(:back), admin_reports_path %>
+<%= link_to t(:edit), edit_report_path(report) %> |
+<%= link_to t(:back), reports_path %>

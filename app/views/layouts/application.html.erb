@@ -4,14 +4,14 @@
 <html>
 <head>
   <title>TC</title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
+  <% stylesheet_link_tag "application", :media => "all" %>
   <%= favicon_link_tag %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="container">
     <div id="header">
-      <%= link_to image_tag("logo.png", :size => "300x124"), root_url %>
+      <% link_to image_tag("logo.png", :size => "300x124"), root_url %>
     </div>
     <ul id="menu">
       <li><%= link_to t(:dashboard), url_for(:action => 'index', :controller => 'admin/dashboard') %></li>

@@ -1,4 +1,4 @@
-<h1>Listing admin_data_tables</h1>
+<h1>Listing data_tables</h1>
 
 <table>
   <tr>
@@ -10,14 +10,14 @@
     <th></th>
   </tr>
 
-<% @admin_data_tables.each do |admin_data_table| %>
+<% @data_tables.each do |data_table| %>
   <tr>
-    <td><%= admin_data_table.name %></td>
-    <td><%= admin_data_table.user %></td>
-    <td><%= admin_data_table.fact %></td>
-    <td><%= link_to 'Show', admin_data_table %></td>
-    <td><%= link_to 'Edit', edit_admin_data_table_path(admin_data_table) %></td>
-    <td><%= link_to 'Destroy', admin_data_table, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= data_table.name %></td>
+    <td><%= data_table.user.full_name %></td>
+    <td><%= data_table.fact %></td>
+    <td><%= link_to 'Show', admin_data_table_path(data_table) %></td>
+    <td><%= link_to 'Edit', edit_admin_data_table_path(data_table) %></td>
+    <td><%= link_to 'Destroy', admin_data_table_path(data_table), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
