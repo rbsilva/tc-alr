@@ -4,10 +4,10 @@ class CreateFields < ActiveRecord::Migration
       t.string :type
       t.string :description
       t.boolean :is_null
-      t.references :table
+      t.references :data_table
 
       t.timestamps
     end
-    add_index :fields, :table_id
+    add_index :fields, :data_table_id
   end
 end

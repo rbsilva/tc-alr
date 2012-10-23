@@ -1,4 +1,4 @@
-# encoding: utf-8
+Ôªø# encoding: utf-8
 class DataTable < ActiveRecord::Base
   belongs_to :user
   has_many :fields
@@ -9,10 +9,11 @@ class DataTable < ActiveRecord::Base
   
   validates :name, :presence => true,
           :length => {:minimum => 2},
-          :format => { :with => /^[A-z_¿¡¬√ƒ≈‡·‚„‰Â“”‘’’÷ÚÛÙıˆ»… ÀËÈÍÎ«ÁÃÕŒœÏÌÓÔŸ⁄€‹˘˙˚¸—Òäöüˇ˝éû].*$/}
+          :format => { :with => /^[A-z_√Ä√Å√Ç√É√Ñ√Ö√†√°√¢√£√§√•√í√ì√î√ï√ï√ñ√≤√≥√¥√µ√∂√à√â√ä√ã√®√©√™√´√∞√á√ß√å√ç√é√è√¨√≠√Æ√Ø√ô√ö√õ√ú√π√∫√ª√º√ë√±≈†≈°≈∏√ø√Ω≈Ω≈æ].*$/}
           
   def name=(value)
-    # primeiro gsub substitui espaÁos por '_' e o segundo gsub apaga qualquer sÌmbolo
-    @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
+    # primeiro gsub substitui espa√ßos por '_' e o segundo gsub apaga qualquer s√≠mbolo
+    _name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
+    write_attribute(:name, _name)
   end
 end

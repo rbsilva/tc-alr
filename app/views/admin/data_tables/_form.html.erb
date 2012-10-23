@@ -22,6 +22,9 @@
     <%= f.label :fact %><br />
     <%= f.check_box :fact %>
   </div>
+  <%= f.fields_for :fields do |builder| %>
+    <%= render "form_fields", :f => builder %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

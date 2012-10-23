@@ -25,7 +25,8 @@ class Admin::DataTablesController < BaseController
   # GET /admin/data_tables/new.json
   def new
     @data_table = DataTable.new
-
+    @data_table.fields.build
+    
     respond_to do |format|
       format.html { render :new, :locals => { :data_table => @data_table } }
       format.json { render json: @data_table }
@@ -35,6 +36,7 @@ class Admin::DataTablesController < BaseController
   # GET /admin/data_tables/1/edit
   def edit
     @data_table = DataTable.find(params[:id])
+    @data_table.fields.build
     
     respond_to do |format|
       format.html { render :edit, :locals => { :data_table => @data_table } }
@@ -52,7 +54,7 @@ class Admin::DataTablesController < BaseController
         format.html { redirect_to admin_data_table_path(@data_table), notice: 'Data table was successfully created.' }
         format.json { render json: @data_table, status: :created, location: @data_table }
       else
-        format.html { render action: "new" }
+        format.html { render :new, :locals => { :data_table => @data_table } }
         format.json { render json: @data_table.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +70,7 @@ class Admin::DataTablesController < BaseController
         format.html { redirect_to admin_data_table_path(@data_table), notice: 'Data table was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit, :locals => { :data_table => @data_table } }
         format.json { render json: @data_table.errors, status: :unprocessable_entity }
       end
     end

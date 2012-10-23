@@ -1,15 +1,15 @@
-# encoding: utf-8
+Ôªø# encoding: utf-8
 class Field < ActiveRecord::Base
-  belongs_to :table
+  belongs_to :data_table
   
   attr_accessible :type, :description, :is_null
   
   validates :description, :presence => true,
         :length => {:minimum => 2},
-        :format => { :with => /^[A-z_¿¡¬√ƒ≈‡·‚„‰Â“”‘’’÷ÚÛÙıˆ»… ÀËÈÍÎ«ÁÃÕŒœÏÌÓÔŸ⁄€‹˘˙˚¸—Òäöüˇ˝éû].*$/}
+        :format => { :with => /^[A-z_√Ä√Å√Ç√É√Ñ√Ö√†√°√¢√£√§√•√í√ì√î√ï√ï√ñ√≤√≥√¥√µ√∂√à√â√ä√ã√®√©√™√´√∞√á√ß√å√ç√é√è√¨√≠√Æ√Ø√ô√ö√õ√ú√π√∫√ª√º√ë√±≈†≈°≈∏√ø√Ω≈Ω≈æ].*$/}
   
   def description=(value)
-    # primeiro gsub substitui espaÁos por '_' e o segundo gsub apaga qualquer sÌmbolo
+    # primeiro gsub substitui espa√ßos por '_' e o segundo gsub apaga qualquer s√≠mbolo
     @name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
   end
 end
