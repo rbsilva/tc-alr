@@ -1,12 +1,13 @@
 TC::Application.routes.draw do
 
+  namespace :admin do resources :data_tables end
+
   devise_for :users
 
   namespace :admin do
+    resources :data_tables
     resources :users
     resources :roles
-    resources :dimensions, :except => [:edit, :update]
-    resources :facts, :except => [:edit, :update]
     resources :inbound, :only => :index
     resources :data_warehouse, :only => :index do
       collection do

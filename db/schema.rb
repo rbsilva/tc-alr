@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012233647) do
+ActiveRecord::Schema.define(:version => 20121022232450) do
+
+  create_table "data_tables", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "fact"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "data_tables", ["user_id"], :name => "index_data_tables_on_user_id"
+
+  create_table "dm_viadagem_dimension", :force => true do |t|
+    t.string "nome"
+    t.string "vdg1"
+    t.string "vdg2"
+  end
+
+  create_table "fields", :force => true do |t|
+    t.string   "type"
+    t.string   "description"
+    t.boolean  "is_null"
+    t.integer  "table_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "fields", ["table_id"], :name => "index_fields_on_table_id"
 
   create_table "inbounds", :force => true do |t|
     t.binary   "file"
@@ -88,5 +115,20 @@ ActiveRecord::Schema.define(:version => 20121012233647) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["user"], :name => "index_users_on_user", :unique => true
   add_index "users", ["user_id"], :name => "index_users_on_user_id"
+
+  create_table "viadagem2_fact", :force => true do |t|
+    t.string  "nome"
+    t.string  "idade"
+    t.string  "sexo"
+    t.integer "dm_viadagem_id"
+  end
+
+  create_table "viadagem_fact", :force => true do |t|
+    t.string  "nome"
+    t.string  "vdg1"
+    t.string  "vdg2"
+    t.string  "vdg_data"
+    t.integer "dm_viadagem_id"
+  end
 
 end

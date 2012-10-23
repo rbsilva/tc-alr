@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DimensionTest < ActiveSupport::TestCase
+class Admin::DataTableTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

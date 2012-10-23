@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  description: MyString
+  is_null: false
+  table: 
+
+two:
+  type: 
+  description: MyString
+  is_null: false
+  table: 
