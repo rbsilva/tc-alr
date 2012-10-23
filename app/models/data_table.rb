@@ -1,7 +1,6 @@
 ﻿# encoding: utf-8
 class DataTable < ActiveRecord::Base
   require 'rails/generators'
-  require 'rake'
   
   belongs_to :user
   has_many :fields
