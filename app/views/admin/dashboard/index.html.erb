@@ -1,3 +1,9 @@
+<div id="dashboard_load_facts" width="200px;">
+  <a href="#" id="opener"><%= t(:open_load_fact) %></a>
+</div>
+
+<div class="clear"></div>
+
 <div id="dashboard_inbounds" class="dashboard_list">
   <% @inbounds.each do |inbound| %>
   <div class="group">
@@ -9,58 +15,26 @@
   <% end %>
 </div>
 
-<div id="dashboard_report" width="200px;">
-  <a href="#" id="opener"><%= t(:open_load_fact) %></a>
-  <br />
-  <br />
-
-  <div class="ui-accordion-content ui-helper-reset ui-corner-bottom ui-accordion-content-active" style="width:700px; overflow:auto; display:block;">
-    <table>
-      <tr>
-        <td>
-          <div id="report">
-            <div id="title">
-              <span class="title"><%= t(:report_of)%> </span>
-              <span class="title"><%= text_field_tag 'description' %></span>
-            </div>
-            <div id="body">
-              <table>
-                <thead>
-                    <tr></tr>
-                </thead>
-                <tbody>
-                    <tr></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
 <div id="dashboard_facts" class="dashboard_list">
   <% @facts.each_pair do |table, data| %>
   <div class="group">
     <h3 class="data_warehouse_title"><%= table.to_s %></h3>
-    <div class="data_table" id="<%=table.to_s%>">
-      <%= data_warehouse_table(table, data) %>
+    <%= data_warehouse_table(table, data) %>
+    <div id="<%=table.to_s%>">
     </div>
   </div>
   <% end %>
 </div>
 
-
 <div class="clear"></div>
 
 <div id="load_facts_modal" title="<%= t(:load_facts)%>">
-  <div id="inbound" class="data_table">
+  <div id="inbound" class="facts_table">
   <h3></h3>
   <table></table>
 </div>
   <%= render 'facts_form'%>
-  <div id="data_warehouse" class="data_table">
+  <div id="data_warehouse" class="facts_table">
     <h3></h3>
     <table><thead></thead></table>
   </div>

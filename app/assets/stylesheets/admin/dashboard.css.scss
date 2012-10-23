@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #dashboard_facts {
-  width: 23%;
+  width: 45%;
   float: right;
   margin: 1%;
 }
 
 #dashboard_inbounds {
-  width: 23%;
+  width: 50%;
   float: left;
   margin: 1%;
 }
@@ -48,4 +48,11 @@
 
 #load_facts_modal #data_warehouse {
 
-} 
+}
+
+.facts_table {
+  height: 300px;
+  margin: 10px;
+  overflow: auto;
+  display: block;
+}
