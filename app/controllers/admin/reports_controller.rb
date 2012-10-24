@@ -1,4 +1,4 @@
-class Admin::ReportsController < ApplicationController
+class Admin::ReportsController < BaseController
   # GET /admin/reports
   # GET /admin/reports.json
   def index
