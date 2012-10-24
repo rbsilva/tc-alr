@@ -6,7 +6,7 @@ class DataWarehouse
   end
 
   def self.facts
-    find_table 'fact'
+    DataTable.where(:fact => true)
   end
 
   def self.load(fact, data, headers, types)

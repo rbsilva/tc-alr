@@ -16,11 +16,11 @@
 </div>
 
 <div id="dashboard_facts" class="dashboard_list">
-  <% @facts.each_pair do |table, data| %>
+  <% @facts.each do |fact| %>
   <div class="group">
-    <h3 class="data_warehouse_title"><%= table.to_s %></h3>
-    <%= data_warehouse_table(table, data) %>
-    <div id="<%=table.to_s%>">
+    <h3 class="data_warehouse_title"><%= fact.name %></h3>
+    <div class="data_table" id="<%=fact.id%>">
+      <%= data_warehouse_table(fact) %>
     </div>
   </div>
   <% end %>

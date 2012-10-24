@@ -18,3 +18,7 @@ test:
 production:
   <<: *common
   database: tc
+
+data_warehouse:
+  <<: *common
+  database: tc_dw

@@ -1,0 +1,2 @@
+class TesteDimension < DwDb
+end
