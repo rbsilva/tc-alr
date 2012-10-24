@@ -27,5 +27,9 @@
 
 # Ignore public compiled assets
 /public/assets
+
+# Ignore redmine project folder
 /.idea
+
+# Ignore windows thumbnails
 Thumbs.db
