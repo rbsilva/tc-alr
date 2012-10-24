@@ -1,0 +1,1 @@
+Folder to store data warehouse's migrations
