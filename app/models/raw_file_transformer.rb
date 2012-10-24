@@ -1,5 +1,5 @@
 class RawFileTransformer < ActiveRecord::Base
-  def self.transform
+  def self.run
     @raw_files = RawFile.where("status = 'SENT'")
 
     @raw_files.each do |raw_file|

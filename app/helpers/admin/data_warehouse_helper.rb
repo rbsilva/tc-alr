@@ -4,10 +4,10 @@ module Admin::DataWarehouseHelper
     html = '<table class="data_warehouse_table">'
     html += '<thead><tr>'
     fact.fields.each do |column|
-      html += "<th>#{column.description}</th>"
+      html += "<th id='#{column.id}'>#{column.description}</th>"
       if column.db_type == 'references' then
         DataTable.where(:name => column.description).first.fields.each do |d_column|
-          html += "<th dimension='#{column.description}'>#{d_column.description}</th>"
+          html += "<th id='#{d_column.id}'>#{d_column.description}</th>"
         end
       end
     end
