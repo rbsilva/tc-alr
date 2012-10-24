@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20121022234620) do
 
+  create_table "contas_dimension", :force => true do |t|
+    t.string "conta"
+    t.string "valor"
+  end
+
   create_table "data_tables", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -23,6 +28,11 @@ ActiveRecord::Schema.define(:version => 20121022234620) do
 
   add_index "data_tables", ["user_id"], :name => "index_data_tables_on_user_id"
 
+  create_table "descricao_dimension", :force => true do |t|
+    t.string "categoria"
+    t.string "tipo"
+  end
+
   create_table "fields", :force => true do |t|
     t.string   "db_type"
     t.string   "description"
@@ -32,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20121022234620) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "fields", ["data_table_id"], :name => "index_fields_on_table_id"
+  add_index "fields", ["data_table_id"], :name => "index_fields_on_data_table_id"
 
   create_table "inbounds", :force => true do |t|
     t.binary   "file"
@@ -84,6 +94,12 @@ ActiveRecord::Schema.define(:version => 20121022234620) do
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
+  create_table "transacao_fact", :force => true do |t|
+    t.string  "data"
+    t.integer "contas_id"
+    t.integer "descricao_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -108,6 +124,5 @@ ActiveRecord::Schema.define(:version => 20121022234620) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["user"], :name => "index_users_on_user", :unique => true
-  add_index "users", ["user_id"], :name => "index_users_on_user_id"
 
 end

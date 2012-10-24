@@ -1,5 +1,5 @@
   <div class="field">
-    <%= f.label :type %>: <%= f.text_field :db_type, :size => 5 %>
+    <%= f.label :type %>: <%= f.select :db_type, Field::DB_TYPE.collect{|p| [t(p.to_sym), p]} %>
 
     <%= f.label :description %>: <%= f.text_field :description, :size => 10 %>
 

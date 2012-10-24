@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC 
+<!DOCTYPE html PUBLIC
 "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -19,8 +19,7 @@
       <li><%= link_to t(:inbound).pluralize.capitalize, url_for(:action => 'index', :controller => 'admin/inbound') %></li>
       <li><%= link_to t(:user).pluralize.capitalize, admin_users_path %></li>
       <li><%= link_to t(:role, :count => 2).pluralize.capitalize, admin_roles_path %></li>
-      <li><%= link_to t(:data_warehouse).camelize, url_for(:action => 'index', :controller => 'admin/data_warehouse') %></li>
-      <li><%= link_to t(:fact).pluralize.capitalize, admin_data_tables_path %></li>
+      <li><%= link_to t(:data_warehouse).camelize, admin_data_tables_path %></li>
       <li><%= link_to t(:report).pluralize.capitalize, admin_reports_path %></li>
       <li><%= link_to t(:sign_out).capitalize, destroy_user_session_path, :method => :delete %></li>
     </ul>
