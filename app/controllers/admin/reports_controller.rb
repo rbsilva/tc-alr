@@ -40,6 +40,11 @@ class Admin::ReportsController < BaseController
       respond_to do |format|
         format.html { render :show, :locals => { :report => @report } } # show.html.erb
         format.json { render json: @report }
+        format.pdf do
+          pdf = PdfReport.new(:left_margin => 40, :page_size => 'LETTER').to_pdf(@report)
+          filename = @report.description
+          send_data pdf, :type => "application/pdf", :disposition => "inline", :filename => "report_of_#{filename}"
+        end
       end
     rescue
       logger.fatal $!

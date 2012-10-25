@@ -54,3 +54,6 @@ gem 'xml-simple'
 
 # To annotate files with schema information
 gem 'annotate'
+
+# To generate PDF's
+gem 'prawn'

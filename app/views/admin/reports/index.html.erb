@@ -7,6 +7,7 @@
     <th><%= t(:user).capitalize %></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% reports.each do |report| %>
@@ -14,6 +15,7 @@
     <td><%= report.description %></td>
     <td><%= report_show_fields(report.fields) %></td>
     <td><%= report.user.full_name %></td>
+    <td><%= link_to t(:pdf), admin_report_path(report, :format => :pdf), :target => '_blank' %></td>
     <td><%= link_to t(:show), admin_report_path(report) %></td>
     <td><%= link_to t(:delete), admin_report_path(report), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
