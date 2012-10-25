@@ -1,0 +1,23 @@
+<div id="dashboard_report">
+  <table width="100%">
+    <tr>
+      <td>
+        <div id="report">
+          <div id="title">
+          <%= render :partial => 'form', :locals => { :report => report } %>
+          </div>
+          <div id="body">
+            <table>
+              <thead>
+                  <tr><%= report_headers(report) %></tr>
+              </thead>
+              <tbody>
+                  <%= report_data(report) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

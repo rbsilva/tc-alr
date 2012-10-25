@@ -11,26 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024175229) do
+ActiveRecord::Schema.define(:version => 20121024210341) do
 
   create_table "produtos_dimensions", :force => true do |t|
-    t.text     "nome"
+    t.integer  "qtd"
+    t.string   "nome"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "teste2_dimensions", :force => true do |t|
+    t.binary   "teste"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "teste_dimensions", :force => true do |t|
+    t.text     "teste"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "vendas_dimensions", :force => true do |t|
-    t.decimal  "valor"
+  create_table "teste_facts", :force => true do |t|
+    t.integer  "teste_dimension_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "teste_facts", ["teste_dimension_id"], :name => "index_teste_facts_on_teste_dimension_id"
+
+  create_table "vendas_facts", :force => true do |t|
     t.integer  "produtos_dimension_id"
+    t.decimal  "valor"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
   end
 
-  add_index "vendas_dimensions", ["produtos_dimension_id"], :name => "index_vendas_dimensions_on_produtos_dimension_id"
+  add_index "vendas_facts", ["produtos_dimension_id"], :name => "index_vendas_facts_on_produtos_dimension_id"
 
 end

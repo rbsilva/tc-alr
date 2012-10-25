@@ -10,6 +10,7 @@ class DataTable < ActiveRecord::Base
 
   attr_accessible :user_id, :name, :fact, :fields_attributes
 
+  before_save :set_name_suffix
   after_save :generate_model
 
   validates :name, :presence => true,
@@ -19,7 +20,6 @@ class DataTable < ActiveRecord::Base
   def name=(value)
     # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo
     _name = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
-    _name += fact ? '_fact' : '_dimension'
     write_attribute(:name, _name)
   end
 
@@ -32,6 +32,12 @@ class DataTable < ActiveRecord::Base
   end
 
   private
+    def set_name_suffix
+      _name = name
+      _name += fact ? '_fact' : '_dimension'
+      write_attribute(:name, _name)
+    end
+
     def generate_model
       args = ["#{name}"]
 
@@ -58,5 +64,8 @@ class DataTable < ActiveRecord::Base
 
       FileUtils.mv(migration_file, dw_migrate_folder)
       FileUtils.mv(model_file, dw_models_folder)
+
+      `rake db:migrate RAILS_ENV=data_warehouse`
+      `rake db:migrate`
     end
 end

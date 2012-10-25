@@ -7,19 +7,19 @@
     <th><%= t(:user).capitalize %></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% reports.each do |report| %>
   <tr>
     <td><%= report.description %></td>
-    <td><%= report.fields %></td>
-    <td><%= report.user %></td>
-    <td><%= link_to t(:show), report %></td>
-    <td><%= link_to t(:delete), report, confirm: t(:are_you_sure), method: :delete %></td>
+    <td><%= report_show_fields(report.fields) %></td>
+    <td><%= report.user.full_name %></td>
+    <td><%= link_to t(:show), admin_report_path(report) %></td>
+    <td><%= link_to t(:delete), admin_report_path(report), confirm: t(:are_you_sure), method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<%= link_to t(:new_report), new_admin_report_path %>

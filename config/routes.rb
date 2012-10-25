@@ -1,7 +1,5 @@
 TC::Application.routes.draw do
 
-  namespace :admin do resources :data_tables end
-
   devise_for :users
 
   namespace :admin do
@@ -15,7 +13,7 @@ TC::Application.routes.draw do
       end
     end
     resources :dashboard, :only => :index
-    resources :reports, :except => [:new, :edit]
+    resources :reports
   end
 
   resources :upload, :as => :raw_files, :controller => :raw_files do

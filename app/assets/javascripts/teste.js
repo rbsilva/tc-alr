@@ -22,6 +22,7 @@ $(function() {
                       success: function( data ) {
                         alert(data);
                         $( "#load_facts_modal" ).dialog( "close" );
+                        location.reload();
                       },
                       error: function( xhr, msg, status ) {
                         var responseText = jQuery.parseJSON(xhr.responseText);
@@ -103,7 +104,12 @@ $(function() {
 
         function loadReport( $item ) {
           $("#report #body table thead tr", $dashboard_report).append("<th>"+$item.clone().html()+"</th>");
-
+          $fields = $("#report_fields").val().split(',');
+          if($fields[0] == '') {
+            $fields = []
+          }
+          $fields.push($item.attr('id'));
+          $("#report_fields").val($fields.join(','));
         }
 
         function loadFact( $item, $column ) {

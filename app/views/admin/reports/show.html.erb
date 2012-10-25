@@ -7,14 +7,18 @@
 
 <p>
   <b><%= t(:fields).capitalize %></b>
-  <%= report.fields %>
+  <%= report_show_fields(report.fields) %>
 </p>
 
 <p>
   <b><%= t(:user).capitalize %></b>
-  <%= report.user %>
+  <%= report.user.full_name %>
 </p>
 
+<%= render :partial => 'report', :locals => { :report => report } %>
 
-<%= link_to t(:edit), edit_report_path(report) %> |
-<%= link_to t(:back), reports_path %>
+<div class="clear"></div>
+
+
+<%= link_to t(:edit), edit_admin_report_path(report) %> |
+<%= link_to t(:back), admin_reports_path %>

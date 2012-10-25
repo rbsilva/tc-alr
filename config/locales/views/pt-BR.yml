@@ -78,6 +78,7 @@ pt-BR:
     other: "permissões"
   role_created_successfully: "Permissão criada com sucesso."
   role_updated_successfully: "Permissão atualizada com sucesso."
+  save: "Salvar"
   send_me_reset: "Me envie instruções para recuperar minha senha"
   show: "ver"
   sign_in: "login"
