@@ -10,9 +10,11 @@ pt-BR:
   change_my_password: "mudar minha senha"
   change_your_password: "mude sua senha"
   click_to_unlock: "Clique no link abaixo para desbloquear sua conta:"
+  columns: "colunas"
   confirm_my_account: "confirme minha conta"
   confirm_new_password: "confirme a nova senha"
   created_at: "data de envio"
+  dashboard: "Painel"
   data_warehouse: "data warehouse"
   delete: "apagar"
   description: "descrição"
@@ -25,6 +27,7 @@ pt-BR:
   dimension_created_successfully: "Dimensão criada com sucesso."
   dimension_updated_successfully: "Dimensão atualizada com sucesso."
   edit: "editar"
+  editing_data_table: "editando tabela de dados"
   editing_dimension: "editando dimensão"
   editing_fact: "editando fato"
   editing_file: "editando arquivo"
@@ -38,6 +41,7 @@ pt-BR:
   fact_not_found: "Fato não encontrado."
   fatal_error: "Erro fatal."
   fields: "campos"
+  filename: "nome do arquivo"
   forgot_password: "Esqueceu sua senha?"
   full_name: "nome completo"
   hello: "olá"
@@ -46,8 +50,11 @@ pt-BR:
   if_you_dont_requested_ignore: "Se você não solicitou isso, por favor ignore este email."
   inbound: "processado"
   invalid_operation: "Operação Inválida"
+  is_null: "é nulo?"
   last_sign_in_at: "útlimo login em"
   leave_blank_password: "(deixe em branco para não alterar sua senha)"
+  lines: "linhas"
+  listing_data_tables: "listando tabelas de dados"
   listing_dimensions: "listando dimensões"
   listing_facts: "listando fatos"
   listing_files: "listando arquivos"
@@ -57,12 +64,15 @@ pt-BR:
   load_facts: "Carregar fatos"
   models: "áreas"
   name: "nome"
+  new_data_table: "nova tabela de dados"
   new_dimension: "nova dimensão"
   new_fact: "novo fato"
   new_file: "novo arquivo"
   new_password: "nova senha"
   new_role: "nova permissão"
   new_user: "novo usuário"
+  _no: "não"
+  open_load_fact: "Carregar fato"
   operation_not_permitted_raw_file: "Operação não permitida devido ao status atual do arquivo."
   path: "arquivo"
   prohibited_save:
@@ -95,12 +105,15 @@ pt-BR:
   submit_user: "salvar usuário"
   success: "Sucesso"
   tags: "marcadores"
+  template: "modelo"
+  type: "tipo"
   update: "atualizar"
   unlock_my_account: "desbloqueie minha conta"
   upload: "envio"
   user: "usuário"
   user_created_successfully: "Usuário criada com sucesso."
   user_updated_successfully: "Usuário atualizada com sucesso."
+  _yes: "sim"
   you_can_confirm_account: "Você pode confirmar sua conta de email através do link abaixo:"
   your_account_locked: "Sua conta foi bloqueada devido há excessivas tentativas de login sem sucesso."
   your_password_until_link: "Sua senha não mudará até que você acesse o link acima e crie uma nova."
@@ -121,13 +134,13 @@ pt-BR:
       role:
         user: "usuário"
         name: "nome"
-      dimension:
+      data_table:
         name: "nome"
-        columns: "colunas"
-      fact:
-        name: "nome"
-        columns: "colunas"
-        foreign_keys: "chaves estrangeiras"
+        fact: "fato"
+      field:
+        description: "descrição"
+        type: "tipo"
+        is_null: "é nulo?"
 
   activerecord:
     errors:
@@ -141,8 +154,9 @@ pt-BR:
       role: "permissão"
     attributes:
       raw_file:
-        path: "arquivo"
-        tags: "marcadores"
+        file: "arquivo"
+        template: "modelo"
+        header: "cabeçalho"
       user:
         full_name: "nome completo"
         email: "email"

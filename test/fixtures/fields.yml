@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  type: 
+  db_type: 
   description: MyString
   is_null: false
-  table: 
+  data_table: 
 
 two:
-  type: 
+  db_type: 
   description: MyString
   is_null: false
-  table: 
+  data_table: 

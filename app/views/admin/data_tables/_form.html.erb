@@ -1,7 +1,9 @@
 <%= form_for(data_table, :url => data_table.persisted? ? admin_data_table_path : admin_data_tables_path) do |f| %>
   <% if data_table.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(data_table.errors.count, "error") %> prohibited this data_table from being saved:</h2>
+      <h2><%= pluralize(data_table.errors.count, t(:error)) %> 
+		<%= t(:prohibited_save, :this => t(:data_table), :count => data_table.errors.count) %>
+	  </h2>
 
       <ul>
       <% data_table.errors.full_messages.each do |msg| %>

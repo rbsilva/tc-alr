@@ -1,0 +1,50 @@
+               new_user_session GET    /users/sign_in(.:format)              devise/sessions#new
+                   user_session POST   /users/sign_in(.:format)              devise/sessions#create
+           destroy_user_session DELETE /users/sign_out(.:format)             devise/sessions#destroy
+                  user_password POST   /users/password(.:format)             devise/passwords#create
+              new_user_password GET    /users/password/new(.:format)         devise/passwords#new
+             edit_user_password GET    /users/password/edit(.:format)        devise/passwords#edit
+                                PUT    /users/password(.:format)             devise/passwords#update
+              admin_data_tables GET    /admin/data_tables(.:format)          admin/data_tables#index
+                                POST   /admin/data_tables(.:format)          admin/data_tables#create
+           new_admin_data_table GET    /admin/data_tables/new(.:format)      admin/data_tables#new
+          edit_admin_data_table GET    /admin/data_tables/:id/edit(.:format) admin/data_tables#edit
+               admin_data_table GET    /admin/data_tables/:id(.:format)      admin/data_tables#show
+                                PUT    /admin/data_tables/:id(.:format)      admin/data_tables#update
+                                DELETE /admin/data_tables/:id(.:format)      admin/data_tables#destroy
+                    admin_users GET    /admin/users(.:format)                admin/users#index
+                                POST   /admin/users(.:format)                admin/users#create
+                 new_admin_user GET    /admin/users/new(.:format)            admin/users#new
+                edit_admin_user GET    /admin/users/:id/edit(.:format)       admin/users#edit
+                     admin_user GET    /admin/users/:id(.:format)            admin/users#show
+                                PUT    /admin/users/:id(.:format)            admin/users#update
+                                DELETE /admin/users/:id(.:format)            admin/users#destroy
+                    admin_roles GET    /admin/roles(.:format)                admin/roles#index
+                                POST   /admin/roles(.:format)                admin/roles#create
+                 new_admin_role GET    /admin/roles/new(.:format)            admin/roles#new
+                edit_admin_role GET    /admin/roles/:id/edit(.:format)       admin/roles#edit
+                     admin_role GET    /admin/roles/:id(.:format)            admin/roles#show
+                                PUT    /admin/roles/:id(.:format)            admin/roles#update
+                                DELETE /admin/roles/:id(.:format)            admin/roles#destroy
+            admin_inbound_index GET    /admin/inbound(.:format)              admin/inbound#index
+load_admin_data_warehouse_index POST   /admin/data_warehouse/load(.:format)  admin/data_warehouse#load
+     admin_data_warehouse_index GET    /admin/data_warehouse(.:format)       admin/data_warehouse#index
+          admin_dashboard_index GET    /admin/dashboard(.:format)            admin/dashboard#index
+                  admin_reports GET    /admin/reports(.:format)              admin/reports#index
+                                POST   /admin/reports(.:format)              admin/reports#create
+               new_admin_report GET    /admin/reports/new(.:format)          admin/reports#new
+              edit_admin_report GET    /admin/reports/:id/edit(.:format)     admin/reports#edit
+                   admin_report GET    /admin/reports/:id(.:format)          admin/reports#show
+                                PUT    /admin/reports/:id(.:format)          admin/reports#update
+                                DELETE /admin/reports/:id(.:format)          admin/reports#destroy
+              download_raw_file GET    /upload/:id/download(.:format)        raw_files#download
+               search_raw_files POST   /upload/search(.:format)              raw_files#search
+                      raw_files GET    /upload(.:format)                     raw_files#index
+                                POST   /upload(.:format)                     raw_files#create
+                   new_raw_file GET    /upload/new(.:format)                 raw_files#new
+                  edit_raw_file GET    /upload/:id/edit(.:format)            raw_files#edit
+                       raw_file GET    /upload/:id(.:format)                 raw_files#show
+                                PUT    /upload/:id(.:format)                 raw_files#update
+                                DELETE /upload/:id(.:format)                 raw_files#destroy
+                     home_index GET    /home/index(.:format)                 home#index
+                           root        /                                     home#index

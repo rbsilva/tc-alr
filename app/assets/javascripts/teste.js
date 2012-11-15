@@ -14,7 +14,7 @@ $(function() {
             show: "blind",
             hide: "explode",
             buttons: {
-                "Save": function() {
+                "Salvar": function() {
                     $.ajax({
                       type: "POST",
                       url: "data_warehouse/load.json",
@@ -33,7 +33,7 @@ $(function() {
 
                     resetDataLoadForm();
                 },
-                "Cancel": function() {
+                "Cancelar": function() {
                     $( this ).dialog( "close" );
                 }
             }

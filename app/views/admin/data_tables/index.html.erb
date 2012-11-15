@@ -1,10 +1,10 @@
-<h1>Listing data_tables</h1>
+<h1><%= t(:listing_data_tables) %></h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>User</th>
-    <th>Fact</th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:user) %></th>
+    <th><%= t(:fact) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,14 +14,14 @@
   <tr>
     <td><%= data_table.name %></td>
     <td><%= data_table.user.full_name %></td>
-    <td><%= data_table.fact %></td>
-    <td><%= link_to 'Show', admin_data_table_path(data_table) %></td>
-    <td><%= link_to 'Edit', edit_admin_data_table_path(data_table) %></td>
-    <td><%= link_to 'Destroy', admin_data_table_path(data_table), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= data_table.fact ? t(:_yes) : t(:_no) %></td>
+    <td><%= link_to t(:show), admin_data_table_path(data_table) %></td>
+    <td><%= link_to t(:edit), edit_admin_data_table_path(data_table) %></td>
+    <td><%= link_to t(:delete), admin_data_table_path(data_table), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Data table', new_admin_data_table_path %>
+<%= link_to t(:new_data_table), new_admin_data_table_path %>

@@ -16,9 +16,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  path: "1343523333_pgadmin.log"
-  tags: "teste, teste, teste"
+  file: "1343523333_pgadmin.log"
+  template: "teste, teste, teste"
 
-one:
-  path: "1343523333_pgadmin1.log"
-  tags: "teste1, teste1, teste1"
+two:
+  file: "1343523333_pgadmin1.log"
+  template: "teste1, teste1, teste1"
