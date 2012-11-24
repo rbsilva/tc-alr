@@ -36,6 +36,11 @@ class Admin::UsersController < BaseController
   # GET /admin/users/1/edit.json
   def edit
     @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :edit, :locals => { :user => @user, :accessible_roles => @accessible_roles } }# new.html.erb
+      format.json { render json: @user }
+    end
   end
 
   # POST /admin/users

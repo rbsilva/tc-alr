@@ -1,6 +1,6 @@
 <h1><%= t(:editing_role) %></h1>
 
-<%= render :partial => 'form', :locals => { :role => role } %>
+<%= render 'form', :role => role %>
 
 <%= link_to t(:show), admin_role_path(role) %> |
 <%= link_to t(:back), admin_roles_path %>

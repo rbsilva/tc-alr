@@ -1,5 +1,5 @@
 <h1><%= t(:new_user) %></h1>
 
-<%= render :partial => 'form', :locals => { :user => user, :accessible_roles => accessible_roles } %>
+<%= render 'form', :user => user, :accessible_roles => accessible_roles %>
 
 <%= link_to t(:back), admin_users_path %>

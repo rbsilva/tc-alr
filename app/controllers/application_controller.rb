@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
         #ErrorMailer.notify_error(exception, params).deliver
         #render 'error_mailer/500', :status => 500, :locals => {:error => exception}
         flash[:error] = exception.message
-        redirect_to :back
+        if request.referer then
+          redirect_to request.referer
+        else
+          redirect_to root_url
+        end
       end
     end
 end
