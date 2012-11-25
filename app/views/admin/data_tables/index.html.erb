@@ -6,7 +6,7 @@
     <th><%= t(:user) %></th>
     <th><%= t(:fact) %></th>
     <th></th>
-    <th></th>
+    <!--<th></th>-->
     <th></th>
   </tr>
 
@@ -16,7 +16,7 @@
     <td><%= data_table.user.full_name %></td>
     <td><%= data_table.fact ? t(:_yes) : t(:_no) %></td>
     <td><%= link_to t(:show), admin_data_table_path(data_table) %></td>
-    <td><%= link_to t(:edit), edit_admin_data_table_path(data_table) %></td>
+    <!--<td><%= link_to t(:edit), edit_admin_data_table_path(data_table) %></td>-->
     <td><%= link_to t(:delete), admin_data_table_path(data_table), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

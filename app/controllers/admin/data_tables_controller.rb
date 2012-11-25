@@ -34,15 +34,15 @@ class Admin::DataTablesController < BaseController
   end
 
   # GET /admin/data_tables/1/edit
-  def edit
-    @data_table = DataTable.find(params[:id])
-    @data_table.fields_build
+#  def edit
+#    @data_table = DataTable.find(params[:id])
+#    @data_table.fields_build
 
-    respond_to do |format|
-      format.html { render :edit, :locals => { :data_table => @data_table } }
-      format.json { render json: @data_table }
-    end
-  end
+#    respond_to do |format|
+#      format.html { render :edit, :locals => { :data_table => @data_table } }
+#      format.json { render json: @data_table }
+#    end
+#  end
 
   # POST /admin/data_tables
   # POST /admin/data_tables.json

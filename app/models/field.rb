@@ -2,6 +2,8 @@
 class Field < ActiveRecord::Base
   belongs_to :data_table
 
+  before_save :set_description_suffix
+
   attr_accessible :db_type, :description, :is_null
 
   validates :description, :presence => true,
@@ -15,4 +17,13 @@ class Field < ActiveRecord::Base
     _description = value.strip.downcase.gsub(/\s+/, '_').sub_accents.gsub(/[^A-z0-9_]+/,'')
     write_attribute(:description, _description)
   end
+
+  private
+    def set_description_suffix
+      if db_type == 'references' then
+        _description = description
+        _description += '_dimension'
+        write_attribute(:description, _description)
+      end
+    end
 end

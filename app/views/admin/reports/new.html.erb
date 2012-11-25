@@ -1,5 +1,5 @@
 
-<%= render :partial => 'report', :locals => { :report => report } %>
+<%= render 'report', :report => report %>
 
 <div id="dashboard_facts" class="dashboard_list">
   <% @facts.each do |fact| %>

@@ -4,7 +4,7 @@ class DataTable < ActiveRecord::Base
   require 'fileutils'
 
   belongs_to :user
-  has_many :fields
+  has_many :fields, :dependent => :destroy
 
   accepts_nested_attributes_for :fields, :reject_if => proc { |attributes| attributes['description'].blank? }, :allow_destroy => true
 
@@ -12,6 +12,7 @@ class DataTable < ActiveRecord::Base
 
   before_save :set_name_suffix
   after_save :generate_model
+  before_destroy :drop_table
 
   validates :name, :presence => true,
           :length => {:minimum => 2},
@@ -36,6 +37,11 @@ class DataTable < ActiveRecord::Base
       _name = name
       _name += fact ? '_fact' : '_dimension'
       write_attribute(:name, _name)
+    end
+
+    def drop_table
+      dw_model = eval(name.camelize)
+      dw_model.connection.execute("drop table #{dw_model.table_name}")
     end
 
     def generate_model
