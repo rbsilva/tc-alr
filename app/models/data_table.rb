@@ -72,8 +72,9 @@ class DataTable < ActiveRecord::Base
       FileUtils.mv(model_file, dw_models_folder)
 
       #DwDbMigrator.migrate
-
-      `rake db:migrate RAILS_ENV=data_warehouse`
+      Thread.new do
+        `rake db:migrate RAILS_ENV=data_warehouse`
+      end
       #`rake db:migrate`
     end
 end
