@@ -20,7 +20,7 @@
   <div class="group">
     <h3 class="data_warehouse_title"><%= fact.name %></h3>
     <div class="data_table" id="<%=fact.id%>">
-      <%= data_warehouse_table(fact) %>
+      <%= data_warehouse_table(fact) rescue 'Carregando...'%>
     </div>
   </div>
   <% end %>

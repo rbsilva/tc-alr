@@ -42,6 +42,9 @@ class DataTable < ActiveRecord::Base
     def drop_table
       dw_model = eval(name.camelize)
       dw_model.connection.execute("drop table #{dw_model.table_name}")
+
+      dw_model = File.join Rails.root, "app/dw_models/#{name}.rb"
+      FileUtils.rm dw_model
     end
 
     def generate_model

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
         if request.referer then
           redirect_to request.referer
         else
-          redirect_to root_url
+          redirect_to admin_dashboard_index_path
         end
       end
     end
