@@ -9,7 +9,7 @@
   <div class="group">
     <h3 class="inbound_title"><%= inbound.raw_file.filename %></h3>
     <div class="data_table" id="<%=inbound.id%>">
-      <%= inbound_table inbound.xml_file %>
+      <%= inbound_table inbound.xml_file, inbound.raw_file.header %>
     </div>
   </div>
   <% end %>

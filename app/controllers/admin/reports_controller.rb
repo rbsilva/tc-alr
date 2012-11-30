@@ -58,7 +58,7 @@ class Admin::ReportsController < BaseController
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to admin_report_path(@report), notice: 'Report was successfully created.' }
+        format.html { redirect_to admin_report_path(@report), notice: :report_created_successfully }
         format.json { render json: @report, status: :created, location: @report }
       else
         format.html { render "new", :locals => { :report => @report } }
@@ -74,7 +74,7 @@ class Admin::ReportsController < BaseController
 
     respond_to do |format|
       if @report.update_attributes(params[:report])
-        format.html { redirect_to admin_report_path(@report), notice: 'Report was successfully updated.' }
+        format.html { redirect_to admin_report_path(@report), notice: :report_updated_successfully }
         format.json { head :no_content }
       else
         format.html { render "edit", locals => { :report => @report } }

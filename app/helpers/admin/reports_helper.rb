@@ -30,7 +30,7 @@ module Admin::ReportsHelper
       begin_tr = '<tr>' if i == 0
       end_tr = '</tr>' if fields.length == i
 
-      eval(field.data_table.name.camelize).all.each_with_index do |fact, j|
+      eval(field.data_table.name.camelize).limit(10).each_with_index do |fact, j|
         lines[j] = '' if lines[j].nil?
         lines[j] += "#{begin_tr}<td style='color: black;'>#{fact.send(field.description.to_sym)}</td>#{end_tr}"
       end

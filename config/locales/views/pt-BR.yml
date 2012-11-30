@@ -82,6 +82,8 @@ pt-BR:
   raw_file: "envio"
   report_of: "Relatório de"
   report: "relatório"
+  report_created_successfully: "Relatório criado com sucesso."
+  report_updated_successfully: "Relatório atualizado com sucesso."
   resend_confirmation_instructions: "Reenviar instruções para confirmação"
   resend_unlock: "Reenviar instruções de desbloqueio"
   role:

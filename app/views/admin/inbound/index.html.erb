@@ -2,7 +2,7 @@
   <div class="floating_table">
     <h2><%= inbound.raw_file.filename %></h2>
     <br/>
-    <%= inbound_table inbound.xml_file %>
+    <%= inbound_table inbound.xml_file, inbound.raw_file.header %>
     <br/>
   </div>
 <% end %>
