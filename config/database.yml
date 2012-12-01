@@ -5,7 +5,7 @@ development: &common
   database: tc_dev
   username: unip
   password: "742147"
-  host: unip.servehttp.com
+  host: localhost
 
 
 # Warning: The database defined as "test" will be erased and
@@ -18,7 +18,17 @@ test:
 production:
   <<: *common
   database: tc
+  host: unip.servehttp.com
 
-data_warehouse:
+data_warehouse_development:
+  <<: *common
+  database: tc_dw_dev
+
+data_warehouse_test:
+  <<: *common
+  database: tc_dw_test
+
+data_warehouse_production:
   <<: *common
   database: tc_dw
+  host: unip.servehttp.com

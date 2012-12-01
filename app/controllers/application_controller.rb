@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         logger.fatal exception.message
         redirect_to root_url
       else
-        logger.fatal "AQUI MANO, PEGA! --> #{exception} #{exception.backtrace}"
+        logger.fatal "AQUI MANO, PEGA! --> #{exception} #{exception.backtrace.to_s.force_encoding('utf-8')}"
         #ErrorMailer.notify_error(exception, params).deliver
         #render 'error_mailer/500', :status => 500, :locals => {:error => exception}
         flash[:error] = exception.message

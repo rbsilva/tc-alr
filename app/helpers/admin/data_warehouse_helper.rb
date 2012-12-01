@@ -21,7 +21,7 @@ module Admin::DataWarehouseHelper
   private
     def generate_tbody(table)
       html = ''
-      eval(table.name.camelize).limit(10).each do |data_table|
+      eval(table.name.singularize.camelize).limit(10).each do |data_table|
         html += '<tr>'
         html += generate_td(table, data_table)
         html += ' </tr>'

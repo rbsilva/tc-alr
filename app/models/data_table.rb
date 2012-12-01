@@ -35,49 +35,20 @@ class DataTable < ActiveRecord::Base
   private
     def set_name_suffix
       _name = name
-      _name += fact ? '_fact' : '_dimension'
+      _name += fact ? '_facts' : '_dimensions'
       write_attribute(:name, _name)
     end
 
     def drop_table
-      dw_model = eval(name.camelize)
-      dw_model.connection.execute("drop table #{dw_model.table_name}")
-
-      dw_model = File.join Rails.root, "app/dw_models/#{name}.rb"
+      DataWarehouseMigrator.drop_table_model(name)
+      dw_model = "#{Rails.root}/app/models/data_warehouse/#{name.singularize}.rb"
       FileUtils.rm dw_model
     end
 
     def generate_model
-      args = ["#{name}"]
-
-      fields.each do |field|
-        args << "#{field.description}:#{field.db_type}"
+      DataWarehouseMigrator.create_table_model(name, fields)
+      File.open("#{Rails.root}/app/models/data_warehouse/#{name.singularize}.rb", 'w') do |f|
+        f.write("class #{name.singularize.camelize} < DataWarehouseDb; end")
       end
-
-      args << '--migration=true'
-      args << '--timestamps=true'
-      args << '--force'
-
-      result = Rails::Generators.invoke('active_record:model', args)
-
-      migration_file = result[2]
-
-      #workaround for generate migrations with parent option
-      args << '--parent=DwDb'
-      result = Rails::Generators.invoke('active_record:model', args)
-
-      model_file = result[3]
-
-      dw_migrate_folder = File.join Rails.root, "db/dw_migrate/#{File.basename(migration_file)}"
-      dw_models_folder = File.join Rails.root, "app/dw_models/#{File.basename(model_file)}"
-
-      FileUtils.mv(migration_file, dw_migrate_folder)
-      FileUtils.mv(model_file, dw_models_folder)
-
-      #DwDbMigrator.migrate
-      Thread.new do
-        `rake db:migrate RAILS_ENV=data_warehouse`
-      end
-      #`rake db:migrate`
     end
 end

@@ -22,7 +22,7 @@ class Field < ActiveRecord::Base
     def set_description_suffix
       if db_type == 'references' then
         _description = description
-        _description += '_dimension'
+        _description += '_dimensions'
         write_attribute(:description, _description)
       end
     end

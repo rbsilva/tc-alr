@@ -34,6 +34,5 @@
 # Ignore windows thumbnails
 Thumbs.db
 
-# Ignore data warehouse models and migrations
-/app/dw_models/*.rb
-/db/dw_migrate/*.rb
+# Ignore data warehouse models
+/app/models/data_warehouse/*.rb
