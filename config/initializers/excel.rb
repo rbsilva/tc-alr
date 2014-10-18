@@ -1,4 +1,4 @@
-Excel.class_eval do
+Roo::Excel.class_eval do
   def get_workbook
     @workbook
   end

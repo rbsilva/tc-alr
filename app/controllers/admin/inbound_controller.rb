@@ -8,8 +8,8 @@ class Admin::InboundController < BaseController
       respond_to do |format|
         format.html
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 

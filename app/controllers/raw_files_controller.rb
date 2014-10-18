@@ -57,8 +57,8 @@ class RawFilesController < BaseController
     if @raw_file.status == 'PROCESSED' then
       raise t(:operation_not_permitted_raw_file)
     end
-  rescue
-    redirect_to raw_files_url, flash: {:error => $!.to_s}
+  # rescue
+  #   redirect_to raw_files_url, flash: {:error => $!.to_s}
   end
 
   # POST /raw_files
@@ -115,8 +115,8 @@ class RawFilesController < BaseController
         format.json { head :no_content }
       end
     end
-  rescue
-    redirect_to raw_files_url, flash: {:error => $!.to_s}
+  # rescue
+  #   redirect_to raw_files_url, flash: {:error => $!.to_s}
   end
 
 end

@@ -16,7 +16,7 @@ class DataTable < ActiveRecord::Base
 
   validates :name, :presence => true,
           :length => {:minimum => 2},
-          :format => { :with => /^[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*$/}
+          :format => { :with => /\A[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*\z/}
 
   def name=(value)
     # primeiro gsub substitui espaços por '_' e o segundo gsub apaga qualquer símbolo

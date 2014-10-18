@@ -8,8 +8,8 @@ class Admin::DataWarehouseController < BaseController
       respond_to do |format|
         format.html
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 
@@ -26,8 +26,8 @@ class Admin::DataWarehouseController < BaseController
           format.json { render json: [I18n.t(:invalid_operation)], :status =>  :unprocessable_entity }
         end
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 

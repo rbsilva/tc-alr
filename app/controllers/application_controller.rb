@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from Exception, :with => :handle_exceptions
+  # rescue_from Exception, :with => :handle_exceptions
 
   private
     def handle_exceptions(exception)

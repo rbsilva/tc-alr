@@ -1,9 +1,9 @@
-encoding: utf8
+# encoding: utf8
 
 development: &common
   adapter: postgresql
   database: tc_dev
-  username: unip
+  username: postgres
   password: "742147"
   host: localhost
 

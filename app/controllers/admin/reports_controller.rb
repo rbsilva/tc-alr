@@ -9,8 +9,8 @@ class Admin::ReportsController < BaseController
         format.html { render :index, :locals => { :reports => @reports } } # index.html.erb
         format.json { render json: @reports }
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 
@@ -26,8 +26,8 @@ class Admin::ReportsController < BaseController
         format.html { render :new, :locals => { :report => @report } } # show.html.erb
         format.json { render json: @report }
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 
@@ -46,8 +46,8 @@ class Admin::ReportsController < BaseController
           send_data pdf, :type => "application/pdf", :disposition => "inline", :filename => "report_of_#{filename}"
         end
       end
-    rescue
-      logger.fatal $!
+    # rescue
+    #   logger.fatal $!
     end
   end
 

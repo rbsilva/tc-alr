@@ -15,8 +15,8 @@ module Admin::ReportsHelper
       tr += "<th>#{field.description}</th>"
     end
     tr.html_safe
-  rescue
-    ''
+  # rescue
+  #   ''
   end
 
   def report_data(report)
@@ -39,7 +39,7 @@ module Admin::ReportsHelper
       html += line
     end
     html.html_safe
-  rescue
-    ''
+  # rescue
+  #   ''
   end
 end

@@ -53,7 +53,7 @@ class DataWarehouse
     end
 
     true
-  rescue
-    $!
+  # rescue
+  #   $!
   end
 end

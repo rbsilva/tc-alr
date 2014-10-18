@@ -8,7 +8,7 @@ class Field < ActiveRecord::Base
 
   validates :description, :presence => true,
         :length => {:minimum => 2},
-        :format => { :with => /^[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*$/}
+        :format => { :with => /\A[A-z_ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖòóôõöÈÉÊËèéêëðÇçÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž].*\z/}
 
   DB_TYPE = %w(binary boolean date datetime decimal float integer primary_key string text time timestamp references)
 

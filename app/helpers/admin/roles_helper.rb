@@ -12,8 +12,8 @@ module Admin::RolesHelper
       end
       html += tag 'br'
       html
-    rescue => e
-      e
+    # rescue => e
+    #   e
     end
   end
 
@@ -23,8 +23,8 @@ module Admin::RolesHelper
       roles << t(model.to_sym, :count => 2)
     end
     roles.join(', ')
-  rescue
-    ''
+  # rescue
+  #   ''
   end
 
   private
