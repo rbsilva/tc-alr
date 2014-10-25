@@ -28,7 +28,7 @@ class DataWarehouse
         _field = Field.find(field.first)
         if _field.data_table.fact then
           table = _field.data_table
-          fact = eval(table.name.camelize).new
+          fact = eval("::#{table.name.singularize.camelize}").new
           break
         end
       end
@@ -40,7 +40,7 @@ class DataWarehouse
           dimension = _field.data_table.name
 
           if fact.send(dimension.to_sym).nil? then
-            fact.send("#{dimension.to_sym}=", eval(dimension.camelize).new)
+            fact.send("#{dimension.to_sym}=", eval("::#{dimension.singularize.camelize}").new)
           end
 
           fact.send(dimension.to_sym).send("#{_field.description}=".to_sym, field.last)

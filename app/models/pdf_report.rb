@@ -31,7 +31,7 @@ class PdfReport < Prawn::Document
     fields.each do |field|
       field = Field.find(field)
 
-      eval(field.data_table.name.camelize).all.each_with_index do |fact, i|
+      eval("::#{field.data_table.name.singularize.camelize}").all.each_with_index do |fact, i|
         lines[i] = [] if lines[i].nil?
         lines[i] << "#{fact.send(field.description.to_sym)}"
       end
