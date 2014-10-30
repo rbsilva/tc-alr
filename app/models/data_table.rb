@@ -48,7 +48,14 @@ class DataTable < ActiveRecord::Base
     def generate_model
       DataWarehouseMigrator.create_table_model(name, fields)
       File.open("#{Rails.root}/app/models/data_warehouse/#{name.singularize}.rb", 'w') do |f|
-        f.write("class #{name.singularize.camelize} < DataWarehouseDb; end")
+        class_text = "class #{name.singularize.camelize} < DataWarehouseDb"
+        fields.each do |field|
+          if field.description.end_with? "_dimensions" then
+            class_text += "\n  belongs_to :#{field.description.singularize}"
+          end
+        end
+        class_text += "\nend"
+        f.write(class_text)
       end
     end
 end

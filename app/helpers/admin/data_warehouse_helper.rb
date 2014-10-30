@@ -35,8 +35,8 @@ module Admin::DataWarehouseHelper
         method = value.description
         if value.db_type == 'references' then
           d_table = DataTable.where(:name => method).first
-          d_data_table = data_table.send method.to_sym
-          html += generate_td(d_table, d_data_table)
+          d_data_table = data_table.send method.singularize.to_sym
+          html += generate_td(d_table, d_data_table) if d_data_table
           method += '_id'
         else
           html += "<td>#{data_table.send method.to_sym}</td>"

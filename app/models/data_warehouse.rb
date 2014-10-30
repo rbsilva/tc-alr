@@ -3,7 +3,7 @@ class DataWarehouse
     DataTable.where(:fact => true)
   end
 
-  def self.load(data)
+  def self.load(data, fact_name)
     facts = {}
 
     data.each do |datum|
@@ -22,28 +22,19 @@ class DataWarehouse
 
     facts.each_pair do |id, rows|
       table = nil
-      fact = nil
-
-      rows.each do |field|
-        _field = Field.find(field.first)
-        if _field.data_table.fact then
-          table = _field.data_table
-          fact = eval("::#{table.name.singularize.camelize}").new
-          break
-        end
-      end
+      fact = eval("::#{fact_name.singularize.camelize}").new
 
       rows.each do |field|
         _field = Field.find(field.first)
 
-        if _field.data_table != table then
+        if _field.data_table.name != fact_name then
           dimension = _field.data_table.name
 
-          if fact.send(dimension.to_sym).nil? then
-            fact.send("#{dimension.to_sym}=", eval("::#{dimension.singularize.camelize}").new)
+          if fact.send(dimension.singularize.to_sym).nil? then
+            fact.send("#{dimension.singularize.to_sym}=", eval("::#{dimension.singularize.camelize}").new)
           end
 
-          fact.send(dimension.to_sym).send("#{_field.description}=".to_sym, field.last)
+          fact.send(dimension.singularize.to_sym).send("#{_field.description}=".to_sym, field.last)
         else
           fact.send("#{_field.description}=".to_sym, field.last)
         end

@@ -14,7 +14,7 @@ class Admin::DataWarehouseController < BaseController
   end
 
   def load
-    result = DataWarehouse.load(params[:load_data])
+    result = DataWarehouse.load(params[:load_data], params[:fact])
 
     logger.fatal result
 

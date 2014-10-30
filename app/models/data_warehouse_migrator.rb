@@ -2,7 +2,11 @@ class DataWarehouseMigrator < DataWarehouseDb
   def self.create_table_model(name, fields)
     connection.create_table name do |t|
       fields.each do |field|
-        t.send(field.db_type, field.description)
+        if field.description.end_with? "_dimensions" then
+          t.send(field.db_type, field.description.singularize)
+        else
+          t.send(field.db_type, field.description)
+        end
       end
 
       t.timestamps
